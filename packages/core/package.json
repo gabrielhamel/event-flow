@@ -14,7 +14,7 @@
   "dependencies": {
     "@prisma/client": "^6.16.2",
     "onoff": "^6.0.3",
-    "uuid": "^11.1.0",
+    "uuid": "^13.0.0",
     "zod": "^4.0.17"
   },
   "devDependencies": {
