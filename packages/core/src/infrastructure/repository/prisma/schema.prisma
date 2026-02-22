@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:../../../../../../database/database.db"
+}
+
+model User {
+  id    String @id
+  email String @unique
+}
+
+model Task {
+  id          String     @id
+  status      TaskStatus
+  description String
+}
+
+enum TaskStatus {
+  Todo
+  InProgress
+  Done
+}

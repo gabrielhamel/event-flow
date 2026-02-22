@@ -1,0 +1,25 @@
+{
+  "name": "@repo/core",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "lint": "eslint --max-warnings 0",
+    "format": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md,css,scss,html}\"",
+    "test": "vitest run",
+    "test:watch": "vitest --watch",
+    "check-types": "tsc --noEmit",
+    "postinstall": "prisma generate --no-hints"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.16.2",
+    "onoff": "^6.0.3",
+    "uuid": "^11.1.0",
+    "zod": "^4.0.17"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "prisma": "^6.16.2"
+  }
+}

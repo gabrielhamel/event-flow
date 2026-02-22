@@ -1,0 +1,26 @@
+{
+  "name": "@repo/eslint-config",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "format": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md,css,scss,html}\""
+  },
+  "exports": {
+    "./base": "./base.js",
+    "./react": "./react.js"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.33.0",
+    "@next/eslint-plugin-next": "^15.5.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-only-warn": "^1.1.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-turbo": "^2.5.6",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-sort-keys-fix": "^1.1.2",
+    "globals": "^16.3.0",
+    "typescript-eslint": "^8.40.0"
+  }
+}

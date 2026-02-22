@@ -1,0 +1,10 @@
+{
+  "extends": "@repo/typescript-config/base.json",
+  "compilerOptions": {
+    "paths": {
+      "@repo/core/*": ["./src/*"]
+    },
+    "types": ["vitest/globals"]
+  },
+  "include": ["src/**/*.ts", "*.config.ts", "eslint.config.mjs"]
+}

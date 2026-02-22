@@ -1,0 +1,16 @@
+{
+  "name": "@repo/api",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "lint": "eslint --max-warnings 0",
+    "format": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md,css,scss,html}\"",
+    "check-types": "tsc --noEmit",
+    "dev": "tsx --watch src/index.ts"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*"
+  }
+}

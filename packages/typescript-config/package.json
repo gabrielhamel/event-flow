@@ -1,0 +1,12 @@
+{
+  "name": "@repo/typescript-config",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "format": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md,css,scss,html}\""
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "extends": "@repo/typescript-config/base.json",
+  "compilerOptions": {
+    "paths": {
+      "@repo/api/*": ["./src/*"],
+      "@repo/core/*": ["../../packages/core/src/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "eslint.config.mjs"]
+}
