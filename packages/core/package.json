@@ -15,7 +15,7 @@
     "@prisma/client": "^6.16.2",
     "onoff": "^6.0.3",
     "uuid": "^11.1.0",
-    "zod": "^4.0.17"
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
