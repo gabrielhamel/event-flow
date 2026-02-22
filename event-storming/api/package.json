@@ -1,0 +1,16 @@
+{
+  "name": "@repo/event-storming-api",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "lint:check": "eslint --max-warnings 0",
+    "lint:fix": "eslint --fix --max-warnings 0",
+    "type:check": "tsc --noEmit",
+    "dev": "tsx --env-file-if-exists=.env --watch src/index.ts"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://v2-8-10.turborepo.dev/schema.json",
+  "ui": "stream",
+  "tasks": {
+    "lint:check": {
+      "dependsOn": [
+        "^lint:check"
+      ]
+    },
+    "lint:fix": {
+      "dependsOn": [
+        "^lint:fix"
+      ]
+    },
+    "type:check": {
+      "dependsOn": [
+        "^type:check"
+      ]
+    },
+    "build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "$TURBO_DEFAULT$"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
+    },
+    "test": {
+      "dependsOn": [
+        "^test"
+      ]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "ci": {
+      "dependsOn": [
+        "type:check",
+        "lint:check"
+      ]
+    }
+  }
+}
