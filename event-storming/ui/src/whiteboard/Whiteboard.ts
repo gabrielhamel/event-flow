@@ -1,8 +1,8 @@
 import { Canvas } from "fabric";
-import { renderDottedBackground } from "./background.ts";
-import { setupPanningForCanvas } from "./pan.ts";
+import { setupDottedBackgroundForCanvas } from "./features/background.ts";
+import { setupPanningForCanvas } from "./features/pan.ts";
+import { setupZoomingForCanvas } from "./features/zoom.ts";
 import { StickyNote } from "./StickyNote.ts";
-import { setupZoomingForCanvas } from "./zoom.ts";
 
 export class Whiteboard {
   private readonly canvas: Canvas;
@@ -16,20 +16,7 @@ export class Whiteboard {
     });
 
     setupPanningForCanvas(this.canvas);
-
-    this.canvas.on("before:render", () => {
-      const ctx = this.canvas.getContext();
-      const vpt = this.canvas.viewportTransform;
-      const zoom = this.canvas.getZoom();
-      ctx.save();
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      renderDottedBackground(ctx, {
-        zoom,
-        scrollX: 2 * vpt[4] / zoom,
-        scrollY: 2 * vpt[5] / zoom,
-      });
-      ctx.restore();
-    });
+    setupDottedBackgroundForCanvas(this.canvas);
     setupZoomingForCanvas(this.canvas);
 
     this.canvas.requestRenderAll();
