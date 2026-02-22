@@ -25,6 +25,7 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "@swc/core",
+      "canvas",
       "dprint",
       "esbuild"
     ]
