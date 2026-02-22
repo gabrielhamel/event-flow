@@ -20,6 +20,6 @@
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
-    "prisma": "^6.16.2"
+    "prisma": "^7.4.1"
   }
 }
