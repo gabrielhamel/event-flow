@@ -6,13 +6,7 @@
   "scripts": {
     "lint:check": "eslint --max-warnings 0",
     "lint:fix": "eslint --fix --max-warnings 0",
-    "type:check": "tsc --noEmit",
-    "test": "vitest run --passWithNoTests",
-    "test:watch": "vitest --watch --passWithNoTests"
-  },
-  "dependencies": {
-    "uuid": "^11.1.0",
-    "zod": "^4.0.17"
+    "type:check": "tsc --noEmit"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
