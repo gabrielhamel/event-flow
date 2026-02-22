@@ -7,7 +7,11 @@ import { StickyNote } from "./StickyNote.ts";
 export class Whiteboard {
   private readonly canvas: Canvas;
 
-  constructor(anchor: HTMLCanvasElement, width: number, height: number) {
+  constructor(
+    anchor: HTMLCanvasElement,
+    width: number,
+    height: number,
+  ) {
     this.canvas = new Canvas(anchor, {
       enableRetinaScaling: true,
       width,

@@ -1,11 +1,5 @@
 import type { Canvas } from "fabric";
 
-interface ViewportState {
-  zoom: number;
-  scrollX: number;
-  scrollY: number;
-}
-
 const BASE_DOT_SPACING = 20;
 const BASE_DOT_SIZE = 1.5;
 const DOT_COLOR = "#d0d0d0";
@@ -13,7 +7,11 @@ const BACKGROUND_COLOR = "#FFFFFF";
 
 const renderDottedBackground = (
   ctx: CanvasRenderingContext2D,
-  { zoom, scrollX, scrollY }: ViewportState,
+  { zoom, scrollX, scrollY }: {
+    zoom: number;
+    scrollX: number;
+    scrollY: number;
+  },
 ) => {
   const canvas = ctx.canvas;
   ctx.fillStyle = BACKGROUND_COLOR;
