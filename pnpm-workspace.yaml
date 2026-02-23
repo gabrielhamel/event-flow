@@ -1,3 +1,5 @@
 packages:
   - "event-storming/*"
   - "packages/*"
+
+injectWorkspacePackages: true
