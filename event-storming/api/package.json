@@ -6,12 +6,14 @@
   "scripts": {
     "lint:check": "eslint --max-warnings 0",
     "lint:fix": "eslint --fix --max-warnings 0",
-    "type:check": "tsc --noEmit",
-    "dev": "tsx --env-file-if-exists=.env --watch src/index.ts"
+    "type:check": "tsc --noEmit -p tsconfig.app.json && tsc --noEmit -p tsconfig.node.json",
+    "dev": "tsx --env-file-if-exists=.env --watch src/index.ts",
+    "build": "tsc --build tsconfig.app.json"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*"
+    "@repo/typescript-config": "workspace:*",
+    "jiti": "^2.6.1"
   },
   "dependencies": {
     "@hocuspocus/server": "^3.4.4"

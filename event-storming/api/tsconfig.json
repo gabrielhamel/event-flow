@@ -1,9 +1,7 @@
 {
-  "extends": "@repo/typescript-config/base.json",
-  "compilerOptions": {
-    "paths": {
-      "@repo/event-storming-api/*": ["./src/*"]
-    }
-  },
-  "include": ["src/**/*.ts", "eslint.config.mjs"]
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
 }

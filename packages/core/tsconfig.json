@@ -5,5 +5,5 @@
       "@repo/core/*": ["./src/*"]
     }
   },
-  "include": ["src/**/*.ts", "*.config.ts", "eslint.config.mjs"]
+  "include": ["src/**/*.ts", "*.config.ts", "eslint.config.ts"]
 }
