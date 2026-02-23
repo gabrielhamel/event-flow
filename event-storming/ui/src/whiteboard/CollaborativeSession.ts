@@ -4,8 +4,17 @@ import { Doc } from "yjs";
 export class CollaborativeSession {
   private readonly provider: HocuspocusProvider;
 
-  private constructor(provider: HocuspocusProvider) {
-    this.provider = provider;
+  constructor() {
+    const sharedDocument = new Doc();
+
+    this.provider = new HocuspocusProvider({
+      url: "ws://localhost:6123",
+      name: "example-document",
+      document: sharedDocument,
+      onAwarenessChange(data) {
+        console.log("awareness change", data.states);
+      },
+    });
 
     this.provider.setAwarenessField("user", {
       color: [Math.floor(Math.random() * 256), Math.floor(Math.random() * 256), Math.floor(Math.random() * 256)],
@@ -17,23 +26,6 @@ export class CollaborativeSession {
         y: event.clientY,
       });
     });
-  }
-
-  static async make() {
-    const sharedDocument = new Doc();
-
-    const provider = new HocuspocusProvider({
-      url: "ws://localhost:6123",
-      name: "example-document",
-      document: sharedDocument,
-      onAwarenessChange(data) {
-        console.log("awareness change", data.states);
-      },
-    });
-
-    await provider.connect();
-
-    return new CollaborativeSession(provider);
   }
 
   destroy() {

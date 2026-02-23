@@ -1,3 +1,4 @@
+import { CollaborativeSession } from "@repo/event-storming-ui/whiteboard/CollaborativeSession.ts";
 import { Canvas } from "fabric";
 import { setupDottedBackgroundForCanvas } from "./features/background.ts";
 import { setupPanningForCanvas } from "./features/pan.ts";
@@ -6,6 +7,7 @@ import { StickyNote } from "./StickyNote.ts";
 
 export class Whiteboard {
   private readonly canvas: Canvas;
+  private readonly collaborativeSession: CollaborativeSession;
 
   constructor(
     anchor: HTMLCanvasElement,
@@ -24,9 +26,12 @@ export class Whiteboard {
     setupZoomingForCanvas(this.canvas);
 
     this.canvas.requestRenderAll();
+
+    this.collaborativeSession = new CollaborativeSession();
   }
 
   destroy() {
+    this.collaborativeSession.destroy();
     void this.canvas.dispose();
   }
 
