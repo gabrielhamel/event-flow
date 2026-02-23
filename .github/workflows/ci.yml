@@ -34,3 +34,31 @@ jobs:
 
       - name: CI
         run: pnpm run ci
+
+  deploy-event-storming-ui:
+    name: Deploy event storming ui
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    needs: ci
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Build event storming ui
+        run: docker build -t ${{ vars.docker_registry }}/ddd-lab/event-storming/ui:${{ github.sha }} -f event-storming/ui/Dockerfile .
+
+  deploy-event-storming-api:
+    name: Deploy event storming api
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    needs: ci
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Build event storming api
+        run: docker build -t ${{ vars.docker_registry }}/ddd-lab/event-storming/api:${{ github.sha }} -f event-storming/api/Dockerfile .
