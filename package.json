@@ -9,6 +9,7 @@
     "format:check": "dprint check",
     "type:check": "turbo run type:check",
     "dev": "turbo run dev",
+    "build": "turbo run build",
     "ci": "pnpm run format:check && turbo run ci"
   },
   "devDependencies": {
