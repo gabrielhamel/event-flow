@@ -63,7 +63,7 @@ jobs:
 
       - name: Build & Push event storming ui container
         run: |
-          docker build -t ${{ steps.login-ecr.outputs.registry }}/ddd-lab/event-storming/ui:${{ github.sha }} -f event-storming/ui/Dockerfile .
+          docker build -t ${{ steps.login-ecr.outputs.registry }}/ddd-lab/event-storming/ui:${{ github.sha }} -f event-storming/ui/Dockerfile --build-arg TURBO_TEAM=$TURBO_TEAM --build-arg TURBO_TOKEN=$TURBO_TOKEN .
           docker push ${{ steps.login-ecr.outputs.registry }}/ddd-lab/event-storming/ui:${{ github.sha }}
 
   deploy-event-storming-api:
@@ -89,5 +89,5 @@ jobs:
 
       - name: Build & Push event storming api container
         run: |
-          docker build -t ${{ steps.login-ecr.outputs.registry }}/ddd-lab/event-storming/api:${{ github.sha }} -f event-storming/api/Dockerfile .
+          docker build -t ${{ steps.login-ecr.outputs.registry }}/ddd-lab/event-storming/api:${{ github.sha }} -f event-storming/api/Dockerfile --build-arg TURBO_TEAM=$TURBO_TEAM --build-arg TURBO_TOKEN=$TURBO_TOKEN .
           docker push ${{ steps.login-ecr.outputs.registry }}/ddd-lab/event-storming/api:${{ github.sha }}
