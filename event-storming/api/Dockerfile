@@ -1,4 +1,4 @@
-FROM node:24.13.1-alpine3.23 AS build
+FROM node:24.13.1-alpine3.23 AS base
 
 ENV DO_NOT_TRACK=1
 ENV PNPM_HOME="/pnpm"
@@ -6,11 +6,20 @@ ENV PATH="$PNPM_HOME:$PATH"
 
 RUN corepack enable
 
-WORKDIR /app
-COPY . /app
+FROM base AS prune
 
-RUN pnpm install --frozen-lockfile --filter="@repo/event-storming-api" && \
-    pnpm run build --filter="@repo/event-storming-api" && \
+WORKDIR /app
+COPY . .
+RUN npx turbo prune @repo/event-storming-api --docker
+
+FROM base AS build
+
+WORKDIR /app
+COPY --from=prune /app/out/json/ .
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+
+COPY --from=prune /app/out/full/ .
+RUN pnpm run build --filter="@repo/event-storming-api" && \
     pnpm deploy --filter="@repo/event-storming-api" --prod /build
 
 FROM node:24.13.1-alpine3.23
