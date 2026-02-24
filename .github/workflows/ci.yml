@@ -19,10 +19,15 @@ jobs:
     name: CI
     timeout-minutes: 15
     runs-on: ubuntu-latest
+    outputs:
+      event-storming-ui: ${{ steps.affected.outputs.event-storming-ui }}
+      event-storming-api: ${{ steps.affected.outputs.event-storming-api }}
 
     steps:
       - name: Check out code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: pnpm/action-setup@v3
         with:
@@ -37,15 +42,32 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Check formatting
+        run: pnpm run format:check
+
       - name: CI
-        run: pnpm run ci
+        run: pnpm exec turbo run ci --affected
+
+      - name: Detect affected packages
+        id: affected
+        run: |
+          AFFECTED=$(pnpm exec turbo ls --affected --output=json)
+          echo "Affected packages: $AFFECTED"
+
+          if echo "$AFFECTED" | jq -e '.packages[] | select(.name == "@repo/event-storming-ui")' > /dev/null 2>&1; then
+            echo "event-storming-ui=true" >> "$GITHUB_OUTPUT"
+          fi
+
+          if echo "$AFFECTED" | jq -e '.packages[] | select(.name == "@repo/event-storming-api")' > /dev/null 2>&1; then
+            echo "event-storming-api=true" >> "$GITHUB_OUTPUT"
+          fi
 
   deploy-event-storming-ui:
     name: Deploy event storming ui
     timeout-minutes: 15
     runs-on: ubuntu-latest
     needs: ci
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.ci.outputs.event-storming-ui == 'true'
 
     steps:
       - name: Configure AWS credentials
@@ -79,7 +101,7 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     needs: ci
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.ci.outputs.event-storming-api == 'true'
 
     steps:
       - name: Configure AWS credentials

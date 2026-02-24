@@ -10,7 +10,7 @@
     "type:check": "turbo run type:check",
     "dev": "turbo run dev",
     "build": "turbo run build",
-    "ci": "pnpm run format:check && turbo run ci"
+    "ci": "pnpm run format:check && turbo run ci --affected"
   },
   "devDependencies": {
     "@types/node": "^24.3.0",
