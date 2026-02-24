@@ -43,11 +43,22 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
     steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.aws_role }}
+          aws-region: eu-west-3
+
+      - name: Login to ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: Build event storming ui
-        run: docker build -t ${{ vars.docker_registry }}/ddd-lab/event-storming/ui:${{ github.sha }} -f event-storming/ui/Dockerfile .
+      - name: Build & Push event storming ui container
+        run: |
+          docker build -t ${{ vars.docker_registry }}/ddd-lab/event-storming/ui:${{ github.sha }} -f event-storming/ui/Dockerfile .
+          docker push ${{ vars.docker_registry }}/ddd-lab/event-storming/ui:${{ github.sha }}
 
   deploy-event-storming-api:
     name: Deploy event storming api
@@ -57,8 +68,19 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
     steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.aws_role }}
+          aws-region: eu-west-3
+
+      - name: Login to ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: Build event storming api
-        run: docker build -t ${{ vars.docker_registry }}/ddd-lab/event-storming/api:${{ github.sha }} -f event-storming/api/Dockerfile .
+      - name: Build & Push event storming api container
+        run: |
+          docker build -t ${{ vars.docker_registry }}/ddd-lab/event-storming/api:${{ github.sha }} -f event-storming/api/Dockerfile .
+          docker push ${{ vars.docker_registry }}/ddd-lab/event-storming/api:${{ github.sha }}
