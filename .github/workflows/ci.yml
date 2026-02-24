@@ -57,11 +57,11 @@ jobs:
           AFFECTED=$(pnpm exec turbo ls --affected --output=json)
           echo "Affected packages: $AFFECTED"
 
-          if echo "$AFFECTED" | jq -e '.packages[] | select(.name == "@repo/event-storming-ui")' > /dev/null 2>&1; then
+          if echo "$AFFECTED" | jq -e '.packages.items[] | select(.name == "@repo/event-storming-ui")' > /dev/null 2>&1; then
             echo "event-storming-ui=true" >> "$GITHUB_OUTPUT"
           fi
 
-          if echo "$AFFECTED" | jq -e '.packages[] | select(.name == "@repo/event-storming-api")' > /dev/null 2>&1; then
+          if echo "$AFFECTED" | jq -e '.packages.items[] | select(.name == "@repo/event-storming-api")' > /dev/null 2>&1; then
             echo "event-storming-api=true" >> "$GITHUB_OUTPUT"
           fi
 
