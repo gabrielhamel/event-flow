@@ -9,9 +9,7 @@ RUN corepack enable
 WORKDIR /app
 COPY . /app
 
-RUN --mount=type=secret,id=TURBO_TEAM,env=TURBO_TEAM \
-    --mount=type=secret,id=TURBO_TOKEN,env=TURBO_TOKEN \
-    pnpm install --frozen-lockfile --filter="@repo/event-storming-api" && \
+RUN pnpm install --frozen-lockfile --filter="@repo/event-storming-api" && \
     pnpm run build --filter="@repo/event-storming-api" && \
     pnpm deploy --filter="@repo/event-storming-api" --prod /build
 

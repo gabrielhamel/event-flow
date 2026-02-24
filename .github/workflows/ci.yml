@@ -65,8 +65,6 @@ jobs:
         run: |
           docker build -t ${{ steps.login-ecr.outputs.registry }}/ddd-lab/event-storming/ui:${{ github.sha }} \
             -f event-storming/ui/Dockerfile \
-            --secret id=TURBO_TEAM \
-            --secret id=TURBO_TOKEN \
             .
           docker push ${{ steps.login-ecr.outputs.registry }}/ddd-lab/event-storming/ui:${{ github.sha }}
 
@@ -95,7 +93,5 @@ jobs:
         run: |
           docker build -t ${{ steps.login-ecr.outputs.registry }}/ddd-lab/event-storming/api:${{ github.sha }} \
             -f event-storming/api/Dockerfile \
-            --secret id=TURBO_TEAM \
-            --secret id=TURBO_TOKEN \
             .
           docker push ${{ steps.login-ecr.outputs.registry }}/ddd-lab/event-storming/api:${{ github.sha }}
