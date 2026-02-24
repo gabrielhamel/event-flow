@@ -59,6 +59,8 @@ export class Whiteboard {
   }
 
   private onNewUser(userId: number, color: TRGBColorSource) {
+    console.log(`New user joined: ${userId} with color ${color}`);
+
     const cursor = new FabricObject({
       width: 10,
       height: 20,
