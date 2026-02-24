@@ -11,8 +11,8 @@ permissions:
 
 env:
   DO_NOT_TRACK: 1
-  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
   TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
 
 jobs:
   ci:
@@ -65,8 +65,9 @@ jobs:
         run: |
           docker build -t ${{ steps.login-ecr.outputs.registry }}/ddd-lab/event-storming/ui:${{ github.sha }} \
             -f event-storming/ui/Dockerfile \
-            --secret id=turbo_team,env=TURBO_TEAM \
-            --secret id=turbo_token,env=TURBO_TOKEN .
+            --secret id=TURBO_TEAM \
+            --secret id=TURBO_TOKEN \
+            .
           docker push ${{ steps.login-ecr.outputs.registry }}/ddd-lab/event-storming/ui:${{ github.sha }}
 
   deploy-event-storming-api:
@@ -94,6 +95,7 @@ jobs:
         run: |
           docker build -t ${{ steps.login-ecr.outputs.registry }}/ddd-lab/event-storming/api:${{ github.sha }} \
             -f event-storming/api/Dockerfile \
-            --secret id=turbo_team,env=TURBO_TEAM \
-            --secret id=turbo_token,env=TURBO_TOKEN .
+            --secret id=TURBO_TEAM \
+            --secret id=TURBO_TOKEN \
+            .
           docker push ${{ steps.login-ecr.outputs.registry }}/ddd-lab/event-storming/api:${{ github.sha }}
