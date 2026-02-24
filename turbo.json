@@ -2,6 +2,15 @@
   "$schema": "https://v2-8-10.turborepo.dev/schema.json",
   "ui": "stream",
   "tasks": {
+    "//#format:check": {
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "!**/*.{css,svg,png,jpg,jpeg,gif,ico,woff,woff2,ttf,eot}"
+      ]
+    },
+    "//#format:fix": {
+      "cache": false
+    },
     "lint:check": {
       "dependsOn": [
         "^lint:check"
@@ -34,6 +43,7 @@
     },
     "ci": {
       "dependsOn": [
+        "//#format:check",
         "type:check",
         "lint:check"
       ]
