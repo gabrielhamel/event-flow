@@ -49,10 +49,14 @@ jobs:
           key: dprint-${{ hashFiles('dprint.json') }}
 
       - name: CI
+        env:
+          TURBO_SCM_BASE: ${{ github.event.before || 'main' }}
         run: pnpm exec turbo run ci --affected
 
       - name: Detect affected packages
         id: affected
+        env:
+          TURBO_SCM_BASE: ${{ github.event.before || 'main' }}
         run: |
           AFFECTED=$(pnpm exec turbo ls --affected --output=json)
           echo "Affected packages: $AFFECTED"
