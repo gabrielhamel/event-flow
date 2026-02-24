@@ -10,7 +10,7 @@ FROM base AS prune
 
 WORKDIR /app
 COPY . .
-RUN npx turbo prune @repo/event-storming-api --docker
+RUN pnpm exec turbo prune @repo/event-storming-api --docker
 
 FROM base AS build
 
