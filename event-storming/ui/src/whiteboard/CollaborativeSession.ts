@@ -18,7 +18,9 @@ export class CollaborativeSession {
     const sharedDocument = new Doc();
 
     this.provider = new HocuspocusProvider({
-      url: "ws://localhost:6123",
+      url: import.meta.env.MODE === "development"
+        ? "ws://localhost:8080/api/event-storming/collaboration"
+        : "ws://api-ddd-lab.gabrielhamel.fr/api/event-storming/collaboration",
       name: "example-document",
       document: sharedDocument,
       onAwarenessChange: this.onAwarenessChange.bind(this),

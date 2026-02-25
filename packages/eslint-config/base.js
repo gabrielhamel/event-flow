@@ -11,14 +11,6 @@ import tsLint from "typescript-eslint";
  * @type {import("eslint").Linter.Config[]}
  */
 export const baseConfig = [
-  {
-    languageOptions: {
-      parserOptions: {
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname,
-      },
-    },
-  },
   jsLint.configs.all,
   ...tsLint.configs.all,
   {
