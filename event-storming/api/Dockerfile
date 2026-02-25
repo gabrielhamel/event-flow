@@ -29,6 +29,6 @@ WORKDIR /app
 COPY --from=build /build/node_modules /app/node_modules
 COPY --from=build /app/event-storming/api/dist /app/dist
 
-EXPOSE 6123
+EXPOSE 8080
 
 CMD ["node", "dist/index.js"]
