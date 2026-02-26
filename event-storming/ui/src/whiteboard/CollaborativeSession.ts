@@ -20,7 +20,7 @@ export class CollaborativeSession {
     this.provider = new HocuspocusProvider({
       url: import.meta.env.MODE === "development"
         ? "ws://localhost:8080/api/event-storming/collaboration"
-        : "ws://api-ddd-lab.gabrielhamel.fr/api/event-storming/collaboration",
+        : "wss://api-ddd-lab.gabrielhamel.fr/api/event-storming/collaboration",
       name: "example-document",
       document: sharedDocument,
       onAwarenessChange: this.onAwarenessChange.bind(this),
