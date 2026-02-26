@@ -17,6 +17,8 @@ FROM base AS build
 WORKDIR /app
 COPY --from=prune /app/out/json/ .
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+ARG VITE_API_WS_URL
+ENV VITE_API_WS_URL=$VITE_API_WS_URL
 
 COPY --from=prune /app/out/full/ .
 RUN pnpm run build --filter="@repo/event-storming-ui"
