@@ -1,0 +1,28 @@
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: event-storming/api/Dockerfile
+    image: event-storming-api:1.0.0
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "--quiet", "http://localhost:8080/healthcheck"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+  ui:
+    build:
+      context: .
+      dockerfile: event-storming/ui/Dockerfile
+      args:
+        - VITE_API_WS_URL=ws://localhost:8080/api/event-storming/collaboration
+    image: event-storming-ui:1.0.0
+    ports:
+      - "80:80"
+    depends_on:
+      api:
+        condition: service_healthy
