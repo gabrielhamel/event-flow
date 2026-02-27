@@ -25,12 +25,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Initialize dprint cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/dprint
-          key: dprint-${{ hashFiles('dprint.json') }}
-
       - uses: pnpm/action-setup@v3
         with:
           version: 10
@@ -44,5 +38,105 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Cache dprint plugins
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/dprint
+          key: dprint-${{ hashFiles('dprint.json') }}
+
       - name: CI
         run: pnpm exec turbo run ci --affected
+
+      - name: Detect affected packages
+        id: affected
+        run: |
+          AFFECTED=$(pnpm exec turbo ls --affected --output=json)
+          echo "Affected packages: $AFFECTED"
+
+          if echo "$AFFECTED" | jq -e '.packages.items[] | select(.name == "@repo/event-storming-ui")' > /dev/null 2>&1; then
+            echo "event-storming-ui=true" >> "$GITHUB_OUTPUT"
+          fi
+
+          if echo "$AFFECTED" | jq -e '.packages.items[] | select(.name == "@repo/event-storming-api")' > /dev/null 2>&1; then
+            echo "event-storming-api=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  build-event-storming-ui:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.ci.outputs.event-storming-ui == 'true'
+    name: Build event storming ui
+    timeout-minutes: 15
+    environment: Production
+    runs-on: ubuntu-latest
+    needs: ci
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Log in to the container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/gabrielhamel/ddd-lab/event-storming/ui
+
+      - name: Build & push image
+        id: push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: event-storming/ui/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+  build-event-storming-api:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.ci.outputs.event-storming-api == 'true'
+    name: Build event storming api
+    timeout-minutes: 15
+    environment: Production
+    runs-on: ubuntu-latest
+    needs: ci
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Log in to the container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/gabrielhamel/ddd-lab/event-storming/api
+
+      - name: Build & push image
+        id: push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: event-storming/api/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
