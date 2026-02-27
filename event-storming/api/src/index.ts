@@ -10,7 +10,7 @@ const collaborationServer = new Hocuspocus({
 
 const { app } = expressWebsockets(express());
 
-app.get("/healthcheck", (_, response) => {
+app.get("/api/healthcheck", (_, response) => {
   response.send("OK");
 });
 
