@@ -153,12 +153,28 @@ jobs:
       - name: Trigger deployment
         env:
           PORTAINER_URL: ${{ secrets.PORTAINER_URL }}
-          PORTAINER_API_KEY: ${{ secrets.PORTAINER_API_KEY }}
+          PORTAINER_USER: ${{ secrets.PORTAINER_USER }}
+          PORTAINER_PASSWORD: ${{ secrets.PORTAINER_PASSWORD }}
           STACK_ID: ${{ secrets.PORTAINER_STACK_ID }}
           ENDPOINT_ID: ${{ secrets.PORTAINER_ENDPOINT_ID }}
         run: |
-          curl -X PUT \
-            -H "Authorization: Bearer $PORTAINER_API_KEY" \
+          # 1️⃣ Exchange API key for a JWT
+          JWT=$(curl -s -X POST "$PORTAINER_URL/api/auth" \
+            -H "Content-Type: application/json" \
+            -d "{\"Username\":\"api-key\",\"Password\":\"$PORTAINER_API_KEY\"}" \
+            | jq -r '.jwt')
+
+          if [ -z "$JWT" ] || [ "$JWT" = "null" ]; then
+            echo "Failed to get JWT from Portainer"
+            exit 1
+          fi
+
+          echo "✅ JWT obtained successfully"
+
+          # 2️⃣ Trigger stack update
+          curl -s -X PUT \
+            -H "Authorization: Bearer $JWT" \
             -H "Content-Type: application/json" \
             "$PORTAINER_URL/api/stacks/$STACK_ID?endpointId=$ENDPOINT_ID" \
-            -d '{"Prune": true, "RepullImageAndRedeploy": true}'
+            -d '{"Prune": true, "RepullImageAndRedeploy": true}' \
+            | jq
