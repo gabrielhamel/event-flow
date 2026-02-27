@@ -161,7 +161,7 @@ jobs:
           # 1️⃣ Exchange API key for a JWT
           JWT=$(curl -s -X POST "$PORTAINER_URL/api/auth" \
             -H "Content-Type: application/json" \
-            -d "{\"Username\":\"api-key\",\"Password\":\"$PORTAINER_API_KEY\"}" \
+            -d "{\"Username\":\"$PORTAINER_USER\",\"Password\":\"$PORTAINER_PASSWORD\"}" \
             | jq -r '.jwt')
 
           if [ -z "$JWT" ] || [ "$JWT" = "null" ]; then
