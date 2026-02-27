@@ -156,8 +156,8 @@ jobs:
           STACK_ID: ${{ secrets.PORTAINER_STACK_ID }}
           ENDPOINT_ID: ${{ secrets.PORTAINER_ENDPOINT_ID }}
         run: |
-          curl -X POST \
+          curl -X PUT \
             -H "Authorization: Bearer $PORTAINER_API_KEY" \
             -H "Content-Type: application/json" \
-            "$PORTAINER_URL/api/stacks/$STACK_ID/update?endpointId=$ENDPOINT_ID" \
-            -d '{"prune": true}'
+            "$PORTAINER_URL/api/stacks/$STACK_ID/?endpointId=$ENDPOINT_ID" \
+            -d '{"Prune": true, "RepullImageAndRedeploy": true}'
