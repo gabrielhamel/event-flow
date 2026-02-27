@@ -4,7 +4,7 @@ ENV DO_NOT_TRACK=1
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 
-RUN corepack enable
+RUN corepack enable && pnpm i -g turbo@2.8.12
 
 FROM base AS prune
 

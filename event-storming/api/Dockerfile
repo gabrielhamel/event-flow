@@ -3,8 +3,14 @@ FROM node:24.13.1-alpine3.23 AS base
 ENV DO_NOT_TRACK=1
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
+ENV PYTHONUNBUFFERED=1
 
-RUN corepack enable
+RUN apk add --update --no-cache python3 && \
+    ln -sf python3 /usr/bin/python && \
+    python3 -m ensurepip && \
+    pip3 install --no-cache --upgrade pip setuptools && \
+    corepack enable && \
+    pnpm i -g turbo@2.8.12
 
 FROM base AS prune
 
