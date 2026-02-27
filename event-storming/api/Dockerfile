@@ -5,10 +5,8 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 ENV PYTHONUNBUFFERED=1
 
-RUN apk add --update --no-cache python3 && \
+RUN apk add --update --no-cache python3 make g++ && \
     ln -sf python3 /usr/bin/python && \
-    python3 -m ensurepip && \
-    pip3 install --no-cache --upgrade pip setuptools && \
     corepack enable && \
     pnpm i -g turbo@2.8.12
 
