@@ -143,7 +143,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 
   trigger-deployment:
-    if: always() && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && (needs.ci.outputs.event-storming-api == 'true' || needs.ci.outputs.event-storming-ui == 'true') && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled')
+    if: always() && ((github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && (needs.ci.outputs.event-storming-api == 'true' || needs.ci.outputs.event-storming-ui == 'true') && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'))
     name: Trigger deployment
     timeout-minutes: 15
     environment: Production
@@ -160,5 +160,5 @@ jobs:
           curl -X PUT \
             -H "Authorization: Bearer $PORTAINER_API_KEY" \
             -H "Content-Type: application/json" \
-            "$PORTAINER_URL/api/stacks/$STACK_ID/?endpointId=$ENDPOINT_ID" \
+            "$PORTAINER_URL/api/stacks/$STACK_ID?endpointId=$ENDPOINT_ID" \
             -d '{"Prune": true, "RepullImageAndRedeploy": true}'
