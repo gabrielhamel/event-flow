@@ -5,7 +5,7 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 ENV PYTHONUNBUFFERED=1
 
-RUN apk add --update --no-cache python3 make g++ && \
+RUN apk add --update --no-cache python3 make g++ pkg-config && \
     ln -sf python3 /usr/bin/python && \
     corepack enable
 
