@@ -16,7 +16,7 @@ FROM base AS build
 
 WORKDIR /app
 COPY --from=prune /app/out/json/ .
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile
 ARG VITE_API_WS_URL
 ENV VITE_API_WS_URL=$VITE_API_WS_URL
 
