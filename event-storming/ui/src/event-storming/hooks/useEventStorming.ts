@@ -1,4 +1,4 @@
-import { useWhiteboard } from "../../whiteboard/hooks/useWhiteboard.tsx";
+import { useWhiteboard } from "../../whiteboard/hooks/useWhiteboard";
 
 export type EventStormingEntityType = "event" | "command" | "actor" | "policy" | "hotSpot" | "externalSystem";
 

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { WhiteboardContext } from "../contexts/WhiteboardContext.ts";
+import { WhiteboardContext } from "../contexts/WhiteboardContext";
 
 export const useWhiteboard = () => {
   const { whiteboard } = useContext(WhiteboardContext);

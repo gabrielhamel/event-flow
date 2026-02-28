@@ -1,7 +1,7 @@
 import { HocuspocusProvider, type onAwarenessChangeParameters } from "@hocuspocus/provider";
-import type { User } from "@repo/core/collaboration/domain/User.ts";
-import { FabricCursor } from "@repo/core/collaboration/infra/fabric/FabricCursor.ts";
-import { FabricUser } from "@repo/core/collaboration/infra/fabric/FabricUser.ts";
+import type { User } from "@repo/core/collaboration/domain/User";
+import { FabricCursor } from "@repo/core/collaboration/infra/fabric/FabricCursor";
+import { FabricUser } from "@repo/core/collaboration/infra/fabric/FabricUser";
 import type { Canvas } from "fabric";
 import { Doc } from "yjs";
 

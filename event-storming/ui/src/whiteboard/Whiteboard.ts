@@ -1,9 +1,9 @@
-import { CollaborativeSession } from "@repo/event-storming-ui/whiteboard/CollaborativeSession.ts";
+import { CollaborativeSession } from "@repo/event-storming-ui/whiteboard/CollaborativeSession";
 import { Canvas, type TPointerEventInfo } from "fabric";
-import { setupDottedBackgroundForCanvas } from "./features/background.ts";
-import { setupPanningForCanvas } from "./features/pan.ts";
-import { setupZoomingForCanvas } from "./features/zoom.ts";
-import { StickyNote } from "./StickyNote.ts";
+import { setupDottedBackgroundForCanvas } from "./features/background";
+import { setupPanningForCanvas } from "./features/pan";
+import { setupZoomingForCanvas } from "./features/zoom";
+import { StickyNote } from "./StickyNote";
 
 export class Whiteboard {
   private readonly canvas: Canvas;

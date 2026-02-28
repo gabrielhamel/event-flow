@@ -4,9 +4,7 @@
     "paths": {
       "@repo/event-storming-api/*": ["./src/*"]
     },
-
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-
     "outDir": "dist"
   },
   "include": ["src"]

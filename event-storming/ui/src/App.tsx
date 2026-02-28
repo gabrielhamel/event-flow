@@ -1,6 +1,6 @@
 import { Box, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
-import { EventStormingControlBar } from "./event-storming/components/EventStormingControlBar.tsx";
-import { WhiteboardComponent } from "./whiteboard/components/WhiteboardComponent.tsx";
+import { EventStormingControlBar } from "./event-storming/components/EventStormingControlBar";
+import { WhiteboardComponent } from "./whiteboard/components/WhiteboardComponent";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";

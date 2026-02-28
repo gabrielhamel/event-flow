@@ -5,11 +5,8 @@
       "@repo/event-storming-ui/*": ["./src/*"],
       "@repo/core/*": ["../../packages/core/src/*"]
     },
-
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2022",
-
-    /* Bundler mode */
     "noEmit": true
   },
   "include": ["src"]
