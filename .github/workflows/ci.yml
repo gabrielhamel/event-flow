@@ -109,6 +109,8 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
   build-event-storming-api:
     if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && needs.ci.outputs.event-storming-api == 'true'
@@ -149,6 +151,8 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
   trigger-deployment:
     if: always() && ((github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && (needs.ci.outputs.event-storming-api == 'true' || needs.ci.outputs.event-storming-ui == 'true' || needs.ci.outputs.docker-compose-changed == 'true') && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'))
