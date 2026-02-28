@@ -1,6 +1,8 @@
 {
   "$schema": "https://v2-8-10.turborepo.dev/schema.json",
   "ui": "stream",
+  "envMode": "strict",
+  "globalPassThroughEnv": ["MODE"],
   "tasks": {
     "//#format:check": {
       "inputs": [

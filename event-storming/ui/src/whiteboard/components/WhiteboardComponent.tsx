@@ -1,25 +1,27 @@
 import { Box } from "@mui/material";
+import { WhiteboardContext } from "@repo/event-storming-ui/whiteboard/contexts/WhiteboardContext.ts";
+import { Whiteboard } from "@repo/event-storming-ui/whiteboard/Whiteboard.ts";
 import { type ReactNode, useEffect, useRef, useState } from "react";
-import { WhiteboardContext } from "../contexts/WhiteboardContext.ts";
-import { Whiteboard } from "../Whiteboard.ts";
 
 export const WhiteboardComponent = ({ children }: { children: ReactNode }) => {
   const [whiteboard, setWhiteboard] = useState<Whiteboard | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    if (!canvasRef.current) return;
+    if (!canvasRef.current) {
+      return undefined;
+    }
 
-    const whiteboard = new Whiteboard(canvasRef.current, window.innerWidth, window.innerHeight);
-    setWhiteboard(whiteboard);
+    const whiteboardHandle = new Whiteboard(canvasRef.current, window.innerWidth, window.innerHeight);
+    setWhiteboard(whiteboardHandle);
 
-    const resizeObserver = () => whiteboard.resize(window.innerWidth, window.innerHeight);
+    const resizeObserver = () => whiteboardHandle.resize(window.innerWidth, window.innerHeight);
 
     window.addEventListener("resize", resizeObserver);
 
     return () => {
       window.removeEventListener("resize", resizeObserver);
-      void whiteboard.destroy();
+      whiteboardHandle.destroy();
       setWhiteboard(null);
     };
   }, []);

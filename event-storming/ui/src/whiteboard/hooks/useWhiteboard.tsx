@@ -5,7 +5,9 @@ export const useWhiteboard = () => {
   const { whiteboard } = useContext(WhiteboardContext);
 
   const addStickyNote = (color: string) => {
-    if (!whiteboard) return;
+    if (!whiteboard) {
+      return;
+    }
 
     whiteboard.addStickyNote(color);
   };

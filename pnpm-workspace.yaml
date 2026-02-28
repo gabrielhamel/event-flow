@@ -3,3 +3,5 @@ packages:
   - "packages/*"
 
 injectWorkspacePackages: true
+syncInjectedDepsAfterScripts:
+  - build

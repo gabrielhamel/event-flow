@@ -1,9 +1,9 @@
 import { createContext } from "react";
 import type { Whiteboard } from "../Whiteboard.ts";
 
-type WhiteboardContextData = {
+interface WhiteboardContextData {
   whiteboard: Whiteboard | null;
-};
+}
 
 export const WhiteboardContext = createContext<WhiteboardContextData>(
   {

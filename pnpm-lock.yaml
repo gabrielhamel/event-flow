@@ -79,6 +79,9 @@ importers:
       '@mui/material':
         specifier: ^7.3.8
         version: 7.3.8(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@repo/core':
+        specifier: workspace:*
+        version: link:../../packages/core
       fabric:
         specifier: ^7.2.0
         version: 7.2.0
@@ -95,6 +98,12 @@ importers:
       '@eslint/js':
         specifier: ^9.39.1
         version: 9.39.3
+      '@repo/eslint-config':
+        specifier: workspace:*
+        version: link:../../packages/eslint-config
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../../packages/typescript-config
       '@types/node':
         specifier: ^24.10.1
         version: 24.10.13
@@ -136,6 +145,10 @@ importers:
         version: 6.1.1(typescript@5.9.3)(vite@7.3.1(@types/node@24.10.13)(jiti@2.6.1)(lightningcss@1.31.1)(tsx@4.20.4))
 
   packages/core:
+    dependencies:
+      fabric:
+        specifier: ^7.2.0
+        version: 7.2.0
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*
@@ -164,9 +177,9 @@ importers:
       eslint-plugin-react-hooks:
         specifier: ^5.2.0
         version: 5.2.0(eslint@9.39.3(jiti@2.6.1))
-      eslint-plugin-simple-import-sort:
-        specifier: ^12.1.1
-        version: 12.1.1(eslint@9.39.3(jiti@2.6.1))
+      eslint-plugin-react-refresh:
+        specifier: ^0.4.26
+        version: 0.4.26(eslint@9.39.3(jiti@2.6.1))
       eslint-plugin-sort-keys-fix:
         specifier: ^1.1.2
         version: 1.1.2
@@ -1715,11 +1728,6 @@ packages:
     engines: {node: '>=4'}
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9.7
-
-  eslint-plugin-simple-import-sort@12.1.1:
-    resolution: {integrity: sha512-6nuzu4xwQtE3332Uz0to+TxDQYRLTKRESSc2hefVT48Zc8JthmN23Gx9lnYhu0FtkRSL1oxny3kJ2aveVhmOVA==}
-    peerDependencies:
-      eslint: '>=5.0.0'
 
   eslint-plugin-sort-keys-fix@1.1.2:
     resolution: {integrity: sha512-DNPHFGCA0/hZIsfODbeLZqaGY/+q3vgtshF85r+YWDNCQ2apd9PNs/zL6ttKm0nD1IFwvxyg3YOTI7FHl4unrw==}
@@ -4719,10 +4727,6 @@ snapshots:
       semver: 6.3.1
       string.prototype.matchall: 4.0.12
       string.prototype.repeat: 1.0.0
-
-  eslint-plugin-simple-import-sort@12.1.1(eslint@9.39.3(jiti@2.6.1)):
-    dependencies:
-      eslint: 9.39.3(jiti@2.6.1)
 
   eslint-plugin-sort-keys-fix@1.1.2:
     dependencies:

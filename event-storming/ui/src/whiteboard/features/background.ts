@@ -13,7 +13,7 @@ const renderDottedBackground = (
     scrollY: number;
   },
 ) => {
-  const canvas = ctx.canvas;
+  const { canvas } = ctx;
   ctx.fillStyle = BACKGROUND_COLOR;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -43,9 +43,9 @@ export const setupDottedBackgroundForCanvas = (canvas: Canvas) => {
     ctx.setTransform(1, 0, 0, 1, 0, 0);
 
     renderDottedBackground(ctx, {
-      zoom,
       scrollX: 2 * vpt[4] / zoom,
       scrollY: 2 * vpt[5] / zoom,
+      zoom,
     });
 
     ctx.restore();

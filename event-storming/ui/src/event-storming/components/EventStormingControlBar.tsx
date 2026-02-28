@@ -7,11 +7,11 @@ import {
   useEventStorming,
 } from "../hooks/useEventStorming.ts";
 
-type AddEntityAction = {
+interface AddEntityAction {
   label: string;
   entity: EventStormingEntityType;
   icon: ReactElement;
-};
+}
 
 export const EventStormingControlBar = () => {
   const { addEntity } = useEventStorming();
@@ -25,34 +25,34 @@ export const EventStormingControlBar = () => {
 
   const actions: AddEntityAction[] = [
     {
-      label: "Event",
       entity: "event",
       icon: createEntityIcon("event", Event),
+      label: "Event",
     },
     {
-      label: "Command",
       entity: "command",
       icon: createEntityIcon("command", Send),
+      label: "Command",
     },
     {
-      label: "Actor",
       entity: "actor",
       icon: createEntityIcon("actor", Person),
+      label: "Actor",
     },
     {
-      label: "Policy",
       entity: "policy",
       icon: createEntityIcon("policy", Rule),
+      label: "Policy",
     },
     {
-      label: "HotSpot",
       entity: "hotSpot",
       icon: createEntityIcon("hotSpot", LocalFireDepartment),
+      label: "HotSpot",
     },
     {
-      label: "External System",
       entity: "externalSystem",
       icon: createEntityIcon("externalSystem", Cloud),
+      label: "External System",
     },
   ];
 

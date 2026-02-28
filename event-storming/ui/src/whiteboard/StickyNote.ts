@@ -9,24 +9,24 @@ export class StickyNote {
     const size = 150;
 
     this.card = new FabricObject({
-      width: size,
-      height: size,
       backgroundColor: color,
-      hasControls: false,
       hasBorders: false,
+      hasControls: false,
+      height: size,
+      width: size,
     });
 
     const textPadding = 20;
     this.textbox = new Textbox("", {
-      fontSize: 18,
-      hasControls: false,
-      hasBorders: false,
-      fontFamily: "Roboto",
-      width: size - textPadding,
-      height: size - textPadding,
-      textAlign: "center",
-      splitByGrapheme: true,
       fill: "#333333",
+      fontFamily: "Roboto",
+      fontSize: 18,
+      hasBorders: false,
+      hasControls: false,
+      height: size - textPadding,
+      splitByGrapheme: true,
+      textAlign: "center",
+      width: size - textPadding,
     });
 
     this.textbox.on("changed", () => {
@@ -34,16 +34,16 @@ export class StickyNote {
     });
 
     this.group = new Group([this.card, this.textbox], {
-      hasControls: false,
       hasBorders: false,
+      hasControls: false,
       selectable: true,
-      subTargetCheck: true,
       shadow: new Shadow({
-        color: "rgba(0, 0, 0, 0.2)",
         blur: 10,
+        color: "rgba(0, 0, 0, 0.2)",
         offsetX: 2,
         offsetY: 2,
       }),
+      subTargetCheck: true,
     });
 
     this.group.on("mousedblclick", () => {

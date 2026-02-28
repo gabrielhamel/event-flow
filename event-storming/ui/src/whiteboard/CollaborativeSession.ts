@@ -1,33 +1,33 @@
 import { HocuspocusProvider, type onAwarenessChangeParameters } from "@hocuspocus/provider";
-import type { TRGBColorSource } from "fabric";
+import type { User } from "@repo/core/collaboration/domain/User.ts";
+import { FabricCursor } from "@repo/core/collaboration/infra/fabric/FabricCursor.ts";
+import { FabricUser } from "@repo/core/collaboration/infra/fabric/FabricUser.ts";
+import type { Canvas } from "fabric";
 import { Doc } from "yjs";
 
-interface CollaborativeSessionHandlers {
-  onNewUser: (userId: number, color: TRGBColorSource) => void;
-  onUserCursorMove: (userId: number, x: number, y: number) => void;
-}
+const randomizeHexColor = () => `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 
 export class CollaborativeSession {
   private readonly provider: HocuspocusProvider;
-  private knownUsers = new Set<number>();
-  private handlers: CollaborativeSessionHandlers;
+  private readonly users = new Map<number, User>();
+  private readonly canvas: Canvas;
 
-  constructor(handlers: CollaborativeSessionHandlers) {
-    this.handlers = handlers;
+  constructor(canvas: Canvas) {
+    this.canvas = canvas;
 
     const sharedDocument = new Doc();
 
     this.provider = new HocuspocusProvider({
+      document: sharedDocument,
+      name: "example-document",
+      onAwarenessChange: this.onAwarenessChange.bind(this),
       url: import.meta.env.MODE === "development"
         ? "ws://localhost:8080/api/event-storming/collaboration"
         : "wss://ddd-lab.gabrielhamel.fr/api/event-storming/collaboration",
-      name: "example-document",
-      document: sharedDocument,
-      onAwarenessChange: this.onAwarenessChange.bind(this),
     });
 
     this.provider.setAwarenessField("user", {
-      color: [Math.floor(Math.random() * 256), Math.floor(Math.random() * 256), Math.floor(Math.random() * 256)],
+      color: randomizeHexColor(),
     });
   }
 
@@ -45,15 +45,26 @@ export class CollaborativeSession {
   private onAwarenessChange(data: onAwarenessChangeParameters) {
     data.states.forEach((state) => {
       if (
-        this.provider.awareness && !this.knownUsers.has(state.clientId)
+        this.provider.awareness && !this.users.has(state.clientId)
         && state.clientId !== this.provider.awareness.clientID
       ) {
-        this.knownUsers.add(state.clientId);
-        this.handlers.onNewUser(state.clientId, state.user.color);
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument,@typescript-eslint/no-unsafe-member-access
+        const cursor = FabricCursor.make(this.canvas, state.user.color);
+        const user = new FabricUser(state.clientId, cursor);
+
+        this.users.set(user.getId(), user);
       }
 
+      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       if (state.mouse) {
-        this.handlers.onUserCursorMove(state.clientId, state.mouse.x, state.mouse.y);
+        const user = this.users.get(state.clientId);
+        if (!user) {
+          return;
+        }
+
+        const cursor = user.getCursor();
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument,@typescript-eslint/no-unsafe-member-access
+        cursor.setPosition(state.mouse.x, state.mouse.y);
       }
     });
   }
