@@ -16,7 +16,7 @@ app.get("/api/healthcheck", (_, response) => {
 
 app.ws("/api/event-storming/collaboration", (websocket, request) => {
   const context = {
-    randomKey: "randomValue",
+    randomKey: "randomValue2",
   };
 
   collaborationServer.handleConnection(websocket, request, context);

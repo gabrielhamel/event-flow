@@ -51,6 +51,7 @@ export class Whiteboard {
   }
 
   private onMouseMove(event: TPointerEventInfo) {
+    console.log("test");
     this.collaborativeSession.updateCurrentUserCursorPosition(event.scenePoint.x, event.scenePoint.y);
   }
 }
