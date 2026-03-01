@@ -9,7 +9,7 @@ export const useWhiteboard = () => {
       return;
     }
 
-    whiteboard.addStickyNote(color);
+    whiteboard.createStickyNote(color);
   };
 
   return { addStickyNote };

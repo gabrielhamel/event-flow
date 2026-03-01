@@ -1,7 +1,7 @@
-import type { Cursor } from "@repo/core/collaboration/domain/Cursor.ts";
-import type { User } from "@repo/core/collaboration/domain/User.ts";
+import type { Cursor } from "@repo/core/Cursor.ts";
+import type { WhiteboardUser } from "@repo/core/WhiteboardUser.ts";
 
-export class FabricUser implements User {
+export class FabricUser implements WhiteboardUser {
   private readonly id: number;
   private readonly cursor: Cursor;
 

@@ -1,7 +1,8 @@
 import { HocuspocusProvider, type onAwarenessChangeParameters } from "@hocuspocus/provider";
-import type { User } from "@repo/core/collaboration/domain/User";
-import { FabricCursor } from "@repo/core/collaboration/infra/fabric/FabricCursor";
-import { FabricUser } from "@repo/core/collaboration/infra/fabric/FabricUser";
+import type { StickyNote, StickyNoteDocumentObject } from "@repo/core/StickyNote";
+import type { WhiteboardUser } from "@repo/core/WhiteboardUser";
+import { FabricCursor } from "@repo/event-storming-ui/collaboration/FabricCursor";
+import { FabricUser } from "@repo/event-storming-ui/collaboration/FabricUser";
 import type { Canvas } from "fabric";
 import { Doc } from "yjs";
 
@@ -9,16 +10,19 @@ const randomizeHexColor = () => `#${Math.floor(Math.random() * 16777215).toStrin
 
 export class CollaborativeSession {
   private readonly provider: HocuspocusProvider;
-  private readonly users = new Map<number, User>();
+  private readonly users = new Map<number, WhiteboardUser>();
   private readonly canvas: Canvas;
+  private readonly sharedDocument: Doc;
+  private readonly callback: (stickyNoteDocumentObject: StickyNoteDocumentObject) => void;
 
-  constructor(canvas: Canvas) {
+  constructor(canvas: Canvas, onStickyNoteAdded: (stickyNoteDocumentObject: StickyNoteDocumentObject) => void) {
     this.canvas = canvas;
+    this.callback = onStickyNoteAdded;
 
-    const sharedDocument = new Doc();
+    this.sharedDocument = new Doc();
 
     this.provider = new HocuspocusProvider({
-      document: sharedDocument,
+      document: this.sharedDocument,
       name: "example-document",
       onAwarenessChange: this.onAwarenessChange.bind(this),
       url: import.meta.env.MODE === "development"
@@ -28,6 +32,15 @@ export class CollaborativeSession {
 
     this.provider.setAwarenessField("user", {
       color: randomizeHexColor(),
+    });
+
+    this.sharedDocument.getArray("stickyNotes").observe((event) => {
+      event.changes.added.forEach((item) => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        const [content] = item.content.getContent();
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+        this.callback(content);
+      });
     });
   }
 
@@ -40,6 +53,12 @@ export class CollaborativeSession {
       x,
       y,
     });
+  }
+
+  addStickyNote(stickyNote: StickyNote) {
+    const object = stickyNote.toDocumentObject();
+
+    this.sharedDocument.getArray("stickyNotes").push([object]);
   }
 
   private onAwarenessChange(data: onAwarenessChangeParameters) {

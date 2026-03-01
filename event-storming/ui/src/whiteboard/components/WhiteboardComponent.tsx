@@ -1,10 +1,10 @@
 import { Box } from "@mui/material";
 import { WhiteboardContext } from "@repo/event-storming-ui/whiteboard/contexts/WhiteboardContext";
-import { Whiteboard } from "@repo/event-storming-ui/whiteboard/Whiteboard";
+import { FabricWhiteboard } from "@repo/event-storming-ui/whiteboard/FabricWhiteboard";
 import { type ReactNode, useEffect, useRef, useState } from "react";
 
 export const WhiteboardComponent = ({ children }: { children: ReactNode }) => {
-  const [whiteboard, setWhiteboard] = useState<Whiteboard | null>(null);
+  const [whiteboard, setWhiteboard] = useState<FabricWhiteboard | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -12,7 +12,7 @@ export const WhiteboardComponent = ({ children }: { children: ReactNode }) => {
       return undefined;
     }
 
-    const whiteboardHandle = new Whiteboard(canvasRef.current, window.innerWidth, window.innerHeight);
+    const whiteboardHandle = new FabricWhiteboard(canvasRef.current, window.innerWidth, window.innerHeight);
     setWhiteboard(whiteboardHandle);
 
     const resizeObserver = () => whiteboardHandle.resize(window.innerWidth, window.innerHeight);
@@ -21,7 +21,7 @@ export const WhiteboardComponent = ({ children }: { children: ReactNode }) => {
 
     return () => {
       window.removeEventListener("resize", resizeObserver);
-      whiteboardHandle.destroy();
+      void whiteboardHandle.dispose();
       setWhiteboard(null);
     };
   }, []);

@@ -1,4 +1,4 @@
-import type { Cursor } from "@repo/core/collaboration/domain/Cursor.ts";
+import type { Cursor } from "@repo/core/Cursor.ts";
 import { type Canvas, FabricObject } from "fabric";
 
 export class FabricCursor implements Cursor {

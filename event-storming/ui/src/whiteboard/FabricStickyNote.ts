@@ -1,11 +1,17 @@
+import type { StickyNote, StickyNoteDocumentObject } from "@repo/core/StickyNote";
 import { type Canvas, FabricObject, Group, Shadow, Textbox } from "fabric";
 
-export class StickyNote {
+export class FabricStickyNote implements StickyNote {
   private readonly textbox: Textbox;
   private readonly card: FabricObject;
   private readonly group: Group;
+  private readonly identifier: string;
+  private readonly color: string;
 
   constructor(color: string) {
+    this.identifier = crypto.randomUUID();
+    this.color = color;
+
     const size = 150;
 
     this.card = new FabricObject({
@@ -53,17 +59,49 @@ export class StickyNote {
     });
   }
 
-  attach(canvas: Canvas) {
-    const viewportCenter = canvas.getVpCenter();
-    const left = viewportCenter.x;
-    const top = viewportCenter.y;
+  static makeFromDocumentObject(object: StickyNoteDocumentObject) {
+    const stickyNote = new FabricStickyNote(object.color);
+    stickyNote.updateFromDocumentObject(object);
+    return stickyNote;
+  }
 
-    this.group.setX(left);
-    this.group.setY(top);
+  id() {
+    return this.identifier;
+  }
+
+  attach(canvas: Canvas, setActive: boolean, middleOfCanvas: boolean) {
+    if (middleOfCanvas) {
+      const viewportCenter = canvas.getVpCenter();
+      const left = viewportCenter.x;
+      const top = viewportCenter.y;
+
+      this.group.setX(left);
+      this.group.setY(top);
+    }
 
     canvas.add(this.group);
 
-    canvas.setActiveObject(this.textbox);
-    this.textbox.enterEditing();
+    if (setActive) {
+      canvas.setActiveObject(this.textbox);
+      this.textbox.enterEditing();
+    }
+  }
+
+  toDocumentObject() {
+    return {
+      color: this.color,
+      id: this.identifier,
+      text: this.textbox.text,
+      x: this.group.left,
+      y: this.group.top,
+    };
+  }
+
+  updateFromDocumentObject(object: StickyNoteDocumentObject) {
+    this.textbox.set("text", object.text);
+    this.group.set({
+      left: object.x,
+      top: object.y,
+    });
   }
 }

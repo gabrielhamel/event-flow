@@ -1,8 +1,8 @@
+import type { FabricWhiteboard } from "@repo/event-storming-ui/whiteboard/FabricWhiteboard";
 import { createContext } from "react";
-import type { Whiteboard } from "../Whiteboard.ts";
 
 interface WhiteboardContextData {
-  whiteboard: Whiteboard | null;
+  whiteboard: FabricWhiteboard | null;
 }
 
 export const WhiteboardContext = createContext<WhiteboardContextData>(

@@ -29,8 +29,6 @@ export const reactConfig = [
       ...reactLint.configs.flat.recommended.languageOptions,
       parserOptions: {
         ...reactLint.configs.flat.recommended.languageOptions.parserOptions,
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname,
       },
       globals: {
         ...globals.serviceworker,
