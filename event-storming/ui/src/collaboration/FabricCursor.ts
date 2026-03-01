@@ -17,8 +17,19 @@ export class FabricCursor implements Cursor {
 
   static async make(canvas: Canvas, hexColor: string) {
     const object = await loadSVGObject("cursor.svg");
-    object.set({ evented: false, fill: hexColor, selectable: false });
+    object.set({
+      evented: false,
+      fill: hexColor,
+      selectable: false,
+      stroke: "#000000",
+      strokeWidth: 20,
+    });
+
     canvas.add(object);
+    canvas.bringObjectToFront(object);
+    canvas.on("object:added", () => {
+      canvas.bringObjectToFront(object);
+    });
 
     return new FabricCursor(object);
   }
