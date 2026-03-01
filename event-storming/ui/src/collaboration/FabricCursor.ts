@@ -1,5 +1,12 @@
 import type { Cursor } from "@repo/core/Cursor.ts";
-import { type Canvas, FabricObject } from "fabric";
+import { type Canvas, type FabricObject, loadSVGFromURL, util } from "fabric";
+
+const loadSVGObject = async (url: string) => {
+  const svg = await loadSVGFromURL(url);
+  const objects = svg.objects.filter((obj): obj is FabricObject => obj !== null);
+
+  return util.groupSVGElements(objects, svg.options);
+};
 
 export class FabricCursor implements Cursor {
   private readonly object: FabricObject;
@@ -8,15 +15,9 @@ export class FabricCursor implements Cursor {
     this.object = object;
   }
 
-  static make(canvas: Canvas, hexColor: string) {
-    const object = new FabricObject({
-      backgroundColor: hexColor,
-      hasBorders: false,
-      hasControls: false,
-      height: 20,
-      width: 10,
-    });
-
+  static async make(canvas: Canvas, hexColor: string) {
+    const object = await loadSVGObject("cursor.svg");
+    object.set({ evented: false, fill: hexColor, selectable: false });
     canvas.add(object);
 
     return new FabricCursor(object);

@@ -8,7 +8,7 @@ export class FabricStickyNote implements StickyNote {
   private readonly identifier: string;
   private readonly color: string;
 
-  constructor(color: string) {
+  constructor(color: string, x: number, y: number) {
     this.identifier = crypto.randomUUID();
     this.color = color;
 
@@ -42,6 +42,7 @@ export class FabricStickyNote implements StickyNote {
     this.group = new Group([this.card, this.textbox], {
       hasBorders: false,
       hasControls: false,
+      left: x,
       selectable: true,
       shadow: new Shadow({
         blur: 10,
@@ -50,6 +51,7 @@ export class FabricStickyNote implements StickyNote {
         offsetY: 2,
       }),
       subTargetCheck: true,
+      top: y,
     });
 
     this.group.on("mousedblclick", () => {
@@ -60,7 +62,7 @@ export class FabricStickyNote implements StickyNote {
   }
 
   static makeFromDocumentObject(object: StickyNoteDocumentObject) {
-    const stickyNote = new FabricStickyNote(object.color);
+    const stickyNote = new FabricStickyNote(object.color, object.x, object.y);
     stickyNote.updateFromDocumentObject(object);
     return stickyNote;
   }
@@ -69,22 +71,13 @@ export class FabricStickyNote implements StickyNote {
     return this.identifier;
   }
 
-  attach(canvas: Canvas, setActive: boolean, middleOfCanvas: boolean) {
-    if (middleOfCanvas) {
-      const viewportCenter = canvas.getVpCenter();
-      const left = viewportCenter.x;
-      const top = viewportCenter.y;
-
-      this.group.setX(left);
-      this.group.setY(top);
-    }
-
+  attach(canvas: Canvas) {
     canvas.add(this.group);
+  }
 
-    if (setActive) {
-      canvas.setActiveObject(this.textbox);
-      this.textbox.enterEditing();
-    }
+  enterEditing() {
+    this.textbox.canvas?.setActiveObject(this.textbox);
+    this.textbox.enterEditing();
   }
 
   toDocumentObject() {

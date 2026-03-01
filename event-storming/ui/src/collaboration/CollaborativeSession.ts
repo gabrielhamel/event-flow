@@ -62,13 +62,13 @@ export class CollaborativeSession {
   }
 
   private onAwarenessChange(data: onAwarenessChangeParameters) {
-    data.states.forEach((state) => {
+    data.states.forEach(async (state) => {
       if (
         this.provider.awareness && !this.users.has(state.clientId)
         && state.clientId !== this.provider.awareness.clientID
       ) {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument,@typescript-eslint/no-unsafe-member-access
-        const cursor = FabricCursor.make(this.canvas, state.user.color);
+        const cursor = await FabricCursor.make(this.canvas, state.user.color);
         const user = new FabricUser(state.clientId, cursor);
 
         this.users.set(user.getId(), user);

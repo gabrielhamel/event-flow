@@ -48,10 +48,14 @@ export class FabricWhiteboard implements Whiteboard {
   }
 
   createStickyNote(color: string) {
-    const stickyNote = new FabricStickyNote(color);
+    const viewportCenter = this.canvas.getVpCenter();
+    const left = viewportCenter.x;
+    const top = viewportCenter.y;
+
+    const stickyNote = new FabricStickyNote(color, left, top);
     this.stickyNotes.set(stickyNote.id(), stickyNote);
 
-    stickyNote.attach(this.canvas, true, true);
+    stickyNote.attach(this.canvas);
 
     this.collaborativeSession.addStickyNote(stickyNote);
   }
@@ -62,7 +66,8 @@ export class FabricWhiteboard implements Whiteboard {
     }
 
     const stickyNote = FabricStickyNote.makeFromDocumentObject(stickyNoteDocumentObject);
-    stickyNote.attach(this.canvas, false, false);
+    stickyNote.attach(this.canvas);
+    stickyNote.enterEditing();
 
     this.stickyNotes.set(stickyNote.id(), stickyNote);
   }
