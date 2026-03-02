@@ -1,16 +1,15 @@
-import type { StickyNoteDocumentObject } from "@repo/core/StickyNote";
 import type { Whiteboard } from "@repo/core/Whiteboard";
 import { CollaborativeSession } from "@repo/event-storming-ui/collaboration/CollaborativeSession";
 import { addDottedBackgroundModule } from "@repo/event-storming-ui/whiteboard/canvas/modules/dottedBackground";
 import { addPanningModule } from "@repo/event-storming-ui/whiteboard/canvas/modules/panning";
 import { addZoomingModule } from "@repo/event-storming-ui/whiteboard/canvas/modules/zooming";
 import { Canvas, type TPointerEventInfo } from "fabric";
-import { FabricStickyNote } from "./FabricStickyNote";
+import { _FabricStickyNote } from "./_FabricStickyNote";
 
 export class FabricWhiteboard implements Whiteboard {
   private readonly canvas: Canvas;
   private readonly collaborativeSession: CollaborativeSession;
-  private readonly stickyNotes = new Map<string, FabricStickyNote>();
+  private readonly stickyNotes = new Map<string, _FabricStickyNote>();
 
   constructor(
     anchor: HTMLCanvasElement,
@@ -52,7 +51,7 @@ export class FabricWhiteboard implements Whiteboard {
     const left = viewportCenter.x;
     const top = viewportCenter.y;
 
-    const stickyNote = new FabricStickyNote(color, left, top);
+    const stickyNote = new _FabricStickyNote(color, left, top);
     this.stickyNotes.set(stickyNote.id(), stickyNote);
 
     stickyNote.attach(this.canvas);
@@ -65,7 +64,7 @@ export class FabricWhiteboard implements Whiteboard {
       return;
     }
 
-    const stickyNote = FabricStickyNote.makeFromDocumentObject(stickyNoteDocumentObject);
+    const stickyNote = _FabricStickyNote.makeFromDocumentObject(stickyNoteDocumentObject);
     stickyNote.attach(this.canvas);
     stickyNote.enterEditing();
 

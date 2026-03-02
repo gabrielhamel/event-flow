@@ -149,6 +149,9 @@ importers:
       fabric:
         specifier: ^7.2.0
         version: 7.2.0
+      yjs:
+        specifier: ^13.6.29
+        version: 13.6.29
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*

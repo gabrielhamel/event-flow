@@ -1,29 +1,29 @@
-import type { StickyNote, StickyNoteDocumentObject } from "@repo/core/StickyNote";
+import { CollaborativeEntity } from "@repo/core/CollaborativeEntity";
+import type { StickyNoteCollaborativeData } from "@repo/core/StickyNoteCollaborativeData";
 import { type Canvas, FabricObject, Group, Shadow, Textbox } from "fabric";
 
-export class FabricStickyNote implements StickyNote {
+export class FabricStickyNote extends CollaborativeEntity<StickyNoteCollaborativeData> {
   private readonly textbox: Textbox;
   private readonly card: FabricObject;
   private readonly group: Group;
-  private readonly identifier: string;
-  private readonly color: string;
+  private readonly canvas: Canvas;
 
-  constructor(color: string, x: number, y: number) {
-    this.identifier = crypto.randomUUID();
-    this.color = color;
+  constructor(data: StickyNoteCollaborativeData, canvas: Canvas) {
+    super(data);
+
+    this.canvas = canvas;
 
     const size = 150;
+    const textPadding = 20;
 
     this.card = new FabricObject({
-      backgroundColor: color,
+      backgroundColor: data.color,
       hasBorders: false,
       hasControls: false,
       height: size,
       width: size,
     });
-
-    const textPadding = 20;
-    this.textbox = new Textbox("", {
+    this.textbox = new Textbox(data.text, {
       fill: "#333333",
       fontFamily: "Roboto",
       fontSize: 18,
@@ -34,15 +34,10 @@ export class FabricStickyNote implements StickyNote {
       textAlign: "center",
       width: size - textPadding,
     });
-
-    this.textbox.on("changed", () => {
-      this.textbox.setRelativeY(0);
-    });
-
     this.group = new Group([this.card, this.textbox], {
       hasBorders: false,
       hasControls: false,
-      left: x,
+      left: data.position.x,
       selectable: true,
       shadow: new Shadow({
         blur: 10,
@@ -51,50 +46,52 @@ export class FabricStickyNote implements StickyNote {
         offsetY: 2,
       }),
       subTargetCheck: true,
-      top: y,
+      top: data.position.y,
     });
 
-    this.group.on("mousedblclick", () => {
-      this.textbox.canvas?.setActiveObject(this.textbox);
-      this.textbox.enterEditing();
-      this.textbox.selectAll();
-    });
+    this.textbox.on("changed", this.handleTextChange.bind(this));
+    this.group.on("mousedblclick", this.handleMouseDoubleClick.bind(this));
+    this.group.on("moving", this.handleMoving.bind(this));
+
+    this.canvas.add(this.group);
   }
 
-  static makeFromDocumentObject(object: StickyNoteDocumentObject) {
-    const stickyNote = new FabricStickyNote(object.color, object.x, object.y);
-    stickyNote.updateFromDocumentObject(object);
-    return stickyNote;
+  onUpdate(data: Partial<StickyNoteCollaborativeData>) {
+    if (data.color !== undefined) {
+      this.card.set("backgroundColor", data.color);
+    }
+
+    if (data.text !== undefined) {
+      this.textbox.set("text", data.text);
+    }
+
+    if (data.position !== undefined) {
+      this.group.set({
+        left: data.position.x,
+        top: data.position.y,
+      });
+    }
   }
 
-  id() {
-    return this.identifier;
-  }
-
-  attach(canvas: Canvas) {
-    canvas.add(this.group);
-  }
-
-  enterEditing() {
-    this.textbox.canvas?.setActiveObject(this.textbox);
+  private handleMouseDoubleClick() {
+    this.canvas.setActiveObject(this.textbox);
     this.textbox.enterEditing();
+    this.textbox.selectAll();
   }
 
-  toDocumentObject() {
-    return {
-      color: this.color,
-      id: this.identifier,
-      text: this.textbox.text,
+  private handleMoving() {
+    this.data.position = {
       x: this.group.left,
       y: this.group.top,
     };
+
+    // TODO Propagate the change to other collaborators
   }
 
-  updateFromDocumentObject(object: StickyNoteDocumentObject) {
-    this.textbox.set("text", object.text);
-    this.group.set({
-      left: object.x,
-      top: object.y,
-    });
+  private handleTextChange() {
+    this.textbox.setRelativeY(0);
+    this.data.text = this.textbox.text;
+
+    // TODO Propagate the change to other collaborators
   }
 }
