@@ -1,5 +1,6 @@
 import reactLint from "eslint-plugin-react";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
+import reactRefresh from "eslint-plugin-react-refresh";
 import globals from "globals";
 import { baseConfig } from "./base.js";
 
@@ -28,8 +29,6 @@ export const reactConfig = [
       ...reactLint.configs.flat.recommended.languageOptions,
       parserOptions: {
         ...reactLint.configs.flat.recommended.languageOptions.parserOptions,
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname,
       },
       globals: {
         ...globals.serviceworker,
@@ -38,12 +37,14 @@ export const reactConfig = [
     },
   },
   {
+    settings: { react: { version: "detect" } },
     plugins: {
+      ...reactRefresh.configs.vite.plugins,
       "react-hooks": reactHooksPlugin,
     },
-    settings: { react: { version: "detect" } },
     rules: {
       ...reactHooksPlugin.configs.recommended.rules,
+      ...reactRefresh.configs.vite.rules,
       "react/react-in-jsx-scope": "off",
       "react/jsx-curly-brace-presence": [
         "error",

@@ -1,7 +1,14 @@
 {
-  "typescript": {},
-  "json": {},
-  "markdown": {},
+  "typescript": {
+    "useBraces": "always",
+    "singleBodyPosition": "nextLine"
+  },
+  "json": {
+  },
+  "markdown": {
+  },
+  "yaml": {
+  },
   "excludes": [
     "**/node_modules",
     "**/*-lock.yaml"

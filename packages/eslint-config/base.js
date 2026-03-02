@@ -1,6 +1,5 @@
 import jsLint from "@eslint/js";
 import onlyWarnPlugin from "eslint-plugin-only-warn";
-import simpleImportSortPlugin from "eslint-plugin-simple-import-sort";
 import sortKeysFixPlugin from "eslint-plugin-sort-keys-fix";
 import turboPlugin from "eslint-plugin-turbo";
 import tsLint from "typescript-eslint";
@@ -79,33 +78,6 @@ export const baseConfig = [
       "@typescript-eslint/naming-convention": ["off"],
     },
     files: ["*.config.*"],
-  },
-  {
-    plugins: {
-      "simple-import-sort": simpleImportSortPlugin,
-    },
-    rules: {
-      "simple-import-sort/exports": "error",
-      "simple-import-sort/imports": [
-        "error",
-        {
-          groups: [
-            [
-              "^react",
-              "^@?\\w",
-              "^(@|components)(/.*|$)",
-              "^\\u0000",
-              "^\\.\\.(?!/?$)",
-              "^\\.\\./?$",
-              "^\\./(?=.*/)(?!/?$)",
-              "^\\.(?!/?$)",
-              "^\\./?$",
-              "^.+\\.?(css)$",
-            ],
-          ],
-        },
-      ],
-    },
   },
   {
     plugins: {

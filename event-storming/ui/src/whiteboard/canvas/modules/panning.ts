@@ -1,6 +1,6 @@
 import type { Canvas, TPointerEventInfo } from "fabric";
 
-export const setupPanningForCanvas = (canvas: Canvas) => {
+export const addPanningModule = (canvas: Canvas) => {
   const moveViewport = (deltaX: number, deltaY: number) => {
     const transform = canvas.viewportTransform;
     transform[4] += deltaX;

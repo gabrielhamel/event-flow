@@ -12,5 +12,8 @@
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "jiti": "^2.6.1"
+  },
+  "dependencies": {
+    "fabric": "^7.2.0"
   }
 }

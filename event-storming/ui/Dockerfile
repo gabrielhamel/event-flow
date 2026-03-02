@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1
 FROM node:24.13.1-alpine3.23 AS base
 
 ENV DO_NOT_TRACK=1
@@ -16,9 +17,11 @@ FROM base AS build
 
 WORKDIR /app
 COPY --from=prune /app/out/json/ .
-RUN pnpm install --frozen-lockfile
-ARG VITE_API_WS_URL
-ENV VITE_API_WS_URL=$VITE_API_WS_URL
+RUN apk add --update --no-cache python3 make g++ pkgconfig pixman-dev cairo-dev pango-dev libjpeg-turbo-dev giflib-dev librsvg-dev && \
+    ln -sf python3 /usr/bin/python
+ENV PYTHONUNBUFFERED=1
+
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 
 COPY --from=prune /app/out/full/ .
 RUN pnpm run build --filter="@repo/event-storming-ui"

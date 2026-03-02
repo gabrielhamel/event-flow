@@ -1,10 +1,5 @@
 import type { Canvas } from "fabric";
 
-const BASE_DOT_SPACING = 20;
-const BASE_DOT_SIZE = 1.5;
-const DOT_COLOR = "#d0d0d0";
-const BACKGROUND_COLOR = "#FFFFFF";
-
 const renderDottedBackground = (
   ctx: CanvasRenderingContext2D,
   { zoom, scrollX, scrollY }: {
@@ -13,16 +8,17 @@ const renderDottedBackground = (
     scrollY: number;
   },
 ) => {
-  const canvas = ctx.canvas;
-  ctx.fillStyle = BACKGROUND_COLOR;
+  const { canvas } = ctx;
+
+  ctx.fillStyle = "#FFFFFF";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  const dotSpacing = BASE_DOT_SPACING * zoom;
-  const dotSize = Math.max(1, BASE_DOT_SIZE * zoom);
+  const dotSpacing = 20 * zoom;
+  const dotSize = Math.max(1, 1.5 * zoom);
   const offsetX = ((scrollX * zoom) % dotSpacing + dotSpacing) % dotSpacing;
   const offsetY = ((scrollY * zoom) % dotSpacing + dotSpacing) % dotSpacing;
 
-  ctx.fillStyle = DOT_COLOR;
+  ctx.fillStyle = "#d0d0d0";
 
   for (let x = offsetX; x < canvas.width; x += dotSpacing) {
     for (let y = offsetY; y < canvas.height; y += dotSpacing) {
@@ -33,7 +29,7 @@ const renderDottedBackground = (
   }
 };
 
-export const setupDottedBackgroundForCanvas = (canvas: Canvas) => {
+export const addDottedBackgroundModule = (canvas: Canvas) => {
   canvas.on("before:render", () => {
     const ctx = canvas.getContext();
     const vpt = canvas.viewportTransform;
@@ -43,9 +39,9 @@ export const setupDottedBackgroundForCanvas = (canvas: Canvas) => {
     ctx.setTransform(1, 0, 0, 1, 0, 0);
 
     renderDottedBackground(ctx, {
-      zoom,
       scrollX: 2 * vpt[4] / zoom,
       scrollY: 2 * vpt[5] / zoom,
+      zoom,
     });
 
     ctx.restore();

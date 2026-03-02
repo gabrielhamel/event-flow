@@ -1,6 +1,6 @@
 import type { Canvas, TPointerEvent, TPointerEventInfo } from "fabric";
 
-export const setupZoomingForCanvas = (canvas: Canvas) => {
+export const addZoomingModule = (canvas: Canvas) => {
   const zoomToPosition = (delta: number, pointer: TPointerEvent) => {
     const zoomFactor = canvas.getZoom() * (0.99 ** delta);
     const zoomClamped = Math.max(0.4, Math.min(5, zoomFactor));
