@@ -184,8 +184,8 @@ importers:
         specifier: ^1.1.2
         version: 1.1.2
       eslint-plugin-turbo:
-        specifier: ^2.5.6
-        version: 2.5.6(eslint@9.39.3(jiti@2.6.1))(turbo@2.8.12)
+        specifier: ^2.8.12
+        version: 2.8.12(eslint@9.39.3(jiti@2.6.1))(turbo@2.8.12)
       globals:
         specifier: ^16.3.0
         version: 16.3.0
@@ -1610,6 +1610,10 @@ packages:
     resolution: {integrity: sha512-3UDv+G9CsCKO1WKMGw9fwq/SWJYbI0c5Y7LU1AXYoDdbhE2AHQ6N6Nb34sG8Fj7T5APy8qXDCKuuIHd1BR0tVA==}
     engines: {node: '>=8'}
 
+  detect-libc@2.1.2:
+    resolution: {integrity: sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ==}
+    engines: {node: '>=8'}
+
   doctrine@2.1.0:
     resolution: {integrity: sha512-35mSku4ZXK0vfCuHEDAwt55dg2jNajHZ1odvF+8SSr82EsZY4QmXfuWso8oEd8zRhVObSN18aM0CjSdoBX7zIw==}
     engines: {node: '>=0.10.0'}
@@ -1733,8 +1737,8 @@ packages:
     resolution: {integrity: sha512-DNPHFGCA0/hZIsfODbeLZqaGY/+q3vgtshF85r+YWDNCQ2apd9PNs/zL6ttKm0nD1IFwvxyg3YOTI7FHl4unrw==}
     engines: {node: '>=0.10.0'}
 
-  eslint-plugin-turbo@2.5.6:
-    resolution: {integrity: sha512-KUDE23aP2JV8zbfZ4TeM1HpAXzMM/AYG/bJam7P4AalUxas8Pd/lS/6R3p4uX91qJcH1LwL4h0ED48nDe8KorQ==}
+  eslint-plugin-turbo@2.8.12:
+    resolution: {integrity: sha512-Q0LcIS2bRivRDZbtHOrtNFUSclnvfL8Qn1yM8I7+1LRerPmdcLF++SYOOCsF9COCEvoP6O66+bnupDqpC/W59w==}
     peerDependencies:
       eslint: '>6.6.0'
       turbo: '>2.0.0'
@@ -4471,6 +4475,9 @@ snapshots:
   detect-libc@2.0.4:
     optional: true
 
+  detect-libc@2.1.2:
+    optional: true
+
   doctrine@2.1.0:
     dependencies:
       esutils: 2.0.3
@@ -4735,7 +4742,7 @@ snapshots:
       natural-compare: 1.4.0
       requireindex: 1.2.0
 
-  eslint-plugin-turbo@2.5.6(eslint@9.39.3(jiti@2.6.1))(turbo@2.8.12):
+  eslint-plugin-turbo@2.8.12(eslint@9.39.3(jiti@2.6.1))(turbo@2.8.12):
     dependencies:
       dotenv: 16.0.3
       eslint: 9.39.3(jiti@2.6.1)
@@ -5399,7 +5406,7 @@ snapshots:
 
   lightningcss@1.31.1:
     dependencies:
-      detect-libc: 2.0.4
+      detect-libc: 2.1.2
     optionalDependencies:
       lightningcss-android-arm64: 1.31.1
       lightningcss-darwin-arm64: 1.31.1
