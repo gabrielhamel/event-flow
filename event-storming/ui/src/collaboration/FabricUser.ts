@@ -1,5 +1,5 @@
 import type { Cursor } from "@repo/core/Cursor.ts";
-import type { WhiteboardUser } from "@repo/core/WhiteboardUser.ts";
+import type { WhiteboardUser } from "@repo/core/whiteboard/WhiteboardUser.ts";
 
 export class FabricUser implements WhiteboardUser {
   private readonly id: number;

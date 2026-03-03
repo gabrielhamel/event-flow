@@ -1,5 +1,6 @@
 export interface StickyNoteCollaborativeData {
-    color: string;
-    text: string;
-    position: { x: number; y: number };
+  color: string;
+  text: string;
+  x: number;
+  y: number;
 }

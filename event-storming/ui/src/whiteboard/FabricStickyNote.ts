@@ -1,4 +1,4 @@
-import { CollaborativeEntity } from "@repo/core/CollaborativeEntity";
+import { CollaborativeEntity } from "@repo/core/collaborative/CollaborativeEntity";
 import type { StickyNoteCollaborativeData } from "@repo/core/StickyNoteCollaborativeData";
 import { type Canvas, FabricObject, Group, Shadow, Textbox } from "fabric";
 
@@ -6,12 +6,12 @@ export class FabricStickyNote extends CollaborativeEntity<StickyNoteCollaborativ
   private readonly textbox: Textbox;
   private readonly card: FabricObject;
   private readonly group: Group;
-  private readonly canvas: Canvas;
 
-  constructor(data: StickyNoteCollaborativeData, canvas: Canvas) {
-    super(data);
-
-    this.canvas = canvas;
+  constructor(
+    data: StickyNoteCollaborativeData,
+    onUpdate: (id: string, data: StickyNoteCollaborativeData) => void,
+  ) {
+    super(data, onUpdate);
 
     const size = 150;
     const textPadding = 20;
@@ -37,7 +37,7 @@ export class FabricStickyNote extends CollaborativeEntity<StickyNoteCollaborativ
     this.group = new Group([this.card, this.textbox], {
       hasBorders: false,
       hasControls: false,
-      left: data.position.x,
+      left: data.x,
       selectable: true,
       shadow: new Shadow({
         blur: 10,
@@ -46,52 +46,44 @@ export class FabricStickyNote extends CollaborativeEntity<StickyNoteCollaborativ
         offsetY: 2,
       }),
       subTargetCheck: true,
-      top: data.position.y,
+      top: data.y,
     });
 
     this.textbox.on("changed", this.handleTextChange.bind(this));
     this.group.on("mousedblclick", this.handleMouseDoubleClick.bind(this));
     this.group.on("moving", this.handleMoving.bind(this));
-
-    this.canvas.add(this.group);
   }
 
-  onUpdate(data: Partial<StickyNoteCollaborativeData>) {
-    if (data.color !== undefined) {
-      this.card.set("backgroundColor", data.color);
-    }
+  attachToCanvas(canvas: Canvas) {
+    canvas.add(this.group);
+  }
 
-    if (data.text !== undefined) {
-      this.textbox.set("text", data.text);
-    }
-
-    if (data.position !== undefined) {
-      this.group.set({
-        left: data.position.x,
-        top: data.position.y,
-      });
-    }
+  updateFromCollaborativeData(data: StickyNoteCollaborativeData) {
+    this.card.set("backgroundColor", data.color);
+    this.textbox.set("text", data.text);
+    this.group.set({
+      left: data.x,
+      top: data.y,
+    });
   }
 
   private handleMouseDoubleClick() {
-    this.canvas.setActiveObject(this.textbox);
+    this.textbox.canvas?.setActiveObject(this.textbox);
     this.textbox.enterEditing();
     this.textbox.selectAll();
   }
 
   private handleMoving() {
-    this.data.position = {
-      x: this.group.left,
-      y: this.group.top,
-    };
+    this.data.x = this.group.left;
+    this.data.y = this.group.top;
 
-    // TODO Propagate the change to other collaborators
+    this.propagateCollaborativeUpdate();
   }
 
   private handleTextChange() {
     this.textbox.setRelativeY(0);
     this.data.text = this.textbox.text;
 
-    // TODO Propagate the change to other collaborators
+    this.propagateCollaborativeUpdate();
   }
 }
