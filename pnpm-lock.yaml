@@ -146,9 +146,18 @@ importers:
 
   packages/core:
     dependencies:
+      '@hocuspocus/provider':
+        specifier: ^3.4.4
+        version: 3.4.4(y-protocols@1.0.7(yjs@13.6.29))(yjs@13.6.29)
       fabric:
         specifier: ^7.2.0
         version: 7.2.0
+      uuid:
+        specifier: ^13.0.0
+        version: 13.0.0
+      yjs:
+        specifier: ^13.6.29
+        version: 13.6.29
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*
@@ -2950,6 +2959,10 @@ packages:
 
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
+
+  uuid@13.0.0:
+    resolution: {integrity: sha512-XQegIaBTVUjSHliKqcnFqYypAd4S+WCYt5NIeRs6w/UAry7z8Y9j5ZwRRL4kzq9U3sD6v+85er9FvkEaBpji2w==}
+    hasBin: true
 
   vary@1.1.2:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
@@ -6154,6 +6167,8 @@ snapshots:
 
   util-deprecate@1.0.2:
     optional: true
+
+  uuid@13.0.0: {}
 
   vary@1.1.2: {}
 
