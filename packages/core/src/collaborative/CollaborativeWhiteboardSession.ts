@@ -4,12 +4,13 @@ import type { StickyNoteCollaborativeData } from "@repo/core/StickyNoteCollabora
 import * as Y from "yjs";
 
 interface CollaborativeWhiteboardHandlers {
-  onStickyNoteAdded: (data: StickyNoteCollaborativeData) => void;
+  createStickyNote: (id: string, data: StickyNoteCollaborativeData) => CollaborativeEntity<StickyNoteCollaborativeData>;
 }
 
 export class CollaborativeWhiteboardSession {
   private readonly provider: HocuspocusProvider;
-  private readonly stickyNoteCollection;
+  private readonly stickyNoteCollection: Y.Map<StickyNoteCollaborativeData>;
+  private readonly stickyNoteEntityCollection: Map<string, CollaborativeEntity<StickyNoteCollaborativeData>>;
 
   constructor(url: string, handlers: CollaborativeWhiteboardHandlers) {
     this.provider = new HocuspocusProvider({
@@ -18,19 +19,31 @@ export class CollaborativeWhiteboardSession {
       url,
     });
 
-    this.stickyNoteCollection = this.provider.document.getArray<{ id: string } & StickyNoteCollaborativeData>(
+    this.stickyNoteEntityCollection = new Map();
+    this.stickyNoteCollection = this.provider.document.getMap<StickyNoteCollaborativeData>(
       "stickyNotes",
     );
-
     this.stickyNoteCollection.observe((event) => {
       if (event.transaction.origin === null) {
         return;
       }
 
-      event.changes.added.forEach((item) => {
-        const data = item.content.getContent().at(0) as StickyNoteCollaborativeData;
+      event.changes.keys.forEach((change, key) => {
+        if (change.action === "add") {
+          const data = this.stickyNoteCollection.get(key) as StickyNoteCollaborativeData;
+          const stickyNote = handlers.createStickyNote(key, data);
+          this.stickyNoteEntityCollection.set(stickyNote.id(), stickyNote);
 
-        handlers.onStickyNoteAdded(data);
+          console.log("add sticky note");
+        } else if (change.action === "update") {
+          const stickyNote = this.stickyNoteEntityCollection.get(key);
+          if (!stickyNote) {
+            throw new Error("Sticky note not found");
+          }
+
+          const newData = this.stickyNoteCollection.get(key) as StickyNoteCollaborativeData;
+          stickyNote.updateFromCollaborativeData(newData);
+        }
       });
     });
   }
@@ -40,11 +53,11 @@ export class CollaborativeWhiteboardSession {
   }
 
   addStickyNote(stickyNote: CollaborativeEntity<StickyNoteCollaborativeData>) {
-    this.stickyNoteCollection.push([{ id: stickyNote.id(), ...stickyNote.collaborativeData() }]);
+    this.stickyNoteCollection.set(stickyNote.id(), stickyNote.collaborativeData());
+    this.stickyNoteEntityCollection.set(stickyNote.id(), stickyNote);
   }
 
   updateStickyNote(id: string, data: StickyNoteCollaborativeData) {
-    void id;
-    void data;
+    this.stickyNoteCollection.set(id, data);
   }
 }

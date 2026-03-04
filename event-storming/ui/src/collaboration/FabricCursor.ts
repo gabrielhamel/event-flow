@@ -30,7 +30,7 @@ export class FabricCursor implements Cursor {
     canvas.on("object:added", () => {
       canvas.bringObjectToFront(object);
     });
-    registerCursor(canvas, object);
+    // RegisterCursor(canvas, object);
 
     return new FabricCursor(object);
   }

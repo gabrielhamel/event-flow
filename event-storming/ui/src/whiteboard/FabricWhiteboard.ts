@@ -32,7 +32,7 @@ export class FabricWhiteboard implements Whiteboard {
         ? "ws://localhost:8080/api/event-storming/collaboration"
         : "wss://ddd-lab.gabrielhamel.fr/api/event-storming/collaboration",
       {
-        onStickyNoteAdded: this.handleStickyNoteAdded.bind(this),
+        createStickyNote: this.handleCreateStickyNote.bind(this),
       },
     );
   }
@@ -54,25 +54,28 @@ export class FabricWhiteboard implements Whiteboard {
     const left = viewportCenter.x;
     const top = viewportCenter.y;
 
-    const stickyNote = new FabricStickyNote(
-      {
+    const stickyNote = new FabricStickyNote({
+      data: {
         color,
         text: "",
         x: left,
         y: top,
       },
-      this.collaborativeSession.updateStickyNote.bind(this.collaborativeSession),
-    );
+      onUpdate: this.collaborativeSession.updateStickyNote.bind(this.collaborativeSession),
+    });
     stickyNote.attachToCanvas(this.canvas);
 
     this.collaborativeSession.addStickyNote(stickyNote);
   }
 
-  private handleStickyNoteAdded(stickyNoteCollaborativeData: StickyNoteCollaborativeData) {
-    const stickyNote = new FabricStickyNote(
-      stickyNoteCollaborativeData,
-      this.collaborativeSession.updateStickyNote.bind(this.collaborativeSession),
-    );
+  private handleCreateStickyNote(id: string, stickyNoteCollaborativeData: StickyNoteCollaborativeData) {
+    const stickyNote = new FabricStickyNote({
+      data: stickyNoteCollaborativeData,
+      id,
+      onUpdate: this.collaborativeSession.updateStickyNote.bind(this.collaborativeSession),
+    });
     stickyNote.attachToCanvas(this.canvas);
+
+    return stickyNote;
   }
 }

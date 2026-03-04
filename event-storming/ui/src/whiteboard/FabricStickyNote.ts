@@ -7,23 +7,24 @@ export class FabricStickyNote extends CollaborativeEntity<StickyNoteCollaborativ
   private readonly card: FabricObject;
   private readonly group: Group;
 
-  constructor(
-    data: StickyNoteCollaborativeData,
-    onUpdate: (id: string, data: StickyNoteCollaborativeData) => void,
-  ) {
-    super(data, onUpdate);
+  constructor(props: {
+    id?: string;
+    data: StickyNoteCollaborativeData;
+    onUpdate: (id: string, data: StickyNoteCollaborativeData) => void;
+  }) {
+    super({ data: props.data, id: props.id ?? crypto.randomUUID(), onUpdate: props.onUpdate });
 
     const size = 150;
     const textPadding = 20;
 
     this.card = new FabricObject({
-      backgroundColor: data.color,
+      backgroundColor: props.data.color,
       hasBorders: false,
       hasControls: false,
       height: size,
       width: size,
     });
-    this.textbox = new Textbox(data.text, {
+    this.textbox = new Textbox(props.data.text, {
       fill: "#333333",
       fontFamily: "Roboto",
       fontSize: 18,
@@ -37,7 +38,7 @@ export class FabricStickyNote extends CollaborativeEntity<StickyNoteCollaborativ
     this.group = new Group([this.card, this.textbox], {
       hasBorders: false,
       hasControls: false,
-      left: data.x,
+      left: props.data.x,
       selectable: true,
       shadow: new Shadow({
         blur: 10,
@@ -46,7 +47,7 @@ export class FabricStickyNote extends CollaborativeEntity<StickyNoteCollaborativ
         offsetY: 2,
       }),
       subTargetCheck: true,
-      top: data.y,
+      top: props.data.y,
     });
 
     this.textbox.on("changed", this.handleTextChange.bind(this));
@@ -65,6 +66,7 @@ export class FabricStickyNote extends CollaborativeEntity<StickyNoteCollaborativ
       left: data.x,
       top: data.y,
     });
+    this.group.canvas?.requestRenderAll();
   }
 
   private handleMouseDoubleClick() {

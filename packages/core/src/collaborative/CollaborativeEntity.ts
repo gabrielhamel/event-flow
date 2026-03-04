@@ -1,14 +1,12 @@
-import { v7 as uuid } from "uuid";
-
 export abstract class CollaborativeEntity<Data> {
   protected data: Data;
   private readonly entityId: string;
   private readonly propagateUpdateCallback: (id: string, data: Data) => void;
 
-  protected constructor(data: Data, onUpdate: (id: string, data: Data) => void) {
-    this.entityId = uuid();
-    this.data = data;
-    this.propagateUpdateCallback = onUpdate;
+  protected constructor(props: { id: string; data: Data; onUpdate: (id: string, data: Data) => void }) {
+    this.entityId = props.id;
+    this.data = props.data;
+    this.propagateUpdateCallback = props.onUpdate;
   }
 
   id() {
