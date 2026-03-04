@@ -21,8 +21,10 @@ export const WhiteboardComponent = ({ children }: { children: ReactNode }) => {
 
     return () => {
       window.removeEventListener("resize", resizeObserver);
-      void whiteboardHandle.dispose();
       setWhiteboard(null);
+      whiteboardHandle.dispose().catch((reason: unknown) => {
+        console.error("Error disposing whiteboard:", reason);
+      });
     };
   }, []);
 

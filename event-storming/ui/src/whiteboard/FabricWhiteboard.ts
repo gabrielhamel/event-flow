@@ -1,13 +1,16 @@
 import { CollaborativeWhiteboardSession } from "@repo/core/collaborative/CollaborativeWhiteboardSession";
+import type { CursorCollaborativeData } from "@repo/core/CursorCollaborativeData";
 import type { StickyNoteCollaborativeData } from "@repo/core/StickyNoteCollaborativeData";
-import type { Whiteboard } from "@repo/core/whiteboard/Whiteboard";
 import { addDottedBackgroundModule } from "@repo/event-storming-ui/whiteboard/canvas/modules/dottedBackground";
 import { addPanningModule } from "@repo/event-storming-ui/whiteboard/canvas/modules/panning";
 import { addZoomingModule } from "@repo/event-storming-ui/whiteboard/canvas/modules/zooming";
+import { FabricCursor } from "@repo/event-storming-ui/whiteboard/FabricCursor";
 import { FabricStickyNote } from "@repo/event-storming-ui/whiteboard/FabricStickyNote";
-import { Canvas } from "fabric";
+import { Canvas, loadSVGFromURL, type TPointerEventInfo } from "fabric";
 
-export class FabricWhiteboard implements Whiteboard {
+const cursorSVG = await loadSVGFromURL("cursor.svg");
+
+export class FabricWhiteboard {
   private readonly canvas: Canvas;
   private readonly collaborativeSession: CollaborativeWhiteboardSession;
 
@@ -32,9 +35,12 @@ export class FabricWhiteboard implements Whiteboard {
         ? "ws://localhost:8080/api/event-storming/collaboration"
         : "wss://ddd-lab.gabrielhamel.fr/api/event-storming/collaboration",
       {
-        createStickyNote: this.handleCreateStickyNote.bind(this),
+        onCreateCursor: this.handleCreateCursor.bind(this),
+        onCreateStickyNote: this.handleCreateStickyNote.bind(this),
       },
     );
+
+    this.canvas.on("mouse:move", this.handleMouseMove.bind(this));
   }
 
   async dispose() {
@@ -55,6 +61,7 @@ export class FabricWhiteboard implements Whiteboard {
     const top = viewportCenter.y;
 
     const stickyNote = new FabricStickyNote({
+      canvas: this.canvas,
       data: {
         color,
         text: "",
@@ -63,19 +70,28 @@ export class FabricWhiteboard implements Whiteboard {
       },
       onUpdate: this.collaborativeSession.updateStickyNote.bind(this.collaborativeSession),
     });
-    stickyNote.attachToCanvas(this.canvas);
 
     this.collaborativeSession.addStickyNote(stickyNote);
   }
 
   private handleCreateStickyNote(id: string, stickyNoteCollaborativeData: StickyNoteCollaborativeData) {
-    const stickyNote = new FabricStickyNote({
+    return new FabricStickyNote({
+      canvas: this.canvas,
       data: stickyNoteCollaborativeData,
       id,
       onUpdate: this.collaborativeSession.updateStickyNote.bind(this.collaborativeSession),
     });
-    stickyNote.attachToCanvas(this.canvas);
+  }
 
-    return stickyNote;
+  private handleCreateCursor(cursorCollaborativeData: CursorCollaborativeData) {
+    return new FabricCursor({
+      canvas: this.canvas,
+      data: cursorCollaborativeData,
+      svg: cursorSVG,
+    });
+  }
+
+  private handleMouseMove(event: TPointerEventInfo) {
+    this.collaborativeSession.updateCursorPosition(event.scenePoint.x, event.scenePoint.y);
   }
 }

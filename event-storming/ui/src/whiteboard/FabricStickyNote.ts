@@ -6,9 +6,11 @@ export class FabricStickyNote extends CollaborativeEntity<StickyNoteCollaborativ
   private readonly textbox: Textbox;
   private readonly card: FabricObject;
   private readonly group: Group;
+  private readonly canvas: Canvas;
 
   constructor(props: {
     id?: string;
+    canvas: Canvas;
     data: StickyNoteCollaborativeData;
     onUpdate: (id: string, data: StickyNoteCollaborativeData) => void;
   }) {
@@ -16,6 +18,8 @@ export class FabricStickyNote extends CollaborativeEntity<StickyNoteCollaborativ
 
     const size = 150;
     const textPadding = 20;
+
+    this.canvas = props.canvas;
 
     this.card = new FabricObject({
       backgroundColor: props.data.color,
@@ -53,10 +57,8 @@ export class FabricStickyNote extends CollaborativeEntity<StickyNoteCollaborativ
     this.textbox.on("changed", this.handleTextChange.bind(this));
     this.group.on("mousedblclick", this.handleMouseDoubleClick.bind(this));
     this.group.on("moving", this.handleMoving.bind(this));
-  }
 
-  attachToCanvas(canvas: Canvas) {
-    canvas.add(this.group);
+    this.canvas.add(this.group);
   }
 
   updateFromCollaborativeData(data: StickyNoteCollaborativeData) {
@@ -66,11 +68,18 @@ export class FabricStickyNote extends CollaborativeEntity<StickyNoteCollaborativ
       left: data.x,
       top: data.y,
     });
-    this.group.canvas?.requestRenderAll();
+    this.group.setCoords();
+
+    if (this.canvas.getActiveObject() === this.group) {
+      this.canvas.discardActiveObject();
+    }
+
+    this.canvas.requestRenderAll();
   }
 
   private handleMouseDoubleClick() {
-    this.textbox.canvas?.setActiveObject(this.textbox);
+    this.canvas.setActiveObject(this.textbox);
+
     this.textbox.enterEditing();
     this.textbox.selectAll();
   }
