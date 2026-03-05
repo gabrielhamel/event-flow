@@ -22,6 +22,7 @@ export class CollaborativeWhiteboardSession {
 
   constructor(url: string, handlers: CollaborativeWhiteboardHandlers) {
     this.handlers = handlers;
+
     this.provider = new HocuspocusProvider({
       document: new Y.Doc(),
       name: "example-document",
@@ -32,32 +33,25 @@ export class CollaborativeWhiteboardSession {
     this.stickyNoteEntityCollection = new Map();
     this.cursorEntityCollection = new Map();
 
+    this.cursorColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+
     this.stickyNoteCollection = this.provider.document.getMap<StickyNoteCollaborativeData>(
       "stickyNotes",
     );
     this.stickyNoteCollection.observe((event) => {
-      if (event.transaction.origin === null) {
+      const isLocalEvent = event.transaction.origin === null;
+      if (isLocalEvent) {
         return;
       }
 
       event.changes.keys.forEach((change, key) => {
         if (change.action === "add") {
-          const data = this.stickyNoteCollection.get(key) as StickyNoteCollaborativeData;
-          const stickyNote = handlers.onCreateStickyNote(key, data);
-          this.stickyNoteEntityCollection.set(stickyNote.id(), stickyNote);
+          this.createStickyNoteEntity(key);
         } else if (change.action === "update") {
-          const stickyNote = this.stickyNoteEntityCollection.get(key);
-          if (!stickyNote) {
-            throw new Error("Sticky note not found");
-          }
-
-          const newData = this.stickyNoteCollection.get(key) as StickyNoteCollaborativeData;
-          stickyNote.updateFromCollaborativeData(newData);
+          this.updateStickyNoteEntity(key);
         }
       });
     });
-
-    this.cursorColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
   }
 
   dispose() {
@@ -81,6 +75,34 @@ export class CollaborativeWhiteboardSession {
     });
   }
 
+  private createStickyNoteEntity(id: string) {
+    const data = this.stickyNoteCollection.get(id) as StickyNoteCollaborativeData;
+    const stickyNote = this.handlers.onCreateStickyNote(id, data);
+    this.stickyNoteEntityCollection.set(stickyNote.id(), stickyNote);
+  }
+
+  private updateStickyNoteEntity(id: string) {
+    const stickyNote = this.stickyNoteEntityCollection.get(id);
+    if (!stickyNote) {
+      throw new Error("Sticky note not found");
+    }
+
+    const newData = this.stickyNoteCollection.get(id) as StickyNoteCollaborativeData;
+    stickyNote.updateFromCollaborativeData(newData);
+  }
+
+  private createOrUpdateClientCursor(clientId: number, data: CursorCollaborativeData) {
+    const alreadyExistingCursor = this.cursorEntityCollection.get(clientId);
+    if (alreadyExistingCursor) {
+      alreadyExistingCursor.updateFromCollaborativeData(data);
+
+      return;
+    }
+
+    const cursor = this.handlers.onCreateCursor(data);
+    this.cursorEntityCollection.set(clientId, cursor);
+  }
+
   private handleAwarenessChange(data: onAwarenessChangeParameters) {
     if (!this.provider.awareness) {
       throw new Error("Awareness is not defined");
@@ -94,15 +116,7 @@ export class CollaborativeWhiteboardSession {
       }
 
       const cursorCollaborativeData = state.cursor as CursorCollaborativeData;
-      const alreadyExistingCursor = this.cursorEntityCollection.get(state.clientId);
-      if (alreadyExistingCursor) {
-        alreadyExistingCursor.updateFromCollaborativeData(cursorCollaborativeData);
-        return;
-      }
-
-      const cursor = this.handlers.onCreateCursor(cursorCollaborativeData);
-
-      this.cursorEntityCollection.set(state.clientId, cursor);
+      this.createOrUpdateClientCursor(state.clientId, cursorCollaborativeData);
     });
   }
 }
