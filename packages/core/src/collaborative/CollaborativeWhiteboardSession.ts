@@ -1,27 +1,37 @@
 import { HocuspocusProvider, type onAwarenessChangeParameters } from "@hocuspocus/provider";
 import type { CollaborativeEntity } from "@repo/core/collaborative/CollaborativeEntity";
-import type { CursorCollaborativeData } from "@repo/core/CursorCollaborativeData";
-import type { StickyNoteCollaborativeData } from "@repo/core/StickyNoteCollaborativeData";
+import type { CursorCollaborativeData } from "@repo/core/collaborative/CursorCollaborativeData";
+import type { StickyNoteCollaborativeData } from "@repo/core/collaborative/StickyNoteCollaborativeData";
 import * as Y from "yjs";
 
-interface CollaborativeWhiteboardHandlers {
-  onCreateStickyNote: (
+export interface StickyNoteFactory {
+  create: (
     id: string,
     data: StickyNoteCollaborativeData,
+    session: CollaborativeWhiteboardSession,
   ) => CollaborativeEntity<StickyNoteCollaborativeData>;
-  onCreateCursor: (data: CursorCollaborativeData) => CollaborativeEntity<CursorCollaborativeData>;
+}
+
+export interface CursorFactory {
+  create: (data: CursorCollaborativeData) => CollaborativeEntity<CursorCollaborativeData>;
 }
 
 export class CollaborativeWhiteboardSession {
   private readonly provider: HocuspocusProvider;
-  private readonly handlers: CollaborativeWhiteboardHandlers;
+  private readonly stickyNoteFactory: StickyNoteFactory;
+  private readonly cursorFactory: CursorFactory;
   private readonly stickyNoteCollection: Y.Map<StickyNoteCollaborativeData>;
   private readonly stickyNoteEntityCollection: Map<string, CollaborativeEntity<StickyNoteCollaborativeData>>;
   private readonly cursorEntityCollection: Map<number, CollaborativeEntity<CursorCollaborativeData>>;
   private readonly cursorColor: string;
 
-  constructor(url: string, handlers: CollaborativeWhiteboardHandlers) {
-    this.handlers = handlers;
+  constructor(
+    url: string,
+    stickyNoteFactory: StickyNoteFactory,
+    cursorFactory: CursorFactory,
+  ) {
+    this.stickyNoteFactory = stickyNoteFactory;
+    this.cursorFactory = cursorFactory;
 
     this.provider = new HocuspocusProvider({
       document: new Y.Doc(),
@@ -77,7 +87,7 @@ export class CollaborativeWhiteboardSession {
 
   private createStickyNoteEntity(id: string) {
     const data = this.stickyNoteCollection.get(id) as StickyNoteCollaborativeData;
-    const stickyNote = this.handlers.onCreateStickyNote(id, data);
+    const stickyNote = this.stickyNoteFactory.create(id, data, this);
     this.stickyNoteEntityCollection.set(stickyNote.id(), stickyNote);
   }
 
@@ -99,7 +109,7 @@ export class CollaborativeWhiteboardSession {
       return;
     }
 
-    const cursor = this.handlers.onCreateCursor(data);
+    const cursor = this.cursorFactory.create(data);
     this.cursorEntityCollection.set(clientId, cursor);
   }
 

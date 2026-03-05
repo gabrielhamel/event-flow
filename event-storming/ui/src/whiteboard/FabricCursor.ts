@@ -1,5 +1,5 @@
 import { CollaborativeEntity } from "@repo/core/collaborative/CollaborativeEntity";
-import type { CursorCollaborativeData } from "@repo/core/CursorCollaborativeData.ts";
+import type { CursorCollaborativeData } from "@repo/core/collaborative/CursorCollaborativeData.ts";
 import { type Canvas, type FabricObject, type loadSVGFromURL, util } from "fabric";
 
 export class FabricCursor extends CollaborativeEntity<CursorCollaborativeData> {

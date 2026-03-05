@@ -1,14 +1,11 @@
 import { CollaborativeWhiteboardSession } from "@repo/core/collaborative/CollaborativeWhiteboardSession";
-import type { CursorCollaborativeData } from "@repo/core/CursorCollaborativeData";
-import type { StickyNoteCollaborativeData } from "@repo/core/StickyNoteCollaborativeData";
 import { addDottedBackgroundModule } from "@repo/event-storming-ui/whiteboard/canvas/modules/dottedBackground";
 import { addPanningModule } from "@repo/event-storming-ui/whiteboard/canvas/modules/panning";
 import { addZoomingModule } from "@repo/event-storming-ui/whiteboard/canvas/modules/zooming";
-import { FabricCursor } from "@repo/event-storming-ui/whiteboard/FabricCursor";
+import { FabricCursorFactory } from "@repo/event-storming-ui/whiteboard/FabricCursorFactory";
 import { FabricStickyNote } from "@repo/event-storming-ui/whiteboard/FabricStickyNote";
-import { Canvas, loadSVGFromURL, type TPointerEventInfo } from "fabric";
-
-const cursorSVG = await loadSVGFromURL("cursor.svg");
+import { FabricStickyNoteFactory } from "@repo/event-storming-ui/whiteboard/FabricStickyNoteFactory";
+import { Canvas, type TPointerEventInfo } from "fabric";
 
 export class FabricWhiteboard {
   private readonly canvas: Canvas;
@@ -25,19 +22,24 @@ export class FabricWhiteboard {
       selection: false,
       width,
     });
+
     addPanningModule(this.canvas);
     addDottedBackgroundModule(this.canvas);
     addZoomingModule(this.canvas);
+
     this.canvas.requestRenderAll();
 
+    const stickyNoteFactory = new FabricStickyNoteFactory(this.canvas);
+    const cursorFactory = new FabricCursorFactory(this.canvas);
+
+    const wsUrl = import.meta.env.MODE === "development"
+      ? "ws://localhost:8080/api/event-storming/collaboration"
+      : "wss://ddd-lab.gabrielhamel.fr/api/event-storming/collaboration";
+
     this.collaborativeSession = new CollaborativeWhiteboardSession(
-      import.meta.env.MODE === "development"
-        ? "ws://localhost:8080/api/event-storming/collaboration"
-        : "wss://ddd-lab.gabrielhamel.fr/api/event-storming/collaboration",
-      {
-        onCreateCursor: this.handleCreateCursor.bind(this),
-        onCreateStickyNote: this.handleCreateStickyNote.bind(this),
-      },
+      wsUrl,
+      stickyNoteFactory,
+      cursorFactory,
     );
 
     this.canvas.on("mouse:move", this.handleMouseMove.bind(this));
@@ -72,23 +74,6 @@ export class FabricWhiteboard {
     });
 
     this.collaborativeSession.addStickyNote(stickyNote);
-  }
-
-  private handleCreateStickyNote(id: string, stickyNoteCollaborativeData: StickyNoteCollaborativeData) {
-    return new FabricStickyNote({
-      canvas: this.canvas,
-      data: stickyNoteCollaborativeData,
-      id,
-      onUpdate: this.collaborativeSession.updateStickyNote.bind(this.collaborativeSession),
-    });
-  }
-
-  private handleCreateCursor(cursorCollaborativeData: CursorCollaborativeData) {
-    return new FabricCursor({
-      canvas: this.canvas,
-      data: cursorCollaborativeData,
-      svg: cursorSVG,
-    });
   }
 
   private handleMouseMove(event: TPointerEventInfo) {

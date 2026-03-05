@@ -1,5 +1,5 @@
 import { CollaborativeEntity } from "@repo/core/collaborative/CollaborativeEntity";
-import type { StickyNoteCollaborativeData } from "@repo/core/StickyNoteCollaborativeData";
+import type { StickyNoteCollaborativeData } from "@repo/core/collaborative/StickyNoteCollaborativeData";
 import { type Canvas, FabricObject, Group, Shadow, Textbox } from "fabric";
 
 export class FabricStickyNote extends CollaborativeEntity<StickyNoteCollaborativeData> {
