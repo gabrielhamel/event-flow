@@ -29,9 +29,11 @@ export class FabricCursor extends CollaborativeEntity<CursorCollaborativeData> {
     this.object.set({
       evented: false,
       fill: props.data.color,
+      left: props.data.x,
       selectable: false,
       stroke: "#000000",
       strokeWidth: 20,
+      top: props.data.y,
     });
 
     this.canvas.add(this.object);
