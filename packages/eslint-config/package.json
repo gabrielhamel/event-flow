@@ -16,6 +16,6 @@
     "eslint-plugin-sort-keys-fix": "^1.1.2",
     "eslint-plugin-turbo": "^2.8.13",
     "globals": "^16.3.0",
-    "typescript-eslint": "^8.40.0"
+    "typescript-eslint": "^8.56.1"
   }
 }
