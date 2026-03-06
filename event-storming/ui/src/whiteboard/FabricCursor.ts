@@ -1,6 +1,7 @@
 import { CollaborativeEntity } from "@repo/core/collaborative/CollaborativeEntity";
 import type { CursorCollaborativeData } from "@repo/core/collaborative/CursorCollaborativeData.ts";
-import { type Canvas, type FabricObject, type loadSVGFromURL, type TPointerEventInfo, util } from "fabric";
+import { listenCanvasZoom } from "@repo/event-storming-ui/whiteboard/canvas/modules/zooming";
+import { type Canvas, type FabricObject, type loadSVGFromURL, util } from "fabric";
 
 export class FabricCursor extends CollaborativeEntity<CursorCollaborativeData> {
   private readonly object: FabricObject;
@@ -42,15 +43,11 @@ export class FabricCursor extends CollaborativeEntity<CursorCollaborativeData> {
       this.canvas.bringObjectToFront(this.object);
     });
 
-    const handleMouseWheel = ({ e: event }: TPointerEventInfo<WheelEvent>) => {
-      event.preventDefault();
-      event.stopPropagation();
+    listenCanvasZoom(this.canvas, this.scaleOnZoom.bind(this));
+  }
 
-      if (event.ctrlKey) {
-        this.object.scale(1 / this.canvas.getZoom());
-      }
-    };
-    this.canvas.on("mouse:wheel", handleMouseWheel);
+  scaleOnZoom() {
+    this.object.scale(1 / this.canvas.getZoom());
   }
 
   updateFromCollaborativeData(data: CursorCollaborativeData) {
