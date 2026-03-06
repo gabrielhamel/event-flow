@@ -1,13 +1,13 @@
-import { CollaborativeWhiteboardSession } from "@repo/core/collaborative/CollaborativeWhiteboardSession";
-import { addPanningModule } from "@repo/event-storming-ui/whiteboard/canvas/modules/panning";
-import { addZoomingModule } from "@repo/event-storming-ui/whiteboard/canvas/modules/zooming";
-import { FabricCursorFactory } from "@repo/event-storming-ui/whiteboard/FabricCursorFactory";
-import { FabricStickyNoteFactory } from "@repo/event-storming-ui/whiteboard/FabricStickyNoteFactory";
+import { WhiteboardSession } from "@repo/core/whiteboard/collaborative/WhiteboardSession";
+import { addPanningModule } from "@repo/event-storming-ui/whiteboard/canvas/modules/pan";
+import { addZoomingModule } from "@repo/event-storming-ui/whiteboard/canvas/modules/zoom";
+import { FabricCursorFactory } from "@repo/event-storming-ui/whiteboard/objects/factories/FabricCursorFactory";
+import { FabricStickyNoteFactory } from "@repo/event-storming-ui/whiteboard/objects/factories/FabricStickyNoteFactory";
 import { Canvas, type TPointerEventInfo } from "fabric";
 
 export class FabricWhiteboard {
   private readonly canvas: Canvas;
-  private readonly collaborativeSession: CollaborativeWhiteboardSession;
+  private readonly collaborativeSession: WhiteboardSession;
   private readonly stickyNoteFactory: FabricStickyNoteFactory;
 
   constructor(
@@ -34,7 +34,7 @@ export class FabricWhiteboard {
       ? "ws://localhost:8080/api/event-storming/collaboration"
       : "wss://ddd-lab.gabrielhamel.fr/api/event-storming/collaboration";
 
-    this.collaborativeSession = new CollaborativeWhiteboardSession(
+    this.collaborativeSession = new WhiteboardSession(
       wsUrl,
       this.stickyNoteFactory,
       cursorFactory,

@@ -1,8 +1,8 @@
 import { CollaborativeEntity } from "@repo/core/collaborative/CollaborativeEntity";
-import type { StickyNoteCollaborativeData } from "@repo/core/collaborative/StickyNoteCollaborativeData";
+import type { StickyNote } from "@repo/core/whiteboard/objects/StickyNote";
 import { type Canvas, FabricObject, Group, Shadow, Textbox } from "fabric";
 
-export class FabricStickyNote extends CollaborativeEntity<StickyNoteCollaborativeData> {
+export class FabricStickyNote extends CollaborativeEntity<StickyNote> {
   private readonly textbox: Textbox;
   private readonly card: FabricObject;
   private readonly group: Group;
@@ -11,8 +11,8 @@ export class FabricStickyNote extends CollaborativeEntity<StickyNoteCollaborativ
   constructor(props: {
     id?: string;
     canvas: Canvas;
-    data: StickyNoteCollaborativeData;
-    onUpdate: (id: string, data: StickyNoteCollaborativeData) => void;
+    data: StickyNote;
+    onUpdate: (id: string, data: StickyNote) => void;
   }) {
     super({ data: props.data, id: props.id ?? crypto.randomUUID(), onUpdate: props.onUpdate });
 
@@ -61,7 +61,7 @@ export class FabricStickyNote extends CollaborativeEntity<StickyNoteCollaborativ
     this.canvas.add(this.group);
   }
 
-  updateFromCollaborativeData(data: StickyNoteCollaborativeData) {
+  updateFromCollaborativeData(data: StickyNote) {
     this.card.set("backgroundColor", data.color);
     this.textbox.set("text", data.text);
     this.group.set({

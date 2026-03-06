@@ -1,9 +1,9 @@
 import { CollaborativeEntity } from "@repo/core/collaborative/CollaborativeEntity";
-import type { CursorCollaborativeData } from "@repo/core/collaborative/CursorCollaborativeData.ts";
-import { listenCanvasZoom } from "@repo/event-storming-ui/whiteboard/canvas/modules/zooming";
+import type { Cursor } from "@repo/core/whiteboard/objects/Cursor.ts";
+import { listenCanvasZoom } from "@repo/event-storming-ui/whiteboard/canvas/modules/zoom";
 import { type Canvas, type FabricObject, type loadSVGFromURL, util } from "fabric";
 
-export class FabricCursor extends CollaborativeEntity<CursorCollaborativeData> {
+export class FabricCursor extends CollaborativeEntity<Cursor> {
   private readonly object: FabricObject;
   private readonly canvas: Canvas;
 
@@ -11,7 +11,7 @@ export class FabricCursor extends CollaborativeEntity<CursorCollaborativeData> {
     props: {
       canvas: Canvas;
       svg: Awaited<ReturnType<typeof loadSVGFromURL>>;
-      data: CursorCollaborativeData;
+      data: Cursor;
     },
   ) {
     super({
@@ -50,7 +50,7 @@ export class FabricCursor extends CollaborativeEntity<CursorCollaborativeData> {
     this.object.scale(1 / this.canvas.getZoom());
   }
 
-  updateFromCollaborativeData(data: CursorCollaborativeData) {
+  updateFromCollaborativeData(data: Cursor) {
     this.object.set("fill", data.color);
     this.object.set({
       left: data.x,

@@ -1,26 +1,18 @@
 import { HocuspocusProvider, type onAwarenessChangeParameters } from "@hocuspocus/provider";
 import type { CollaborativeEntity } from "@repo/core/collaborative/CollaborativeEntity";
-import type { CursorCollaborativeData } from "@repo/core/collaborative/CursorCollaborativeData";
-import type { StickyNoteCollaborativeData } from "@repo/core/collaborative/StickyNoteCollaborativeData";
+import type { Cursor } from "@repo/core/whiteboard/objects/Cursor";
+import type { CursorFactory } from "@repo/core/whiteboard/objects/factories/CursorFactory";
+import type { StickyNoteFactory } from "@repo/core/whiteboard/objects/factories/StickyNoteFactory";
+import type { StickyNote } from "@repo/core/whiteboard/objects/StickyNote";
 import * as Y from "yjs";
 
-export interface StickyNoteFactory {
-  create: (
-    params: { id: string; data: StickyNoteCollaborativeData; session: CollaborativeWhiteboardSession },
-  ) => CollaborativeEntity<StickyNoteCollaborativeData>;
-}
-
-export interface CursorFactory {
-  create: (data: CursorCollaborativeData) => CollaborativeEntity<CursorCollaborativeData>;
-}
-
-export class CollaborativeWhiteboardSession {
+export class WhiteboardSession {
   private readonly provider: HocuspocusProvider;
   private readonly stickyNoteFactory: StickyNoteFactory;
   private readonly cursorFactory: CursorFactory;
-  private readonly stickyNoteCollection: Y.Map<StickyNoteCollaborativeData>;
-  private readonly stickyNoteEntityCollection: Map<string, CollaborativeEntity<StickyNoteCollaborativeData>>;
-  private readonly cursorEntityCollection: Map<number, CollaborativeEntity<CursorCollaborativeData>>;
+  private readonly stickyNoteCollection: Y.Map<StickyNote>;
+  private readonly stickyNoteEntityCollection: Map<string, CollaborativeEntity<StickyNote>>;
+  private readonly cursorEntityCollection: Map<number, CollaborativeEntity<Cursor>>;
   private readonly cursorColor: string;
 
   constructor(
@@ -43,7 +35,7 @@ export class CollaborativeWhiteboardSession {
 
     this.cursorColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 
-    this.stickyNoteCollection = this.provider.document.getMap<StickyNoteCollaborativeData>(
+    this.stickyNoteCollection = this.provider.document.getMap<StickyNote>(
       "stickyNotes",
     );
     this.stickyNoteCollection.observe((event) => {
@@ -66,12 +58,12 @@ export class CollaborativeWhiteboardSession {
     this.provider.destroy();
   }
 
-  addStickyNote(stickyNote: CollaborativeEntity<StickyNoteCollaborativeData>) {
+  addStickyNote(stickyNote: CollaborativeEntity<StickyNote>) {
     this.stickyNoteCollection.set(stickyNote.id(), stickyNote.collaborativeData());
     this.stickyNoteEntityCollection.set(stickyNote.id(), stickyNote);
   }
 
-  updateStickyNote(id: string, data: StickyNoteCollaborativeData) {
+  updateStickyNote(id: string, data: StickyNote) {
     this.stickyNoteCollection.set(id, data);
   }
 
@@ -84,7 +76,7 @@ export class CollaborativeWhiteboardSession {
   }
 
   private createStickyNoteEntity(id: string) {
-    const data = this.stickyNoteCollection.get(id) as StickyNoteCollaborativeData;
+    const data = this.stickyNoteCollection.get(id) as StickyNote;
 
     const stickyNote = this.stickyNoteFactory.create({
       data,
@@ -101,11 +93,11 @@ export class CollaborativeWhiteboardSession {
       throw new Error("Sticky note not found");
     }
 
-    const updatedData = this.stickyNoteCollection.get(id) as StickyNoteCollaborativeData;
+    const updatedData = this.stickyNoteCollection.get(id) as StickyNote;
     stickyNote.updateFromCollaborativeData(updatedData);
   }
 
-  private createOrUpdateClientCursor(clientId: number, data: CursorCollaborativeData) {
+  private createOrUpdateClientCursor(clientId: number, data: Cursor) {
     const alreadyExistingCursor = this.cursorEntityCollection.get(clientId);
     if (alreadyExistingCursor) {
       alreadyExistingCursor.updateFromCollaborativeData(data);
@@ -129,7 +121,7 @@ export class CollaborativeWhiteboardSession {
         return;
       }
 
-      const cursorCollaborativeData = state.cursor as CursorCollaborativeData;
+      const cursorCollaborativeData = state.cursor as Cursor;
       this.createOrUpdateClientCursor(state.clientId, cursorCollaborativeData);
     });
   }

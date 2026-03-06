@@ -1,6 +1,6 @@
-import type { CursorFactory } from "@repo/core/collaborative/CollaborativeWhiteboardSession";
-import type { CursorCollaborativeData } from "@repo/core/collaborative/CursorCollaborativeData";
-import { FabricCursor } from "@repo/event-storming-ui/whiteboard/FabricCursor";
+import type { Cursor } from "@repo/core/whiteboard/objects/Cursor";
+import type { CursorFactory } from "@repo/core/whiteboard/objects/factories/CursorFactory";
+import { FabricCursor } from "@repo/event-storming-ui/whiteboard/objects/FabricCursor";
 import { type Canvas, loadSVGFromURL } from "fabric";
 
 const cursorSVG = await loadSVGFromURL("cursor.svg");
@@ -12,7 +12,7 @@ export class FabricCursorFactory implements CursorFactory {
     this.canvas = canvas;
   }
 
-  create(data: CursorCollaborativeData) {
+  create(data: Cursor) {
     return new FabricCursor({
       canvas: this.canvas,
       data,

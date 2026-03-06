@@ -1,4 +1,4 @@
-export interface StickyNoteCollaborativeData {
+export interface StickyNote {
   color: string;
   text: string;
   x: number;
