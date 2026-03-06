@@ -1,6 +1,6 @@
 import { CollaborativeEntity } from "@repo/core/collaborative/CollaborativeEntity";
 import type { CursorCollaborativeData } from "@repo/core/collaborative/CursorCollaborativeData.ts";
-import { type Canvas, type FabricObject, type loadSVGFromURL, util } from "fabric";
+import { type Canvas, type FabricObject, type loadSVGFromURL, type TPointerEventInfo, util } from "fabric";
 
 export class FabricCursor extends CollaborativeEntity<CursorCollaborativeData> {
   private readonly object: FabricObject;
@@ -32,7 +32,7 @@ export class FabricCursor extends CollaborativeEntity<CursorCollaborativeData> {
       left: props.data.x,
       selectable: false,
       stroke: "#000000",
-      strokeWidth: 20,
+      strokeWidth: 1,
       top: props.data.y,
     });
 
@@ -41,6 +41,16 @@ export class FabricCursor extends CollaborativeEntity<CursorCollaborativeData> {
     this.canvas.on("object:added", () => {
       this.canvas.bringObjectToFront(this.object);
     });
+
+    const handleMouseWheel = ({ e: event }: TPointerEventInfo<WheelEvent>) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (event.ctrlKey) {
+        this.object.scale(1 / this.canvas.getZoom());
+      }
+    };
+    this.canvas.on("mouse:wheel", handleMouseWheel);
   }
 
   updateFromCollaborativeData(data: CursorCollaborativeData) {
