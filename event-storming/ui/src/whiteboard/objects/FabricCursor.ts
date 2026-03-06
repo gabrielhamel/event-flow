@@ -26,16 +26,18 @@ export class FabricCursor extends CollaborativeEntity<Cursor> {
     const objects = props.svg.objects.filter((obj): obj is FabricObject => obj !== null);
 
     this.canvas = props.canvas;
-    this.object = util.groupSVGElements(objects, props.svg.options);
+    this.object = util.groupSVGElements(objects, {
+      ...props.svg.options,
+    });
 
     this.object.set({
       evented: false,
       fill: props.data.color,
-      left: props.data.x,
+      left: props.data.x + (this.object.width / 2) * (1 / this.canvas.getZoom()),
       selectable: false,
       stroke: "#000000",
       strokeWidth: 1,
-      top: props.data.y,
+      top: props.data.y + (this.object.height / 2) * (1 / this.canvas.getZoom()),
     });
 
     this.canvas.add(this.object);
@@ -54,8 +56,8 @@ export class FabricCursor extends CollaborativeEntity<Cursor> {
   updateFromCollaborativeData(data: Cursor) {
     this.object.set("fill", data.color);
     this.object.set({
-      left: data.x,
-      top: data.y,
+      left: data.x + (this.object.width / 2) * (1 / this.canvas.getZoom()),
+      top: data.y + (this.object.height / 2) * (1 / this.canvas.getZoom()),
     });
     this.canvas.requestRenderAll();
   }
