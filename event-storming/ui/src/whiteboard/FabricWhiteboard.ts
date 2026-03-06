@@ -3,13 +3,13 @@ import { addDottedBackgroundModule } from "@repo/event-storming-ui/whiteboard/ca
 import { addPanningModule } from "@repo/event-storming-ui/whiteboard/canvas/modules/panning";
 import { addZoomingModule } from "@repo/event-storming-ui/whiteboard/canvas/modules/zooming";
 import { FabricCursorFactory } from "@repo/event-storming-ui/whiteboard/FabricCursorFactory";
-import { FabricStickyNote } from "@repo/event-storming-ui/whiteboard/FabricStickyNote";
 import { FabricStickyNoteFactory } from "@repo/event-storming-ui/whiteboard/FabricStickyNoteFactory";
 import { Canvas, type TPointerEventInfo } from "fabric";
 
 export class FabricWhiteboard {
   private readonly canvas: Canvas;
   private readonly collaborativeSession: CollaborativeWhiteboardSession;
+  private readonly stickyNoteFactory: FabricStickyNoteFactory;
 
   constructor(
     anchor: HTMLCanvasElement,
@@ -29,7 +29,7 @@ export class FabricWhiteboard {
 
     this.canvas.requestRenderAll();
 
-    const stickyNoteFactory = new FabricStickyNoteFactory(this.canvas);
+    this.stickyNoteFactory = new FabricStickyNoteFactory(this.canvas);
     const cursorFactory = new FabricCursorFactory(this.canvas);
 
     const wsUrl = import.meta.env.MODE === "development"
@@ -38,7 +38,7 @@ export class FabricWhiteboard {
 
     this.collaborativeSession = new CollaborativeWhiteboardSession(
       wsUrl,
-      stickyNoteFactory,
+      this.stickyNoteFactory,
       cursorFactory,
     );
 
@@ -58,19 +58,16 @@ export class FabricWhiteboard {
   }
 
   createStickyNote(color: string) {
-    const viewportCenter = this.canvas.getVpCenter();
-    const left = viewportCenter.x;
-    const top = viewportCenter.y;
+    const { x, y } = this.canvas.getVpCenter();
 
-    const stickyNote = new FabricStickyNote({
-      canvas: this.canvas,
+    const stickyNote = this.stickyNoteFactory.create({
       data: {
         color,
         text: "",
-        x: left,
-        y: top,
+        x,
+        y,
       },
-      onUpdate: this.collaborativeSession.updateStickyNote.bind(this.collaborativeSession),
+      session: this.collaborativeSession,
     });
 
     this.collaborativeSession.addStickyNote(stickyNote);

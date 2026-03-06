@@ -13,7 +13,9 @@ export class FabricStickyNoteFactory implements StickyNoteFactory {
     this.canvas = canvas;
   }
 
-  create(id: string, data: StickyNoteCollaborativeData, session: CollaborativeWhiteboardSession) {
+  create(
+    { id, data, session }: { id?: string; data: StickyNoteCollaborativeData; session: CollaborativeWhiteboardSession },
+  ) {
     return new FabricStickyNote({
       canvas: this.canvas,
       data,

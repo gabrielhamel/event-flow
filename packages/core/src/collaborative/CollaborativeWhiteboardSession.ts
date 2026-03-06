@@ -6,9 +6,7 @@ import * as Y from "yjs";
 
 export interface StickyNoteFactory {
   create: (
-    id: string,
-    data: StickyNoteCollaborativeData,
-    session: CollaborativeWhiteboardSession,
+    params: { id: string; data: StickyNoteCollaborativeData; session: CollaborativeWhiteboardSession },
   ) => CollaborativeEntity<StickyNoteCollaborativeData>;
 }
 
@@ -87,7 +85,13 @@ export class CollaborativeWhiteboardSession {
 
   private createStickyNoteEntity(id: string) {
     const data = this.stickyNoteCollection.get(id) as StickyNoteCollaborativeData;
-    const stickyNote = this.stickyNoteFactory.create(id, data, this);
+
+    const stickyNote = this.stickyNoteFactory.create({
+      data,
+      id,
+      session: this,
+    });
+
     this.stickyNoteEntityCollection.set(stickyNote.id(), stickyNote);
   }
 
@@ -97,8 +101,8 @@ export class CollaborativeWhiteboardSession {
       throw new Error("Sticky note not found");
     }
 
-    const newData = this.stickyNoteCollection.get(id) as StickyNoteCollaborativeData;
-    stickyNote.updateFromCollaborativeData(newData);
+    const updatedData = this.stickyNoteCollection.get(id) as StickyNoteCollaborativeData;
+    stickyNote.updateFromCollaborativeData(updatedData);
   }
 
   private createOrUpdateClientCursor(clientId: number, data: CursorCollaborativeData) {
