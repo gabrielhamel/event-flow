@@ -1,5 +1,6 @@
 import { HocuspocusProvider, type onAwarenessChangeParameters } from "@hocuspocus/provider";
 import type { CollaborativeEntity } from "@repo/core/collaborative/CollaborativeEntity";
+import type { Id } from "@repo/core/Id";
 import type { Cursor } from "@repo/core/whiteboard/objects/Cursor";
 import type { CursorFactory } from "@repo/core/whiteboard/objects/factories/CursorFactory";
 import type { StickyNoteFactory } from "@repo/core/whiteboard/objects/factories/StickyNoteFactory";
@@ -46,9 +47,9 @@ export class WhiteboardSession {
 
       event.changes.keys.forEach((change, key) => {
         if (change.action === "add") {
-          this.createStickyNoteEntity(key);
+          this.createStickyNoteEntity(key as Id);
         } else if (change.action === "update") {
-          this.updateStickyNoteEntity(key);
+          this.updateStickyNoteEntity(key as Id);
         }
       });
     });
@@ -63,7 +64,7 @@ export class WhiteboardSession {
     this.stickyNoteEntityCollection.set(stickyNote.id(), stickyNote);
   }
 
-  updateStickyNote(id: string, data: StickyNote) {
+  updateStickyNote(id: Id, data: StickyNote) {
     this.stickyNoteCollection.set(id, data);
   }
 
@@ -75,7 +76,7 @@ export class WhiteboardSession {
     });
   }
 
-  private createStickyNoteEntity(id: string) {
+  private createStickyNoteEntity(id: Id) {
     const data = this.stickyNoteCollection.get(id) as StickyNote;
 
     const stickyNote = this.stickyNoteFactory.create({
@@ -87,7 +88,7 @@ export class WhiteboardSession {
     this.stickyNoteEntityCollection.set(stickyNote.id(), stickyNote);
   }
 
-  private updateStickyNoteEntity(id: string) {
+  private updateStickyNoteEntity(id: Id) {
     const stickyNote = this.stickyNoteEntityCollection.get(id);
     if (!stickyNote) {
       throw new Error("Sticky note not found");

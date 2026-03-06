@@ -1,4 +1,5 @@
 import { CollaborativeEntity } from "@repo/core/collaborative/CollaborativeEntity";
+import { generateId, type Id } from "@repo/core/Id";
 import type { StickyNote } from "@repo/core/whiteboard/objects/StickyNote";
 import { type Canvas, FabricObject, Group, Shadow, Textbox } from "fabric";
 
@@ -9,12 +10,12 @@ export class FabricStickyNote extends CollaborativeEntity<StickyNote> {
   private readonly canvas: Canvas;
 
   constructor(props: {
-    id?: string;
+    id?: Id;
     canvas: Canvas;
     data: StickyNote;
-    onUpdate: (id: string, data: StickyNote) => void;
+    onUpdate: (id: Id, data: StickyNote) => void;
   }) {
-    super({ data: props.data, id: props.id ?? crypto.randomUUID(), onUpdate: props.onUpdate });
+    super({ data: props.data, id: props.id ?? generateId("sticky-note"), onUpdate: props.onUpdate });
 
     const size = 150;
     const textPadding = 20;

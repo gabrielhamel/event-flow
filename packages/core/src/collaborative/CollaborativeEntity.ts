@@ -1,9 +1,11 @@
+import type { Id } from "@repo/core/Id";
+
 export abstract class CollaborativeEntity<Data> {
   protected data: Data;
-  private readonly entityId: string;
-  private readonly propagateUpdateCallback: ((id: string, data: Data) => void) | undefined;
+  private readonly entityId: Id;
+  private readonly propagateUpdateCallback: ((id: Id, data: Data) => void) | undefined;
 
-  protected constructor(props: { id: string; data: Data; onUpdate?: (id: string, data: Data) => void }) {
+  protected constructor(props: { id: Id; data: Data; onUpdate?: (id: Id, data: Data) => void }) {
     this.entityId = props.id;
     this.data = props.data;
     this.propagateUpdateCallback = props.onUpdate;

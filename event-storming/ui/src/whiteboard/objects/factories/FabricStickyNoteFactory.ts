@@ -1,3 +1,4 @@
+import type { Id } from "@repo/core/Id";
 import type { WhiteboardSession } from "@repo/core/whiteboard/collaborative/WhiteboardSession";
 import type { StickyNoteFactory } from "@repo/core/whiteboard/objects/factories/StickyNoteFactory";
 import type { StickyNote } from "@repo/core/whiteboard/objects/StickyNote";
@@ -12,7 +13,7 @@ export class FabricStickyNoteFactory implements StickyNoteFactory {
   }
 
   create(
-    { id, data, session }: { id?: string; data: StickyNote; session: WhiteboardSession },
+    { id, data, session }: { id?: Id; data: StickyNote; session: WhiteboardSession },
   ) {
     return new FabricStickyNote({
       canvas: this.canvas,

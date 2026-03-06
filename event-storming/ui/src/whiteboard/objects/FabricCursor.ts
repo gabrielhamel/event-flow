@@ -1,4 +1,5 @@
 import { CollaborativeEntity } from "@repo/core/collaborative/CollaborativeEntity";
+import { generateId } from "@repo/core/Id";
 import type { Cursor } from "@repo/core/whiteboard/objects/Cursor.ts";
 import { listenCanvasZoom } from "@repo/event-storming-ui/whiteboard/canvas/modules/zoom";
 import { type Canvas, type FabricObject, type loadSVGFromURL, util } from "fabric";
@@ -16,7 +17,7 @@ export class FabricCursor extends CollaborativeEntity<Cursor> {
   ) {
     super({
       data: props.data,
-      id: crypto.randomUUID(),
+      id: generateId("cursor"),
       onUpdate: () => {
         /* Empty */
       },
