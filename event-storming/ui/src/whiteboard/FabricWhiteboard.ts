@@ -1,5 +1,4 @@
 import { CollaborativeWhiteboardSession } from "@repo/core/collaborative/CollaborativeWhiteboardSession";
-import { addDottedBackgroundModule } from "@repo/event-storming-ui/whiteboard/canvas/modules/dottedBackground";
 import { addPanningModule } from "@repo/event-storming-ui/whiteboard/canvas/modules/panning";
 import { addZoomingModule } from "@repo/event-storming-ui/whiteboard/canvas/modules/zooming";
 import { FabricCursorFactory } from "@repo/event-storming-ui/whiteboard/FabricCursorFactory";
@@ -24,7 +23,6 @@ export class FabricWhiteboard {
     });
 
     addPanningModule(this.canvas);
-    addDottedBackgroundModule(this.canvas);
     addZoomingModule(this.canvas);
 
     this.canvas.requestRenderAll();
