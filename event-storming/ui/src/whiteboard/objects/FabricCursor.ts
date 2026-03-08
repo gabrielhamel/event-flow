@@ -7,6 +7,8 @@ import { type Canvas, type FabricObject, type loadSVGFromURL, util } from "fabri
 export class FabricCursor extends CollaborativeEntity<Cursor> {
   private readonly object: FabricObject;
   private readonly canvas: Canvas;
+  private readonly objectAddedUnsubscribe: () => void;
+  private readonly zoomUnsubscribe: () => void;
 
   constructor(
     props: {
@@ -42,11 +44,19 @@ export class FabricCursor extends CollaborativeEntity<Cursor> {
 
     this.canvas.add(this.object);
     this.canvas.bringObjectToFront(this.object);
-    this.canvas.on("object:added", () => {
+
+    this.objectAddedUnsubscribe = this.canvas.on("object:added", () => {
       this.canvas.bringObjectToFront(this.object);
     });
+    this.zoomUnsubscribe = listenCanvasZoom(this.canvas, this.scaleOnZoom.bind(this));
+  }
 
-    listenCanvasZoom(this.canvas, this.scaleOnZoom.bind(this));
+  dispose() {
+    this.zoomUnsubscribe();
+    this.objectAddedUnsubscribe();
+
+    this.canvas.remove(this.object);
+    this.object.dispose();
   }
 
   scaleOnZoom() {

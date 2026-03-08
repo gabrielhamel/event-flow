@@ -14,8 +14,14 @@ export class FabricStickyNote extends CollaborativeEntity<StickyNote> {
     canvas: Canvas;
     data: StickyNote;
     onUpdate: (id: Id, data: StickyNote) => void;
+    onDelete: (id: Id) => void;
   }) {
-    super({ data: props.data, id: props.id ?? generateId("sticky-note"), onUpdate: props.onUpdate });
+    super({
+      data: props.data,
+      id: props.id ?? generateId("sticky-note"),
+      onDelete: props.onDelete,
+      onUpdate: props.onUpdate,
+    });
 
     const size = 150;
     const textPadding = 20;
@@ -41,7 +47,9 @@ export class FabricStickyNote extends CollaborativeEntity<StickyNote> {
       width: size - textPadding,
     });
     this.group = new Group([this.card, this.textbox], {
-      hasBorders: false,
+      borderColor: "#0096FF",
+      borderScaleFactor: 3,
+      hasBorders: true,
       hasControls: false,
       left: props.data.x,
       selectable: true,
@@ -78,6 +86,14 @@ export class FabricStickyNote extends CollaborativeEntity<StickyNote> {
     this.canvas.requestRenderAll();
   }
 
+  dispose() {
+    this.canvas.remove(this.group);
+
+    this.group.dispose();
+    this.textbox.dispose();
+    this.card.dispose();
+  }
+
   private handleMouseDoubleClick() {
     this.canvas.setActiveObject(this.textbox);
 
@@ -89,13 +105,13 @@ export class FabricStickyNote extends CollaborativeEntity<StickyNote> {
     this.data.x = this.group.left;
     this.data.y = this.group.top;
 
-    this.propagateCollaborativeUpdate();
+    this.propagateUpdate();
   }
 
   private handleTextChange() {
     this.textbox.setRelativeY(0);
     this.data.text = this.textbox.text;
 
-    this.propagateCollaborativeUpdate();
+    this.propagateUpdate();
   }
 }

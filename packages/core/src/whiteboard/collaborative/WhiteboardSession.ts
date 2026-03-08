@@ -27,9 +27,10 @@ export class WhiteboardSession {
     this.provider = new HocuspocusProvider({
       document: new Y.Doc(),
       name: "example-document",
-      onAwarenessChange: this.handleAwarenessChange.bind(this),
       url,
     });
+
+    this.provider.on("awarenessChange", this.handleAwarenessChange.bind(this));
 
     this.stickyNoteEntityCollection = new Map();
     this.cursorEntityCollection = new Map();
@@ -50,12 +51,15 @@ export class WhiteboardSession {
           this.createStickyNoteEntity(key as Id);
         } else if (change.action === "update") {
           this.updateStickyNoteEntity(key as Id);
+        } else {
+          this.deleteStickyNoteEntity(key as Id);
         }
       });
     });
   }
 
   dispose() {
+    this.provider.off("awarenessChange");
     this.provider.destroy();
   }
 
@@ -66,6 +70,17 @@ export class WhiteboardSession {
 
   updateStickyNote(id: Id, data: StickyNote) {
     this.stickyNoteCollection.set(id, data);
+  }
+
+  deleteStickyNote(id: Id) {
+    const stickyNoteEntity = this.stickyNoteEntityCollection.get(id);
+    if (!stickyNoteEntity) {
+      throw new Error("Sticky note not found");
+    }
+    stickyNoteEntity.dispose();
+
+    this.stickyNoteEntityCollection.delete(id);
+    this.stickyNoteCollection.delete(id);
   }
 
   updateCursorPosition(x: number, y: number) {
@@ -98,6 +113,17 @@ export class WhiteboardSession {
     stickyNote.updateFromCollaborativeData(updatedData);
   }
 
+  private deleteStickyNoteEntity(id: Id) {
+    const stickyNoteEntity = this.stickyNoteEntityCollection.get(id);
+    if (!stickyNoteEntity) {
+      throw new Error("Sticky note not found");
+    }
+    stickyNoteEntity.dispose();
+
+    this.stickyNoteEntityCollection.delete(id);
+    this.stickyNoteCollection.delete(id);
+  }
+
   private createOrUpdateClientCursor(clientId: number, data: Cursor) {
     const alreadyExistingCursor = this.cursorEntityCollection.get(clientId);
     if (alreadyExistingCursor) {
@@ -116,6 +142,16 @@ export class WhiteboardSession {
     }
 
     const localClientId = this.provider.awareness.clientID;
+
+    if ((data.states.length - 1) < this.cursorEntityCollection.size) {
+      // Someone has left the room, remove their cursor
+      this.cursorEntityCollection.forEach((cursor, clientId) => {
+        if (data.states.every((state) => state.clientId !== clientId)) {
+          cursor.dispose();
+          this.cursorEntityCollection.delete(clientId);
+        }
+      });
+    }
 
     data.states.forEach((state) => {
       if (state.clientId === localClientId) {

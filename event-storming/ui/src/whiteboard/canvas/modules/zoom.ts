@@ -10,7 +10,7 @@ export const listenCanvasZoom = (canvas: Canvas, onCanvasZoom: (delta: number, p
     }
   };
 
-  canvas.on("mouse:wheel", handleMouseWheel);
+  return canvas.on("mouse:wheel", handleMouseWheel);
 };
 
 export const addZoomingModule = (canvas: Canvas) => {
@@ -22,5 +22,5 @@ export const addZoomingModule = (canvas: Canvas) => {
     canvas.zoomToPoint(viewportPoint, zoomClamped);
   };
 
-  listenCanvasZoom(canvas, zoomToPointer);
+  return listenCanvasZoom(canvas, zoomToPointer);
 };

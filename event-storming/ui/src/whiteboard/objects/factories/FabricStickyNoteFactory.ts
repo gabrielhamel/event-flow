@@ -19,6 +19,7 @@ export class FabricStickyNoteFactory implements StickyNoteFactory {
       canvas: this.canvas,
       data,
       id,
+      onDelete: session.deleteStickyNote.bind(session),
       onUpdate: session.updateStickyNote.bind(session),
     });
   }

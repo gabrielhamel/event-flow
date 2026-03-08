@@ -10,7 +10,7 @@ export const listenCanvasPan = (canvas: Canvas, onCanvasPan: (deltaX: number, de
     }
   };
 
-  canvas.on("mouse:wheel", handleMouseWheel);
+  return canvas.on("mouse:wheel", handleMouseWheel);
 };
 
 export const addPanningModule = (canvas: Canvas) => {
@@ -22,5 +22,5 @@ export const addPanningModule = (canvas: Canvas) => {
     canvas.requestRenderAll();
   };
 
-  listenCanvasPan(canvas, moveViewport);
+  return listenCanvasPan(canvas, moveViewport);
 };
