@@ -11,10 +11,15 @@
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
-    "jiti": "^2.6.1"
+    "@types/pg": "^8.18.0",
+    "jiti": "^2.6.1",
+    "prisma": "^7.4.2"
   },
   "dependencies": {
     "@hocuspocus/provider": "^3.4.4",
+    "@prisma/adapter-pg": "^7.4.2",
+    "@prisma/client": "^7.4.2",
+    "pg": "^8.20.0",
     "uuid": "^13.0.0",
     "yjs": "^13.6.29"
   }

@@ -24,10 +24,12 @@
   "packageManager": "pnpm@10.31.0",
   "pnpm": {
     "onlyBuiltDependencies": [
+      "@prisma/engines",
       "@swc/core",
       "canvas",
       "dprint",
-      "esbuild"
+      "esbuild",
+      "prisma"
     ]
   },
   "volta": {
