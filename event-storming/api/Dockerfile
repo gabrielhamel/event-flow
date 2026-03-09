@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM node:24.13.1-alpine3.23 AS base
+FROM node:25.8.0-alpine3.23 AS base
 
 ENV DO_NOT_TRACK=1
 ENV PNPM_HOME="/pnpm"
@@ -23,7 +23,7 @@ COPY --from=prune /app/out/full/ .
 RUN pnpm run build --filter="@repo/event-storming-api" && \
     pnpm deploy --filter="@repo/event-storming-api" --prod /build
 
-FROM node:24.13.1-alpine3.23
+FROM node:25.8.0-alpine3.23
 
 WORKDIR /app
 
