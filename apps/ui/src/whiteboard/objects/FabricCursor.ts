@@ -64,6 +64,8 @@ export class FabricCursor extends CollaborativeEntity<Cursor> {
   }
 
   updateFromCollaborativeData(data: Cursor) {
+    this.data = data;
+
     this.object.set("fill", data.color);
     this.object.set({
       left: data.x + (this.object.width / 2) * (1 / this.canvas.getZoom()),

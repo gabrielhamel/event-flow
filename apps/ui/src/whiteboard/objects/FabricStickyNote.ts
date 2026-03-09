@@ -77,6 +77,8 @@ export class FabricStickyNote extends CollaborativeEntity<StickyNote> {
   }
 
   updateFromCollaborativeData(data: StickyNote) {
+    this.data = data;
+
     this.card.set("backgroundColor", data.color);
     this.textbox.set("text", data.text);
     this.group.set({
