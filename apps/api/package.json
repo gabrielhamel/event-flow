@@ -18,6 +18,7 @@
     "jiti": "^2.6.1"
   },
   "dependencies": {
+    "@repo/core": "workspace:*",
     "@hocuspocus/server": "^3.4.4",
     "express": "^5.2.1",
     "express-ws": "^5.0.2"

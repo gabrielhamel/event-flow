@@ -5,7 +5,7 @@ ENV DO_NOT_TRACK=1
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 
-RUN npm install -g pnpm@10.31.0
+RUN npm install -g pnpm@10.31.0 prisma@7.4.2
 
 FROM base AS prune
 
@@ -23,13 +23,19 @@ COPY --from=prune /app/out/full/ .
 RUN pnpm run build --filter="@repo/api" && \
     pnpm deploy --filter="@repo/api" --prod /build
 
-FROM node:25.8.0-alpine3.23
+FROM base
 
 WORKDIR /app
 
 COPY --from=build /build/node_modules /app/node_modules
 COPY --from=build /app/apps/api/dist /app/dist
+COPY --from=build /app/packages/core/prisma.config.ts /app/prisma.config.ts
+COPY --from=build /app/packages/core/src/infra/prisma/migrations /app/src/infra/prisma/migrations
+COPY --from=build /app/packages/core/src/infra/prisma/schema.prisma /app/src/infra/prisma/schema.prisma
+
+# Link globally installed prisma into app node_modules so prisma.config.ts can resolve "prisma/config"
+RUN ln -s $(realpath $(npm root -g)/prisma) /app/node_modules/prisma
 
 EXPOSE 8080
 
-CMD ["node", "dist/index.js"]
+CMD ["sh", "-c", "prisma migrate deploy && node dist/index.js"]
