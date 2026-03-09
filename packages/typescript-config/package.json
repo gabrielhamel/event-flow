@@ -4,5 +4,8 @@
   "private": true,
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "vite": "^7.3.1"
   }
 }

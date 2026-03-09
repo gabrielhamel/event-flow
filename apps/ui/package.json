@@ -15,13 +15,11 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@fontsource/roboto": "^5.2.10",
-    "@hocuspocus/provider": "^3.4.4",
     "@mui/icons-material": "^7.3.8",
     "@mui/material": "^7.3.9",
     "fabric": "^7.2.0",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "yjs": "^13.6.29"
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",

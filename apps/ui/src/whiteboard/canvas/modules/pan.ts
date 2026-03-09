@@ -1,6 +1,6 @@
 import type { Canvas, TPointerEventInfo } from "fabric";
 
-export const listenCanvasPan = (canvas: Canvas, onCanvasPan: (deltaX: number, deltaY: number) => void) => {
+const listenCanvasPan = (canvas: Canvas, onCanvasPan: (deltaX: number, deltaY: number) => void) => {
   const handleMouseWheel = ({ e: event }: TPointerEventInfo<WheelEvent>) => {
     event.preventDefault();
     event.stopPropagation();
