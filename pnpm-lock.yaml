@@ -89,9 +89,6 @@ importers:
         specifier: ^19.2.0
         version: 19.2.4(react@19.2.4)
     devDependencies:
-      '@eslint/js':
-        specifier: ^10.0.1
-        version: 10.0.1(eslint@10.0.3(jiti@2.6.1))
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
@@ -113,24 +110,12 @@ importers:
       eslint:
         specifier: ^10.0.1
         version: 10.0.3(jiti@2.6.1)
-      eslint-plugin-react-hooks:
-        specifier: ^7.0.1
-        version: 7.0.1(eslint@10.0.3(jiti@2.6.1))
-      eslint-plugin-react-refresh:
-        specifier: ^0.5.2
-        version: 0.5.2(eslint@10.0.3(jiti@2.6.1))
-      globals:
-        specifier: ^17.4.0
-        version: 17.4.0
       jiti:
         specifier: ^2.6.1
         version: 2.6.1
       typescript:
         specifier: ~5.9.3
         version: 5.9.3
-      typescript-eslint:
-        specifier: ^8.56.1
-        version: 8.56.1(eslint@10.0.3(jiti@2.6.1))(typescript@5.9.3)
       vite:
         specifier: ^7.3.1
         version: 7.3.1(@types/node@25.3.5)(jiti@2.6.1)(lightningcss@1.31.1)(tsx@4.20.4)
