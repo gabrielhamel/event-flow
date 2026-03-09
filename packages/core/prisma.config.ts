@@ -1,11 +1,11 @@
 import { defineConfig } from "prisma/config";
 
 export default defineConfig({
-  schema: "./src/infra/prisma/schema.prisma",
+  datasource: {
+    url: process.env.DATABASE_URL,
+  },
   migrations: {
     path: "./src/infra/prisma/migrations",
   },
-  datasource: {
-    url: process.env["DATABASE_URL"],
-  },
+  schema: "./src/infra/prisma/schema.prisma",
 });

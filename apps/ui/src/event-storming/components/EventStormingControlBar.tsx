@@ -54,7 +54,7 @@ export const EventStormingControlBar = () => {
 
   return (
     <BottomNavigation showLabels sx={{ borderRadius: "15px", boxShadow: 1, gap: 3, paddingX: 5 }}>
-      {actions.map(({ label, entity, icon }) => (
+      {actions.map(({ entity, icon, label }) => (
         <BottomNavigationAction
           key={label}
           label={label}

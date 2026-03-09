@@ -13,7 +13,7 @@ export class FabricStickyNoteFactory implements StickyNoteFactory {
   }
 
   create(
-    { id, data, session }: { id?: Id; data: StickyNote; session: WhiteboardSession },
+    { data, id, session }: { id?: Id; data: StickyNote; session: WhiteboardSession },
   ) {
     return new FabricStickyNote({
       canvas: this.canvas,

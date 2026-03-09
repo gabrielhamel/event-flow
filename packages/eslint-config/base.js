@@ -1,6 +1,6 @@
 import jsLint from "@eslint/js";
 import onlyWarnPlugin from "eslint-plugin-only-warn";
-import sortKeysFixPlugin from "eslint-plugin-sort-keys-fix";
+import perfectionistPlugin from "eslint-plugin-perfectionist";
 import turboPlugin from "eslint-plugin-turbo";
 import tsLint from "typescript-eslint";
 
@@ -81,10 +81,10 @@ export const baseConfig = [
   },
   {
     plugins: {
-      "sort-keys-fix": sortKeysFixPlugin,
+      perfectionist: perfectionistPlugin,
     },
     rules: {
-      "sort-keys-fix/sort-keys-fix": "error",
+      "perfectionist/sort-objects": ["error", { type: "natural" }],
     },
   },
   {
