@@ -5,10 +5,14 @@
     "declaration": true,
     "rootDir": "src",
     "paths": {
-      "@repo/api/*": ["./src/*"]
+      "@repo/api/*": ["./src/*"],
+      "@repo/core/*": ["../../packages/core/src/*"]
     },
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "outDir": "dist"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "references": [
+    { "path": "../../packages/core/tsconfig.lib.json" }
+  ]
 }
