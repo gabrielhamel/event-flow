@@ -1,9 +1,6 @@
 {
   "extends": "@repo/typescript-config/base.json",
   "compilerOptions": {
-    "composite": true,
-    "declaration": true,
-    "rootDir": "src",
     "paths": {
       "@repo/api/*": ["./src/*"],
       "@repo/core/*": ["../../packages/core/src/*"]
@@ -11,8 +8,5 @@
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "outDir": "dist"
   },
-  "include": ["src"],
-  "references": [
-    { "path": "../../packages/core/tsconfig.lib.json" }
-  ]
+  "include": ["src"]
 }

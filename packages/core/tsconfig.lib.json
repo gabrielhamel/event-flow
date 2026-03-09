@@ -1,19 +1,11 @@
 {
   "extends": "@repo/typescript-config/base.json",
   "compilerOptions": {
-    "composite": true,
-    "declaration": true,
-    "declarationMap": true,
-    "rootDir": "src",
-    "outDir": "dist",
     "paths": {
       "@repo/core/*": [
         "./src/*"
       ]
-    },
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.lib.tsbuildinfo"
+    }
   },
-  "include": [
-    "src/**/*.ts"
-  ]
+  "include": ["src"]
 }

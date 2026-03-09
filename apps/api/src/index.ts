@@ -1,7 +1,6 @@
 import { Hocuspocus } from "@hocuspocus/server";
-import { makePrismaClient } from "@repo/core/infra/prisma";
-import { betterAuth } from "better-auth";
-import { prismaAdapter } from "better-auth/adapters/prisma";
+import { auth } from "@repo/api/auth";
+import { toNodeHandler } from "better-auth/node";
 import express from "express";
 import expressWebsockets from "express-ws";
 
@@ -11,16 +10,9 @@ const collaborationServer = new Hocuspocus({
   },
 });
 
-const db = makePrismaClient();
-
-const auth = betterAuth({
-  database: prismaAdapter(db, {
-    provider: "postgresql",
-  }),
-  experimental: { joins: true },
-});
-
 const { app } = expressWebsockets(express());
+
+app.all("/api/auth/*splat", toNodeHandler(auth));
 
 app.get("/api/healthcheck", (_, response) => {
   response.send("OK");
