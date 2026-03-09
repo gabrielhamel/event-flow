@@ -38,4 +38,7 @@ RUN ln -s $(realpath $(npm root -g)/prisma) /app/node_modules/prisma
 
 EXPOSE 8080
 
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+  CMD wget --quiet --tries=1 --spider http://localhost:8080/api/healthcheck || exit 1
+
 CMD ["sh", "-c", "prisma migrate deploy && node dist/index.js"]

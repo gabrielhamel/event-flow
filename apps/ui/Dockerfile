@@ -17,7 +17,7 @@ FROM base AS build
 
 WORKDIR /app
 COPY --from=prune /app/out/json/ .
-RUN apk add --update --no-cache python3 make g++ pkgconfig pixman-dev cairo-dev pango-dev libjpeg-turbo-dev giflib-dev librsvg-dev && \
+RUN apk add --update --no-cache curl python3 make g++ pkgconfig pixman-dev cairo-dev pango-dev libjpeg-turbo-dev giflib-dev librsvg-dev && \
     ln -sf python3 /usr/bin/python
 ENV PYTHONUNBUFFERED=1
 
@@ -27,5 +27,8 @@ COPY --from=prune /app/out/full/ .
 RUN pnpm run build --filter="@repo/ui"
 
 FROM nginx:1.29.5-alpine3.23
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:80/ || exit 1
 
 COPY --from=build /app/apps/ui/dist /usr/share/nginx/html
