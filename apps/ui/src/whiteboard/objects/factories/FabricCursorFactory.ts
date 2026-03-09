@@ -1,6 +1,6 @@
 import type { Cursor } from "@repo/core/whiteboard/objects/Cursor";
 import type { CursorFactory } from "@repo/core/whiteboard/objects/factories/CursorFactory";
-import { FabricCursor } from "@repo/event-storming-ui/whiteboard/objects/FabricCursor";
+import { FabricCursor } from "@repo/ui/whiteboard/objects/FabricCursor";
 import { type Canvas, loadSVGFromURL } from "fabric";
 
 const cursorSVG = await loadSVGFromURL("cursor.svg");

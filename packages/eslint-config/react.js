@@ -37,7 +37,7 @@ export const reactConfig = [
     },
   },
   {
-    settings: { react: { version: "detect" } },
+    settings: { react: { version: "19" } },
     plugins: {
       ...reactRefresh.configs.vite.plugins,
       "react-hooks": reactHooksPlugin,

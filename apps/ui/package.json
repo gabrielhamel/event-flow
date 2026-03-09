@@ -1,5 +1,5 @@
 {
-  "name": "@repo/event-storming-ui",
+  "name": "@repo/ui",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -31,7 +31,7 @@
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react-swc": "^4.2.2",
-    "eslint": "^9.39.3",
+    "eslint": "^10.0.1",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.4.0",

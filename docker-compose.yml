@@ -1,12 +1,12 @@
 services:
   api:
-    image: ghcr.io/gabrielhamel/ddd-lab/event-storming/api:main
+    image: ghcr.io/gabrielhamel/ddd-lab/api:main
     ports:
       - "127.0.0.1:15080:8080"
     restart: "always"
 
   ui:
-    image: ghcr.io/gabrielhamel/ddd-lab/event-storming/ui:main
+    image: ghcr.io/gabrielhamel/ddd-lab/ui:main
     ports:
       - "127.0.0.1:15081:80"
     restart: "always"

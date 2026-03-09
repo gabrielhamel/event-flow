@@ -1,8 +1,8 @@
 import { WhiteboardSession } from "@repo/core/whiteboard/collaborative/WhiteboardSession";
-import { addPanningModule } from "@repo/event-storming-ui/whiteboard/canvas/modules/pan";
-import { addZoomingModule } from "@repo/event-storming-ui/whiteboard/canvas/modules/zoom";
-import { FabricCursorFactory } from "@repo/event-storming-ui/whiteboard/objects/factories/FabricCursorFactory";
-import { FabricStickyNoteFactory } from "@repo/event-storming-ui/whiteboard/objects/factories/FabricStickyNoteFactory";
+import { addPanningModule } from "@repo/ui/whiteboard/canvas/modules/pan";
+import { addZoomingModule } from "@repo/ui/whiteboard/canvas/modules/zoom";
+import { FabricCursorFactory } from "@repo/ui/whiteboard/objects/factories/FabricCursorFactory";
+import { FabricStickyNoteFactory } from "@repo/ui/whiteboard/objects/factories/FabricStickyNoteFactory";
 import { Canvas, type TPointerEventInfo } from "fabric";
 
 export class FabricWhiteboard {
@@ -31,8 +31,8 @@ export class FabricWhiteboard {
     const cursorFactory = new FabricCursorFactory(this.canvas);
 
     const wsUrl = import.meta.env.MODE === "development"
-      ? "ws://localhost:8080/api/event-storming/collaboration"
-      : "wss://ddd-lab.gabrielhamel.fr/api/event-storming/collaboration";
+      ? "ws://localhost:8080/api/collaboration"
+      : "wss://ddd-lab.gabrielhamel.fr/api/collaboration";
 
     this.collaborativeSession = new WhiteboardSession(
       wsUrl,

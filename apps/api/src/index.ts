@@ -14,7 +14,7 @@ app.get("/api/healthcheck", (_, response) => {
   response.send("OK");
 });
 
-app.ws("/api/event-storming/collaboration", (websocket, request) => {
+app.ws("/api/collaboration", (websocket, request) => {
   const context = {
     randomKey: "randomValue2",
   };
