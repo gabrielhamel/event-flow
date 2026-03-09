@@ -182,6 +182,7 @@ jobs:
           PORTAINER_PASSWORD: ${{ secrets.PORTAINER_PASSWORD }}
           STACK_ID: ${{ secrets.PORTAINER_STACK_ID }}
           ENDPOINT_ID: ${{ secrets.PORTAINER_ENDPOINT_ID }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
           echo "1️⃣ Exchange API key for a JWT"
 
@@ -205,5 +206,5 @@ jobs:
             -H "Authorization: Bearer $JWT" \
             -H "Content-Type: application/json" \
             "$PORTAINER_URL/api/stacks/$STACK_ID?endpointId=$ENDPOINT_ID" \
-            -d "$(jq -n --arg content "$STACK_FILE_CONTENT" '{"Prune": true, "RepullImageAndRedeploy": true, "StackFileContent": $content}')" \
+            -d "$(jq -n --arg content "$STACK_FILE_CONTENT" --arg database_url "$DATABASE_URL" '{"Env": [{ "name": "DATABASE_URL", "value": database_url }], "Prune": true, "RepullImageAndRedeploy": true, "StackFileContent": $content}')" \
             | jq
