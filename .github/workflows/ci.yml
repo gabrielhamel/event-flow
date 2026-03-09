@@ -206,5 +206,5 @@ jobs:
             -H "Authorization: Bearer $JWT" \
             -H "Content-Type: application/json" \
             "$PORTAINER_URL/api/stacks/$STACK_ID?endpointId=$ENDPOINT_ID" \
-            -d "$(jq -n --arg content "$STACK_FILE_CONTENT" --arg database_url "$DATABASE_URL" '{"Env": [{ "name": "DATABASE_URL", "value": database_url }], "Prune": true, "RepullImageAndRedeploy": true, "StackFileContent": $content}')" \
+            -d "$(jq -n --arg content "$STACK_FILE_CONTENT" --arg database_url "$DATABASE_URL" '{"Env": [{ "name": "DATABASE_URL", "value": $database_url }], "Prune": true, "RepullImageAndRedeploy": true, "StackFileContent": $content}')" \
             | jq
