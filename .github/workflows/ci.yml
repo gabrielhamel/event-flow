@@ -208,5 +208,5 @@ jobs:
             -H "Authorization: Bearer $JWT" \
             -H "Content-Type: application/json" \
             "$PORTAINER_URL/api/stacks/$STACK_ID?endpointId=$ENDPOINT_ID" \
-            -d "$(jq -n --arg content "$STACK_FILE_CONTENT" --arg database_url "$DATABASE_URL" --arg better_auth_secret "BETTER_AUTH_SECRET" --arg better_auth_url "BETTER_AUTH_URL" '{"Env": [{ "name": "DATABASE_URL", "value": $database_url }, { "name": "BETTER_AUTH_SECRET", "value": $better_auth_secret }, { "name": "BETTER_AUTH_URL", "value": $better_auth_url }], "Prune": true, "RepullImageAndRedeploy": true, "StackFileContent": $content}')" \
+            -d "$(jq -n --arg content "$STACK_FILE_CONTENT" --arg database_url "$DATABASE_URL" --arg better_auth_secret "$BETTER_AUTH_SECRET" --arg better_auth_url "$BETTER_AUTH_URL" '{"Env": [{ "name": "DATABASE_URL", "value": $database_url }, { "name": "BETTER_AUTH_SECRET", "value": $better_auth_secret }, { "name": "BETTER_AUTH_URL", "value": $better_auth_url }], "Prune": true, "RepullImageAndRedeploy": true, "StackFileContent": $content}')" \
             | jq
