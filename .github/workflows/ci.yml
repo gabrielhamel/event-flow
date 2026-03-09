@@ -183,6 +183,8 @@ jobs:
           STACK_ID: ${{ secrets.PORTAINER_STACK_ID }}
           ENDPOINT_ID: ${{ secrets.PORTAINER_ENDPOINT_ID }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
+          BETTER_AUTH_URL: ${{ secrets.BETTER_AUTH_URL }}
         run: |
           echo "1️⃣ Exchange API key for a JWT"
 
@@ -206,5 +208,5 @@ jobs:
             -H "Authorization: Bearer $JWT" \
             -H "Content-Type: application/json" \
             "$PORTAINER_URL/api/stacks/$STACK_ID?endpointId=$ENDPOINT_ID" \
-            -d "$(jq -n --arg content "$STACK_FILE_CONTENT" --arg database_url "$DATABASE_URL" '{"Env": [{ "name": "DATABASE_URL", "value": $database_url }], "Prune": true, "RepullImageAndRedeploy": true, "StackFileContent": $content}')" \
+            -d "$(jq -n --arg content "$STACK_FILE_CONTENT" --arg database_url "$DATABASE_URL" --arg better_auth_secret "BETTER_AUTH_SECRET" --arg better_auth_url "BETTER_AUTH_URL" '{"Env": [{ "name": "DATABASE_URL", "value": $database_url }, { "name": "BETTER_AUTH_SECRET", "value": $better_auth_secret }, { "name": "BETTER_AUTH_URL", "value": $better_auth_url }], "Prune": true, "RepullImageAndRedeploy": true, "StackFileContent": $content}')" \
             | jq
