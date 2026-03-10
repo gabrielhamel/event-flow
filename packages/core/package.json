@@ -3,6 +3,14 @@
   "version": "0.0.0",
   "type": "module",
   "private": true,
+  "exports": {
+    "./*": {
+      "default": "./src/*.ts"
+    },
+    "./infra/prisma": {
+      "default": "./src/infra/prisma/index.ts"
+    }
+  },
   "scripts": {
     "lint:check": "eslint --max-warnings 0",
     "lint:fix": "eslint --fix --max-warnings 0",
