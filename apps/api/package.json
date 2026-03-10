@@ -8,18 +8,19 @@
     "lint:fix": "eslint --fix --max-warnings 0",
     "type:check": "tsc --noEmit -p tsconfig.app.json && tsc --noEmit -p tsconfig.node.json",
     "dev": "tsx --env-file-if-exists=.env --tsconfig tsconfig.app.json --watch src/index.ts",
-    "build": "tsc --build tsconfig.app.json"
+    "build": "tsup"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/express": "^5.0.6",
     "@types/express-ws": "^3.0.6",
-    "jiti": "^2.6.1"
+    "jiti": "^2.6.1",
+    "tsup": "^8.5.1"
   },
   "dependencies": {
-    "@repo/core": "workspace:*",
     "@hocuspocus/server": "^3.4.4",
+    "@repo/core": "workspace:*",
     "better-auth": "^1.5.4",
     "express": "^5.2.1",
     "express-ws": "^5.0.2"

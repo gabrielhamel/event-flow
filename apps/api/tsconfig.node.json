@@ -5,5 +5,5 @@
     "target": "ES2023",
     "noEmit": true
   },
-  "include": ["eslint.config.ts"]
+  "include": ["*.config.ts"]
 }
