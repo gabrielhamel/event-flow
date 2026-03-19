@@ -35,7 +35,7 @@ importers:
     dependencies:
       '@hocuspocus/server':
         specifier: ^3.4.4
-        version: 3.4.4(y-protocols@1.0.7(yjs@13.6.29))(yjs@13.6.29)
+        version: 3.4.4(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
       '@prisma/adapter-pg':
         specifier: ^7.4.2
         version: 7.4.2
@@ -44,7 +44,7 @@ importers:
         version: 7.4.2(prisma@7.4.2(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(typescript@5.9.3)
       '@repo/core':
         specifier: workspace:*
-        version: link:../../packages/core
+        version: file:packages/core(prisma@7.4.2(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(typescript@5.9.3)(y-protocols@1.0.7(yjs@13.6.30))
       better-auth:
         specifier: ^1.5.4
         version: 1.5.4(@prisma/client@7.4.2(prisma@7.4.2(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(typescript@5.9.3))(drizzle-orm@0.45.1(@electric-sql/pglite@0.3.15)(@prisma/client@7.4.2(prisma@7.4.2(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(typescript@5.9.3))(@types/pg@8.18.0)(kysely@0.28.11)(mysql2@3.15.3)(pg@8.20.0)(postgres@3.4.7)(prisma@7.4.2(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3)))(mongodb@7.1.0)(mysql2@3.15.3)(pg@8.20.0)(prisma@7.4.2(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -93,7 +93,7 @@ importers:
         version: 7.3.9(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@repo/core':
         specifier: workspace:*
-        version: link:../../packages/core
+        version: file:packages/core(prisma@7.4.2(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(typescript@5.9.3)(y-protocols@1.0.7(yjs@13.6.30))
       fabric:
         specifier: ^7.2.0
         version: 7.2.0
@@ -190,8 +190,8 @@ importers:
         specifier: ^0.5.2
         version: 0.5.2(eslint@10.0.3(jiti@2.6.1))
       eslint-plugin-turbo:
-        specifier: ^2.8.14
-        version: 2.8.14(eslint@10.0.3(jiti@2.6.1))(turbo@2.8.16)
+        specifier: ^2.8.19
+        version: 2.8.19(eslint@10.0.3(jiti@2.6.1))(turbo@2.8.16)
       globals:
         specifier: ^17.4.0
         version: 17.4.0
@@ -931,6 +931,9 @@ packages:
       '@types/react': ^18.0.0 || ^19.0.0
       react: ^18.0.0 || ^19.0.0
       react-dom: ^18.0.0 || ^19.0.0
+
+  '@repo/core@file:packages/core':
+    resolution: {directory: packages/core, type: directory}
 
   '@rolldown/pluginutils@1.0.0-rc.2':
     resolution: {integrity: sha512-izyXV/v+cHiRfozX62W9htOAvwMo4/bXKDrQ+vom1L1qRuexPock/7VZDAhnpHCLNejd3NJ6hiab+tO0D44Rgw==}
@@ -1859,8 +1862,8 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9.7
 
-  eslint-plugin-turbo@2.8.14:
-    resolution: {integrity: sha512-AU3H0trwN9AoDZHHIx+TWSLc/AXIqk0iB93dy5zF5EmhAS3KTVPlFRJHWXc4BdKo8gy/Z11DKrZZQTpqIZ8k4A==}
+  eslint-plugin-turbo@2.8.19:
+    resolution: {integrity: sha512-UTOWpSGNbXPV/JAbtw3t2iDdn+iAnwjpDNwu++NZO8kuM3y28ahaUAaLJgQ/R9IHda8jBp2cWHpxC3bfYUvWQw==}
     peerDependencies:
       eslint: '>6.6.0'
       turbo: '>2.0.0'
@@ -3485,6 +3488,10 @@ packages:
     resolution: {integrity: sha512-kHqDPdltoXH+X4w1lVmMtddE3Oeqq48nM40FD5ojTd8xYhQpzIDcfE2keMSU5bAgRPJBe225WTUdyUgj1DtbiQ==}
     engines: {node: '>=16.0.0', npm: '>=8.0.0'}
 
+  yjs@13.6.30:
+    resolution: {integrity: sha512-vv/9h42eCMC81ZHDFswuu/MKzkl/vyq1BhaNGfHyOonwlG4CJbQF4oiBBJPvfdeCt/PlVDWh7Nov9D34YY09uQ==}
+    engines: {node: '>=16.0.0', npm: '>=8.0.0'}
+
   yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
@@ -3961,7 +3968,19 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@hocuspocus/server@3.4.4(y-protocols@1.0.7(yjs@13.6.29))(yjs@13.6.29)':
+  '@hocuspocus/provider@3.4.4(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)':
+    dependencies:
+      '@hocuspocus/common': 3.4.4
+      '@lifeomic/attempt': 3.1.0
+      lib0: 0.2.117
+      ws: 8.18.3
+      y-protocols: 1.0.7(yjs@13.6.30)
+      yjs: 13.6.30
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
+  '@hocuspocus/server@3.4.4(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)':
     dependencies:
       '@hocuspocus/common': 3.4.4
       async-lock: 1.4.1
@@ -3969,8 +3988,8 @@ snapshots:
       kleur: 4.1.5
       lib0: 0.2.117
       ws: 8.18.3
-      y-protocols: 1.0.7(yjs@13.6.29)
-      yjs: 13.6.29
+      y-protocols: 1.0.7(yjs@13.6.30)
+      yjs: 13.6.30
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -4199,6 +4218,22 @@ snapshots:
       '@types/react': 19.2.14
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
+
+  '@repo/core@file:packages/core(prisma@7.4.2(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(typescript@5.9.3)(y-protocols@1.0.7(yjs@13.6.30))':
+    dependencies:
+      '@hocuspocus/provider': 3.4.4(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30)
+      '@prisma/adapter-pg': 7.4.2
+      '@prisma/client': 7.4.2(prisma@7.4.2(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(typescript@5.9.3)
+      pg: 8.20.0
+      uuid: 13.0.0
+      yjs: 13.6.30
+    transitivePeerDependencies:
+      - bufferutil
+      - pg-native
+      - prisma
+      - typescript
+      - utf-8-validate
+      - y-protocols
 
   '@rolldown/pluginutils@1.0.0-rc.2': {}
 
@@ -5136,7 +5171,7 @@ snapshots:
       string.prototype.matchall: 4.0.12
       string.prototype.repeat: 1.0.0
 
-  eslint-plugin-turbo@2.8.14(eslint@10.0.3(jiti@2.6.1))(turbo@2.8.16):
+  eslint-plugin-turbo@2.8.19(eslint@10.0.3(jiti@2.6.1))(turbo@2.8.16):
     dependencies:
       dotenv: 16.0.3
       eslint: 10.0.3(jiti@2.6.1)
@@ -6860,6 +6895,11 @@ snapshots:
       lib0: 0.2.117
       yjs: 13.6.29
 
+  y-protocols@1.0.7(yjs@13.6.30):
+    dependencies:
+      lib0: 0.2.117
+      yjs: 13.6.30
+
   yallist@3.1.1: {}
 
   yaml@1.10.2: {}
@@ -6868,6 +6908,10 @@ snapshots:
     optional: true
 
   yjs@13.6.29:
+    dependencies:
+      lib0: 0.2.117
+
+  yjs@13.6.30:
     dependencies:
       lib0: 0.2.117
 
