@@ -21,7 +21,7 @@
   "dependencies": {
     "@hocuspocus/server": "^3.4.4",
     "@prisma/adapter-pg": "^7.5.0",
-    "@prisma/client": "^7.4.2",
+    "@prisma/client": "^7.5.0",
     "@repo/core": "workspace:*",
     "better-auth": "^1.5.4",
     "express": "^5.2.1",
