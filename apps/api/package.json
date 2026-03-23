@@ -8,7 +8,9 @@
     "lint:fix": "eslint --fix --max-warnings 0",
     "type:check": "tsc --noEmit -p tsconfig.app.json && tsc --noEmit -p tsconfig.node.json",
     "dev": "tsx --env-file-if-exists=.env --tsconfig tsconfig.app.json --watch src/index.ts",
-    "build": "tsup"
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",

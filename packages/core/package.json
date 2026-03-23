@@ -14,7 +14,9 @@
   "scripts": {
     "lint:check": "eslint --max-warnings 0",
     "lint:fix": "eslint --fix --max-warnings 0",
-    "type:check": "tsc --noEmit -p tsconfig.lib.json && tsc --noEmit -p tsconfig.node.json"
+    "type:check": "tsc --noEmit -p tsconfig.lib.json && tsc --noEmit -p tsconfig.node.json",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",

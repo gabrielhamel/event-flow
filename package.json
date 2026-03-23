@@ -10,6 +10,7 @@
     "type:check": "turbo run type:check",
     "dev": "turbo run dev",
     "build": "turbo run build",
+    "test": "turbo run test",
     "ci": "turbo run ci --affected"
   },
   "devDependencies": {
@@ -20,7 +21,8 @@
     "tsx": "^4.21.0",
     "turbo": "^2.8.20",
     "typescript": "^5.9.3",
-    "vitest": "^4.1.0"
+    "vitest": "^4.1.0",
+    "vite-tsconfig-paths": "^6.1.1"
   },
   "packageManager": "pnpm@10.31.0",
   "pnpm": {

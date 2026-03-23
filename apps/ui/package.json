@@ -8,7 +8,9 @@
     "lint:fix": "eslint --fix --max-warnings 0",
     "type:check": "tsc --noEmit -p tsconfig.app.json && tsc --noEmit -p tsconfig.node.json",
     "dev": "vite",
-    "build": "tsc -b && vite build"
+    "build": "tsc -b && vite build",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@repo/core": "workspace:*",
@@ -29,7 +31,6 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react-swc": "^4.3.0",
     "jiti": "^2.6.1",
-    "vite": "^7.3.1",
-    "vite-tsconfig-paths": "^6.1.1"
+    "vite": "^7.3.1"
   }
 }

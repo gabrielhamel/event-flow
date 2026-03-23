@@ -28,6 +28,11 @@
         "^type:check"
       ]
     },
+    "test": {
+      "dependsOn": [
+        "^test"
+      ]
+    },
     "build": {
       "dependsOn": [
         "^build"
@@ -47,7 +52,8 @@
       "dependsOn": [
         "//#format:check",
         "type:check",
-        "lint:check"
+        "lint:check",
+        "test"
       ]
     }
   }
