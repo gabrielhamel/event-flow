@@ -39,6 +39,7 @@ yarn-error.log*
 # IDE
 .vscode
 .idea
+.zed
 
 # Volta
 .volta
