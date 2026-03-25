@@ -23,7 +23,7 @@
     "@repo/typescript-config": "workspace:*",
     "@types/pg": "^8.20.0",
     "jiti": "^2.6.1",
-    "prisma": "^7.4.2"
+    "prisma": "^7.5.0"
   },
   "dependencies": {
     "@hocuspocus/provider": "^3.4.4",
