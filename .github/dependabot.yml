@@ -9,4 +9,11 @@ updates:
     assignees:
       - "gabrielhamel"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+    groups:
+      non-breaking:
+        update-types:
+          - "minor"
+          - "patch"
+        patterns:
+          - "*"
