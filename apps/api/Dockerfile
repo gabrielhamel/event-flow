@@ -5,7 +5,7 @@ ENV DO_NOT_TRACK=1
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 
-RUN npm install -g pnpm@10.31.0 prisma@7.4.2
+RUN npm install -g pnpm@10.33.0 prisma@7.4.2
 
 FROM base AS prune
 
