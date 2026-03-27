@@ -1,9 +1,9 @@
 import { WhiteboardSession } from "@repo/core/whiteboard/collaborative/WhiteboardSession";
-import { addPanningModule } from "@repo/ui/whiteboard/canvas/modules/pan";
-import { addZoomingModule } from "@repo/ui/whiteboard/canvas/modules/zoom";
-import { FabricCursorFactory } from "@repo/ui/whiteboard/objects/factories/FabricCursorFactory";
-import { FabricStickyNoteFactory } from "@repo/ui/whiteboard/objects/factories/FabricStickyNoteFactory";
 import { Canvas, type TPointerEventInfo } from "fabric";
+import { addPanningModule } from "./canvas/modules/pan";
+import { addZoomingModule } from "./canvas/modules/zoom";
+import { FabricCursorFactory } from "./objects/factories/FabricCursorFactory";
+import { FabricStickyNoteFactory } from "./objects/factories/FabricStickyNoteFactory";
 
 export class FabricWhiteboard {
   private readonly canvas: Canvas;

@@ -2,8 +2,8 @@ import type { Id } from "@repo/core/Id";
 import type { WhiteboardSession } from "@repo/core/whiteboard/collaborative/WhiteboardSession";
 import type { StickyNoteFactory } from "@repo/core/whiteboard/objects/factories/StickyNoteFactory";
 import type { StickyNote } from "@repo/core/whiteboard/objects/StickyNote";
-import { FabricStickyNote } from "@repo/ui/whiteboard/objects/FabricStickyNote";
 import type { Canvas } from "fabric";
+import { FabricStickyNote } from "../FabricStickyNote";
 
 export class FabricStickyNoteFactory implements StickyNoteFactory {
   private readonly canvas: Canvas;

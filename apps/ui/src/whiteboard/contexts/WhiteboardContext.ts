@@ -1,5 +1,5 @@
-import type { FabricWhiteboard } from "@repo/ui/whiteboard/FabricWhiteboard";
 import { createContext } from "react";
+import type { FabricWhiteboard } from "../FabricWhiteboard";
 
 interface WhiteboardContextData {
   whiteboard: FabricWhiteboard | null;

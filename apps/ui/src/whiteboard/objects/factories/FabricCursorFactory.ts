@@ -1,7 +1,7 @@
 import type { Cursor } from "@repo/core/whiteboard/objects/Cursor";
 import type { CursorFactory } from "@repo/core/whiteboard/objects/factories/CursorFactory";
-import { FabricCursor } from "@repo/ui/whiteboard/objects/FabricCursor";
 import { type Canvas, loadSVGFromURL } from "fabric";
+import { FabricCursor } from "../FabricCursor";
 
 const cursorSVG = await loadSVGFromURL("cursor.svg");
 

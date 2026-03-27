@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
-import { WhiteboardContext } from "@repo/ui/whiteboard/contexts/WhiteboardContext";
-import { FabricWhiteboard } from "@repo/ui/whiteboard/FabricWhiteboard";
 import { type ReactNode, useEffect, useRef, useState } from "react";
+import { WhiteboardContext } from "../contexts/WhiteboardContext";
+import { FabricWhiteboard } from "../FabricWhiteboard";
 
 export const WhiteboardComponent = ({ children }: { children: ReactNode }) => {
   const [whiteboard, setWhiteboard] = useState<FabricWhiteboard | null>(null);
