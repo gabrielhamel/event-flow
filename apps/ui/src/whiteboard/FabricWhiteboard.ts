@@ -1,5 +1,6 @@
 import { WhiteboardSession } from "@repo/core/whiteboard/collaborative/WhiteboardSession";
 import { Canvas, type TPointerEventInfo } from "fabric";
+import { apiWebsocketBaseUrl } from "../constants";
 import { addPanningModule } from "./canvas/modules/pan";
 import { addZoomingModule } from "./canvas/modules/zoom";
 import { FabricCursorFactory } from "./objects/factories/FabricCursorFactory";
@@ -30,12 +31,8 @@ export class FabricWhiteboard {
     this.stickyNoteFactory = new FabricStickyNoteFactory(this.canvas);
     const cursorFactory = new FabricCursorFactory(this.canvas);
 
-    const wsUrl = import.meta.env.MODE === "development"
-      ? "ws://localhost:8080/api/collaboration"
-      : "wss://ddd-lab.gabrielhamel.fr/api/collaboration";
-
     this.collaborativeSession = new WhiteboardSession(
-      wsUrl,
+      `${apiWebsocketBaseUrl}/collaboration`,
       this.stickyNoteFactory,
       cursorFactory,
     );
