@@ -13,12 +13,12 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@repo/core": "workspace:*",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@fontsource/roboto": "^5.2.10",
     "@mui/icons-material": "^7.3.9",
     "@mui/material": "^7.3.9",
+    "@repo/core": "workspace:*",
     "fabric": "^7.2.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
@@ -29,7 +29,7 @@
     "@types/node": "^25.5.0",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react-swc": "^4.3.0",
+    "@vitejs/plugin-react": "^6.0.1",
     "jiti": "^2.6.1",
     "vite": "^8.0.2"
   }
