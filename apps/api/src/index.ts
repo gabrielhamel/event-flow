@@ -1,8 +1,8 @@
 import { Hocuspocus } from "@hocuspocus/server";
+import { auth } from "@repo/core/infra/auth";
 import { toNodeHandler } from "better-auth/node";
 import express from "express";
 import expressWebsockets from "express-ws";
-import { auth } from "./auth.js";
 
 const collaborationServer = new Hocuspocus({
   onAwarenessUpdate() {

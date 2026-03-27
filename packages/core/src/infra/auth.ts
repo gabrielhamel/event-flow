@@ -1,6 +1,6 @@
-import { makePrismaClient } from "@repo/core/infra/prisma";
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
+import { makePrismaClient } from "./prisma";
 
 const db = makePrismaClient();
 

@@ -5,3 +5,6 @@ packages:
 injectWorkspacePackages: true
 syncInjectedDepsAfterScripts:
   - build
+
+catalog:
+  better-auth: ^1.5.6

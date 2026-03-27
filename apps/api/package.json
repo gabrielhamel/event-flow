@@ -22,10 +22,8 @@
   },
   "dependencies": {
     "@hocuspocus/server": "^3.4.4",
-    "@prisma/adapter-pg": "^7.5.0",
-    "@prisma/client": "^7.5.0",
     "@repo/core": "workspace:*",
-    "better-auth": "^1.5.6",
+    "better-auth": "catalog:",
     "express": "^5.2.1",
     "express-ws": "^5.0.2"
   }
