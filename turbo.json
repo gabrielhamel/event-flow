@@ -2,7 +2,15 @@
   "$schema": "https://v2-8-10.turborepo.dev/schema.json",
   "ui": "stream",
   "envMode": "strict",
-  "globalPassThroughEnv": ["DATABASE_URL", "MODE", "BETTER_AUTH_SECRET", "BETTER_AUTH_URL"],
+  "globalPassThroughEnv": [
+    "DATABASE_URL",
+    "MODE",
+    "BETTER_AUTH_SECRET",
+    "BETTER_AUTH_URL",
+    "GITHUB_CLIENT_ID",
+    "GITHUB_CLIENT_SECRET",
+    "NODE_ENV"
+  ],
   "tasks": {
     "//#format:check": {
       "inputs": [

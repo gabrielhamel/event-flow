@@ -1,6 +1,7 @@
 import { Hocuspocus } from "@hocuspocus/server";
 import { auth } from "@repo/core/infra/auth";
 import { toNodeHandler } from "better-auth/node";
+import cors from "cors";
 import express from "express";
 import expressWebsockets from "express-ws";
 
@@ -11,6 +12,8 @@ const collaborationServer = new Hocuspocus({
 });
 
 const { app } = expressWebsockets(express());
+
+app.use(cors({ credentials: true, origin: true }));
 
 app.all("/api/auth/*splat", toNodeHandler(auth));
 

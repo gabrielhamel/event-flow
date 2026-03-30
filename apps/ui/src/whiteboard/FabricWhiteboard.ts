@@ -1,10 +1,13 @@
+import { getInfraConfig } from "@repo/core/infra/config";
 import { WhiteboardSession } from "@repo/core/whiteboard/collaborative/WhiteboardSession";
 import { Canvas, type TPointerEventInfo } from "fabric";
-import { apiWebsocketBaseUrl } from "../constants";
 import { addPanningModule } from "./canvas/modules/pan";
 import { addZoomingModule } from "./canvas/modules/zoom";
 import { FabricCursorFactory } from "./objects/factories/FabricCursorFactory";
 import { FabricStickyNoteFactory } from "./objects/factories/FabricStickyNoteFactory";
+
+const isInDevelopment = import.meta.env.MODE === "development";
+const { apiWebsocketBaseUrl } = getInfraConfig(isInDevelopment);
 
 export class FabricWhiteboard {
   private readonly canvas: Canvas;
