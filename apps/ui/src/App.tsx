@@ -104,6 +104,7 @@ const App = () => {
                 sx={{
                   boxShadow: 1,
                 }}
+                src={session.user.image ?? undefined}
                 onClick={handleAvatarClick}
               >
                 {avatarData}
