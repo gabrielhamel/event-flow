@@ -16,14 +16,15 @@ export class FabricWhiteboard {
 
   constructor(
     anchor: HTMLCanvasElement,
-    width: number,
-    height: number,
+    size: { width: number; height: number },
+    theme: "light" | "dark",
   ) {
     this.canvas = new Canvas(anchor, {
+      backgroundColor: theme === "light" ? "#F8F9FA" : "#1E1E1E",
       enableRetinaScaling: true,
-      height,
+      height: size.height,
       selection: false,
-      width,
+      width: size.width,
     });
 
     addPanningModule(this.canvas);
