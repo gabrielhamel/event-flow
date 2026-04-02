@@ -8,10 +8,10 @@ const authClient = createAuthClient({
 
 export const useSession = () => {
   const { data: session, isPending } = authClient.useSession();
-  const [isSignIn, setIsSignIn] = useState(false);
+  const [isSignInLoading, setIsSignInLoading] = useState(false);
 
   const signIn = () => {
-    setIsSignIn(true);
+    setIsSignInLoading(true);
 
     authClient.signIn.social({
       callbackURL: configs.uiBaseUrl,
@@ -19,7 +19,7 @@ export const useSession = () => {
     }).catch((error: unknown) => {
       console.error("Error signing in:", error);
 
-      setIsSignIn(false);
+      setIsSignInLoading(false);
     });
   };
 
@@ -31,7 +31,7 @@ export const useSession = () => {
 
   return {
     isSessionLoading: isPending,
-    isSignIn,
+    isSignInLoading,
     session,
     signIn,
     signOut,

@@ -1,10 +1,10 @@
 import { Button } from "@mui/material";
 
-export const SignInButton = ({ isSessionLoading, signIn }: { signIn: () => void; isSessionLoading: boolean }) => (
+export const SignInButton = ({ isSignInLoading, signIn }: { signIn: () => void; isSignInLoading: boolean }) => (
   <Button
     variant="outlined"
     onClick={signIn}
-    loading={isSessionLoading}
+    loading={isSignInLoading}
   >
     Sign in
   </Button>

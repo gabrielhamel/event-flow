@@ -13,7 +13,7 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
 const App = () => {
-  const { isSessionLoading, session, signIn, signOut } = useSession();
+  const { isSessionLoading, isSignInLoading, session, signIn, signOut } = useSession();
   const { mode } = useThemeMode();
 
   const theme = useMemo(() =>
@@ -38,7 +38,7 @@ const App = () => {
           }}
         >
           {isSessionLoading && <AvatarSkeleton />}
-          {(!isSessionLoading && !session) && <SignInButton signIn={signIn} isSessionLoading={isSessionLoading} />}
+          {(!isSessionLoading && !session) && <SignInButton signIn={signIn} isSignInLoading={isSignInLoading} />}
           {session && (
             <CurrentUserAvatar
               username={session.user.name}
