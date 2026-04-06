@@ -14,12 +14,12 @@
     "ci": "turbo run ci --affected"
   },
   "devDependencies": {
-    "@types/node": "^25.5.0",
-    "dprint": "^0.53.1",
-    "eslint": "^10.1.0",
+    "@types/node": "^25.5.2",
+    "dprint": "^0.53.2",
+    "eslint": "^10.2.0",
     "husky": "^9.1.7",
     "tsx": "^4.21.0",
-    "turbo": "^2.8.21",
+    "turbo": "^2.9.3",
     "typescript": "^5.9.3",
     "vitest": "^4.1.2"
   },
