@@ -6,5 +6,4 @@
 .vscode
 .dockerignore
 .github
-.husky
 .envrc

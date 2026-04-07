@@ -2,7 +2,6 @@
   "name": "ddd-lab",
   "private": true,
   "scripts": {
-    "prepare": "husky",
     "lint:check": "turbo run lint:check",
     "lint:fix": "turbo run lint:fix",
     "format:fix": "dprint fmt",
@@ -17,7 +16,6 @@
     "@types/node": "^25.5.2",
     "dprint": "^0.53.2",
     "eslint": "^10.2.0",
-    "husky": "^9.1.7",
     "tsx": "^4.21.0",
     "turbo": "^2.9.4",
     "typescript": "^5.9.3",
