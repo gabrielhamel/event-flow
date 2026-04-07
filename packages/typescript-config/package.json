@@ -6,6 +6,7 @@
     "access": "public"
   },
   "devDependencies": {
-    "vite": "^8.0.3"
+    "vite": "catalog:",
+    "vite-plus": "catalog:"
   }
 }

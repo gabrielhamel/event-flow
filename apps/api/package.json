@@ -1,25 +1,16 @@
 {
   "name": "@repo/api",
   "version": "0.0.0",
-  "type": "module",
   "private": true,
+  "type": "module",
   "scripts": {
     "lint:check": "eslint --max-warnings 0",
     "lint:fix": "eslint --fix --max-warnings 0",
     "type:check": "tsc --noEmit -p tsconfig.app.json && tsc --noEmit -p tsconfig.node.json",
     "dev": "tsx --env-file-if-exists=.env --tsconfig tsconfig.app.json --watch src/index.ts",
     "build": "tsup",
-    "test": "vitest run",
-    "test:watch": "vitest"
-  },
-  "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.6",
-    "@types/express-ws": "^3.0.6",
-    "jiti": "^2.6.1",
-    "tsup": "^8.5.1"
+    "test": "vp test run",
+    "test:watch": "vp test"
   },
   "dependencies": {
     "@hocuspocus/server": "^3.4.4",
@@ -30,5 +21,14 @@
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "express-ws": "^5.0.2"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/express-ws": "^3.0.6",
+    "jiti": "^2.6.1",
+    "tsup": "^8.5.1"
   }
 }
