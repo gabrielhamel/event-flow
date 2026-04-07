@@ -27,6 +27,7 @@ jobs:
         run: vp check && vp run -r test
 
   build-ui:
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
     name: Build ui
     timeout-minutes: 15
     environment: Production
@@ -40,7 +41,7 @@ jobs:
 
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Log in to the container registry
         uses: docker/login-action@v3
@@ -71,6 +72,7 @@ jobs:
           cache-to: type=gha,mode=max
 
   build-api:
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
     name: Build api
     timeout-minutes: 15
     environment: Production
@@ -84,7 +86,7 @@ jobs:
 
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Log in to the container registry
         uses: docker/login-action@v3
@@ -123,7 +125,7 @@ jobs:
     needs: [ci, build-api, build-ui]
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Trigger deployment
         env:
