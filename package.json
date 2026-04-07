@@ -4,15 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "turbo run dev",
-    "build": "turbo run build",
-    "test": "turbo run test",
     "prepare": "vp config"
   },
   "devDependencies": {
     "@types/node": "^25.5.2",
     "tsx": "^4.21.0",
-    "turbo": "^2.9.4",
     "typescript": "^5.9.3",
     "vite-plus": "catalog:"
   },
