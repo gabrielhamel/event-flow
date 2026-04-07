@@ -33,9 +33,5 @@
       "esbuild",
       "prisma"
     ]
-  },
-  "volta": {
-    "node": "25.8.1",
-    "pnpm": "10.33.0"
   }
 }
