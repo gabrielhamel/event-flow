@@ -1,6 +1,6 @@
+import type { StickyNote } from "@repo/core/whiteboard/objects/StickyNote";
 import { CollaborativeEntity } from "@repo/core/collaborative/CollaborativeEntity";
 import { generateId, type Id } from "@repo/core/Id";
-import type { StickyNote } from "@repo/core/whiteboard/objects/StickyNote";
 import { type Canvas, FabricObject, Group, Shadow, Textbox } from "fabric";
 
 export class FabricStickyNote extends CollaborativeEntity<StickyNote> {

@@ -1,10 +1,10 @@
-import { HocuspocusProvider, type onAwarenessChangeParameters } from "@hocuspocus/provider";
 import type { CollaborativeEntity } from "@repo/core/collaborative/CollaborativeEntity";
 import type { Id } from "@repo/core/Id";
 import type { Cursor } from "@repo/core/whiteboard/objects/Cursor";
 import type { CursorFactory } from "@repo/core/whiteboard/objects/factories/CursorFactory";
 import type { StickyNoteFactory } from "@repo/core/whiteboard/objects/factories/StickyNoteFactory";
 import type { StickyNote } from "@repo/core/whiteboard/objects/StickyNote";
+import { HocuspocusProvider, type onAwarenessChangeParameters } from "@hocuspocus/provider";
 import * as Y from "yjs";
 
 export class WhiteboardSession {
