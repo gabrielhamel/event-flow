@@ -25,7 +25,6 @@
     "yjs": "^13.6.30"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/pg": "^8.20.0",
     "jiti": "^2.6.1",

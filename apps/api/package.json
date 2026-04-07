@@ -20,7 +20,6 @@
     "express-ws": "^5.0.2"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
