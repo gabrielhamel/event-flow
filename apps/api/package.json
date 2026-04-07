@@ -25,6 +25,7 @@
     "@types/express": "^5.0.6",
     "@types/express-ws": "^3.0.6",
     "jiti": "^2.6.1",
-    "tsup": "^8.5.1"
+    "tsup": "^8.5.1",
+    "tsx": "catalog:"
   }
 }
