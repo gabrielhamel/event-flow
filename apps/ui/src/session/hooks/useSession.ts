@@ -13,14 +13,16 @@ export const useSession = () => {
   const signIn = () => {
     setIsSignInLoading(true);
 
-    authClient.signIn.social({
-      callbackURL: configs.uiBaseUrl,
-      provider: "github",
-    }).catch((error: unknown) => {
-      console.error("Error signing in:", error);
+    authClient.signIn
+      .social({
+        callbackURL: configs.uiBaseUrl,
+        provider: "github",
+      })
+      .catch((error: unknown) => {
+        console.error("Error signing in:", error);
 
-      setIsSignInLoading(false);
-    });
+        setIsSignInLoading(false);
+      });
   };
 
   const signOut = () => {

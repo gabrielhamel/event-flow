@@ -1,7 +1,11 @@
 import { Cloud, Event, LocalFireDepartment, Person, Rule, Send } from "@mui/icons-material";
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import { createElement, type ElementType, type ReactElement } from "react";
-import { EventStormingEntityColors, type EventStormingEntityType, useEventStorming } from "../hooks/useEventStorming";
+import {
+  EventStormingEntityColors,
+  type EventStormingEntityType,
+  useEventStorming,
+} from "../hooks/useEventStorming";
 
 interface AddEntityAction {
   label: string;

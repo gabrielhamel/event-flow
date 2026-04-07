@@ -4,11 +4,12 @@ DDD Collaborative tools
 
 ## Prerequisites
 
-- [direnv](https://direnv.net) (the .envrc sets up NodeJS & pnpm versions automatically)
+- [direnv](https://direnv.net) (the .envrc sets up some useful environment variables)
+- [Vite+](https://viteplus.dev) (Manage node versions, toolchains, dependencies, hooks, etc...)
 
 ## Getting Started
 
 1. Clone the repository
-2. Run `direnv allow` to automatically set up the right version of Node.js and pnpm
-3. Install dependencies: `pnpm install`
-4. Start the development environment: `pnpm dev`
+2. Activate the direnv environment `direnv allow`
+3. Install dependencies `vp install`
+4. Start the development environment: `vp run -r dev`

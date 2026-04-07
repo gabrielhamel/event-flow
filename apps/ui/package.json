@@ -1,16 +1,13 @@
 {
   "name": "@repo/ui",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
   "type": "module",
   "scripts": {
-    "lint:check": "eslint --max-warnings 0",
-    "lint:fix": "eslint --fix --max-warnings 0",
-    "type:check": "tsc --noEmit -p tsconfig.app.json && tsc --noEmit -p tsconfig.node.json",
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "test": "vitest run",
-    "test:watch": "vitest"
+    "dev": "vp dev",
+    "build": "tsc -b && vp build",
+    "test": "vp test run",
+    "test:watch": "vp test"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -19,19 +16,19 @@
     "@mui/icons-material": "^7.3.9",
     "@mui/material": "^7.3.9",
     "@repo/core": "workspace:*",
+    "better-auth": "catalog:",
     "fabric": "^7.2.0",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "better-auth": "catalog:"
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
-    "@types/node": "^25.5.2",
+    "@types/node": "catalog:",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
-    "jiti": "^2.6.1",
-    "vite": "^8.0.3"
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vite-plus": "catalog:"
   }
 }

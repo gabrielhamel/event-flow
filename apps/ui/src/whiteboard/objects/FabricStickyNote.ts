@@ -1,6 +1,6 @@
+import type { StickyNote } from "@repo/core/whiteboard/objects/StickyNote";
 import { CollaborativeEntity } from "@repo/core/collaborative/CollaborativeEntity";
 import { generateId, type Id } from "@repo/core/Id";
-import type { StickyNote } from "@repo/core/whiteboard/objects/StickyNote";
 import { type Canvas, FabricObject, Group, Shadow, Textbox } from "fabric";
 
 export class FabricStickyNote extends CollaborativeEntity<StickyNote> {
@@ -68,7 +68,10 @@ export class FabricStickyNote extends CollaborativeEntity<StickyNote> {
     this.group.on("moving", this.handleMoving.bind(this));
 
     window.addEventListener("keydown", (event) => {
-      if ((event.key === "Delete" || event.key === "Backspace") && this.canvas.getActiveObject() === this.group) {
+      if (
+        (event.key === "Delete" || event.key === "Backspace") &&
+        this.canvas.getActiveObject() === this.group
+      ) {
         this.propagateDelete();
       }
     });

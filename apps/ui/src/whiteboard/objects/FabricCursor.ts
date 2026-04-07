@@ -1,6 +1,6 @@
+import type { Cursor } from "@repo/core/whiteboard/objects/Cursor";
 import { CollaborativeEntity } from "@repo/core/collaborative/CollaborativeEntity";
 import { generateId } from "@repo/core/Id";
-import type { Cursor } from "@repo/core/whiteboard/objects/Cursor";
 import { type Canvas, type FabricObject, type loadSVGFromURL, util } from "fabric";
 import { listenCanvasZoom } from "../canvas/modules/zoom";
 
@@ -10,13 +10,11 @@ export class FabricCursor extends CollaborativeEntity<Cursor> {
   private readonly objectAddedUnsubscribe: () => void;
   private readonly zoomUnsubscribe: () => void;
 
-  constructor(
-    props: {
-      canvas: Canvas;
-      svg: Awaited<ReturnType<typeof loadSVGFromURL>>;
-      data: Cursor;
-    },
-  ) {
+  constructor(props: {
+    canvas: Canvas;
+    svg: Awaited<ReturnType<typeof loadSVGFromURL>>;
+    data: Cursor;
+  }) {
     super({
       data: props.data,
       id: generateId("cursor"),

@@ -1,10 +1,10 @@
-import { HocuspocusProvider, type onAwarenessChangeParameters } from "@hocuspocus/provider";
 import type { CollaborativeEntity } from "@repo/core/collaborative/CollaborativeEntity";
 import type { Id } from "@repo/core/Id";
 import type { Cursor } from "@repo/core/whiteboard/objects/Cursor";
 import type { CursorFactory } from "@repo/core/whiteboard/objects/factories/CursorFactory";
 import type { StickyNoteFactory } from "@repo/core/whiteboard/objects/factories/StickyNoteFactory";
 import type { StickyNote } from "@repo/core/whiteboard/objects/StickyNote";
+import { HocuspocusProvider, type onAwarenessChangeParameters } from "@hocuspocus/provider";
 import * as Y from "yjs";
 
 export class WhiteboardSession {
@@ -16,11 +16,7 @@ export class WhiteboardSession {
   private readonly cursorEntityCollection: Map<number, CollaborativeEntity<Cursor>>;
   private readonly cursorColor: string;
 
-  constructor(
-    url: string,
-    stickyNoteFactory: StickyNoteFactory,
-    cursorFactory: CursorFactory,
-  ) {
+  constructor(url: string, stickyNoteFactory: StickyNoteFactory, cursorFactory: CursorFactory) {
     this.stickyNoteFactory = stickyNoteFactory;
     this.cursorFactory = cursorFactory;
 
@@ -37,9 +33,7 @@ export class WhiteboardSession {
 
     this.cursorColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 
-    this.stickyNoteCollection = this.provider.document.getMap<StickyNote>(
-      "stickyNotes",
-    );
+    this.stickyNoteCollection = this.provider.document.getMap<StickyNote>("stickyNotes");
     this.stickyNoteCollection.observe((event) => {
       const isLocalEvent = event.transaction.origin === null;
       if (isLocalEvent) {
@@ -143,7 +137,7 @@ export class WhiteboardSession {
 
     const localClientId = this.provider.awareness.clientID;
 
-    if ((data.states.length - 1) < this.cursorEntityCollection.size) {
+    if (data.states.length - 1 < this.cursorEntityCollection.size) {
       // Someone has left the room, remove their cursor
       this.cursorEntityCollection.forEach((cursor, clientId) => {
         if (data.states.every((state) => state.clientId !== clientId)) {

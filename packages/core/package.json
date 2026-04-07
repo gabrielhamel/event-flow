@@ -1,8 +1,8 @@
 {
   "name": "@repo/core",
   "version": "0.0.0",
-  "type": "module",
   "private": true,
+  "type": "module",
   "exports": {
     "./*": {
       "default": "./src/*.ts"
@@ -12,26 +12,21 @@
     }
   },
   "scripts": {
-    "lint:check": "eslint --max-warnings 0",
-    "lint:fix": "eslint --fix --max-warnings 0",
-    "type:check": "tsc --noEmit -p tsconfig.lib.json && tsc --noEmit -p tsconfig.node.json",
-    "test": "vitest run",
-    "test:watch": "vitest"
-  },
-  "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
-    "@types/pg": "^8.20.0",
-    "jiti": "^2.6.1",
-    "prisma": "^7.6.0"
+    "test": "vp test run",
+    "test:watch": "vp test"
   },
   "dependencies": {
-    "@hocuspocus/provider": "^3.4.4",
-    "@prisma/adapter-pg": "^7.6.0",
-    "@prisma/client": "^7.6.0",
+    "@hocuspocus/provider": "catalog:",
+    "@prisma/adapter-pg": "catalog:",
+    "@prisma/client": "catalog:",
+    "better-auth": "catalog:",
     "pg": "^8.20.0",
     "uuid": "^13.0.0",
-    "yjs": "^13.6.30",
-    "better-auth": "catalog:"
+    "yjs": "^13.6.30"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/pg": "^8.20.0",
+    "prisma": "^7.6.0"
   }
 }

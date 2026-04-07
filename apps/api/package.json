@@ -1,34 +1,29 @@
 {
   "name": "@repo/api",
   "version": "0.0.0",
-  "type": "module",
   "private": true,
+  "type": "module",
   "scripts": {
-    "lint:check": "eslint --max-warnings 0",
-    "lint:fix": "eslint --fix --max-warnings 0",
-    "type:check": "tsc --noEmit -p tsconfig.app.json && tsc --noEmit -p tsconfig.node.json",
     "dev": "tsx --env-file-if-exists=.env --tsconfig tsconfig.app.json --watch src/index.ts",
-    "build": "tsup",
-    "test": "vitest run",
-    "test:watch": "vitest"
-  },
-  "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.6",
-    "@types/express-ws": "^3.0.6",
-    "jiti": "^2.6.1",
-    "tsup": "^8.5.1"
+    "build": "vp pack",
+    "test": "vp test run",
+    "test:watch": "vp test"
   },
   "dependencies": {
-    "@hocuspocus/server": "^3.4.4",
-    "@prisma/adapter-pg": "^7.6.0",
-    "@prisma/client": "^7.6.0",
+    "@hocuspocus/server": "catalog:",
+    "@prisma/adapter-pg": "catalog:",
+    "@prisma/client": "catalog:",
     "@repo/core": "workspace:*",
     "better-auth": "catalog:",
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "express-ws": "^5.0.2"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/express-ws": "^3.0.6",
+    "tsx": "catalog:"
   }
 }

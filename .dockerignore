@@ -1,11 +1,9 @@
 **/node_modules
 **/dist
-**/.turbo
-.volta
 .git
 .idea
 .vscode
 .dockerignore
 .github
-.husky
 .envrc
+.vite-hooks

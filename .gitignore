@@ -15,9 +15,6 @@ node_modules
 # Testing
 coverage
 
-# Turbo
-.turbo
-
 # Vercel
 .vercel
 
@@ -40,9 +37,6 @@ yarn-error.log*
 .vscode
 .idea
 .zed
-
-# Volta
-.volta
 
 # AI
 /.sisyphus

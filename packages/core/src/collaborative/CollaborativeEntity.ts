@@ -6,9 +6,12 @@ export abstract class CollaborativeEntity<Data> {
   private readonly propagateUpdateCallback: ((id: Id, data: Data) => void) | undefined;
   private readonly propagateDeleteCallback: ((id: Id) => void) | undefined;
 
-  protected constructor(
-    props: { id: Id; data: Data; onUpdate?: (id: Id, data: Data) => void; onDelete?: (id: Id) => void },
-  ) {
+  protected constructor(props: {
+    id: Id;
+    data: Data;
+    onUpdate?: (id: Id, data: Data) => void;
+    onDelete?: (id: Id) => void;
+  }) {
     this.entityId = props.id;
     this.data = props.data;
     this.propagateUpdateCallback = props.onUpdate;

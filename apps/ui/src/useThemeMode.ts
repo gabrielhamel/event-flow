@@ -8,9 +8,8 @@ export const useThemeMode = () => {
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
-    const handler = (event: {
-      matches: boolean | ((prevState: boolean) => boolean);
-    }) => setIsDarkMode(event.matches);
+    const handler = (event: { matches: boolean | ((prevState: boolean) => boolean) }) =>
+      setIsDarkMode(event.matches);
 
     mediaQuery.addEventListener("change", handler);
 
