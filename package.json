@@ -15,8 +15,7 @@
     "tsx": "^4.21.0",
     "turbo": "^2.9.4",
     "typescript": "^5.9.3",
-    "vite-plus": "catalog:",
-    "vitest": "catalog:"
+    "vite-plus": "catalog:"
   },
   "engines": {
     "node": ">=25.8.1"
