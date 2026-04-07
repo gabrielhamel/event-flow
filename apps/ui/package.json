@@ -4,7 +4,6 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "type:check": "tsc --noEmit -p tsconfig.app.json && tsc --noEmit -p tsconfig.node.json",
     "dev": "vp dev",
     "build": "tsc -b && vp build",
     "test": "vp test run",

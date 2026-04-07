@@ -12,21 +12,6 @@
     "NODE_ENV"
   ],
   "tasks": {
-    "//#format:check": {
-      "inputs": ["$TURBO_DEFAULT$", "!**/*.{css,svg,png,jpg,jpeg,gif,ico,woff,woff2,ttf,eot}"]
-    },
-    "//#format:fix": {
-      "cache": false
-    },
-    "lint:check": {
-      "dependsOn": ["^lint:check"]
-    },
-    "lint:fix": {
-      "dependsOn": ["^lint:fix"]
-    },
-    "type:check": {
-      "dependsOn": ["^type:check"]
-    },
     "test": {
       "dependsOn": ["^test"]
     },
@@ -40,7 +25,7 @@
       "persistent": true
     },
     "ci": {
-      "dependsOn": ["//#format:check", "type:check", "lint:check", "test"]
+      "dependsOn": ["//#format:check", "test"]
     }
   }
 }

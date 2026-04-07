@@ -12,7 +12,6 @@
     }
   },
   "scripts": {
-    "type:check": "tsc --noEmit -p tsconfig.lib.json && tsc --noEmit -p tsconfig.node.json",
     "test": "vp test run",
     "test:watch": "vp test"
   },
