@@ -68,7 +68,10 @@ export class FabricStickyNote extends CollaborativeEntity<StickyNote> {
     this.group.on("moving", this.handleMoving.bind(this));
 
     window.addEventListener("keydown", (event) => {
-      if ((event.key === "Delete" || event.key === "Backspace") && this.canvas.getActiveObject() === this.group) {
+      if (
+        (event.key === "Delete" || event.key === "Backspace") &&
+        this.canvas.getActiveObject() === this.group
+      ) {
         this.propagateDelete();
       }
     });

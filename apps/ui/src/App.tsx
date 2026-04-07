@@ -16,12 +16,15 @@ const App = () => {
   const { isSessionLoading, isSignInLoading, session, signIn, signOut } = useSession();
   const { mode } = useThemeMode();
 
-  const theme = useMemo(() =>
-    createTheme({
-      palette: {
-        mode,
-      },
-    }), [mode]);
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode,
+        },
+      }),
+    [mode],
+  );
 
   return (
     <ThemeProvider theme={theme}>
@@ -38,7 +41,9 @@ const App = () => {
           }}
         >
           {isSessionLoading && <AvatarSkeleton />}
-          {(!isSessionLoading && !session) && <SignInButton signIn={signIn} isSignInLoading={isSignInLoading} />}
+          {!isSessionLoading && !session && (
+            <SignInButton signIn={signIn} isSignInLoading={isSignInLoading} />
+          )}
           {session && (
             <CurrentUserAvatar
               username={session.user.name}

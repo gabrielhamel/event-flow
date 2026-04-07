@@ -1,21 +1,17 @@
 {
   "name": "ddd-lab",
+  "version": "0.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "lint:check": "turbo run lint:check",
-    "lint:fix": "turbo run lint:fix",
-    "format:fix": "dprint fmt",
-    "format:check": "dprint check",
     "type:check": "turbo run type:check",
     "dev": "turbo run dev",
     "build": "turbo run build",
     "test": "turbo run test",
-    "ci": "turbo run ci --affected",
     "prepare": "vp config"
   },
   "devDependencies": {
     "@types/node": "^25.5.2",
-    "dprint": "^0.53.2",
     "eslint": "^10.2.0",
     "tsx": "^4.21.0",
     "turbo": "^2.9.4",
@@ -23,13 +19,15 @@
     "vite-plus": "catalog:",
     "vitest": "catalog:"
   },
+  "engines": {
+    "node": ">=25.8.1"
+  },
   "packageManager": "pnpm@10.33.0",
   "pnpm": {
     "onlyBuiltDependencies": [
       "@prisma/engines",
       "@swc/core",
       "canvas",
-      "dprint",
       "esbuild",
       "prisma"
     ]

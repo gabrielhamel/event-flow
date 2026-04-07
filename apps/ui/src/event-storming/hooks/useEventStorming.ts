@@ -1,6 +1,12 @@
 import { useWhiteboard } from "../../whiteboard/hooks/useWhiteboard";
 
-export type EventStormingEntityType = "event" | "command" | "actor" | "policy" | "hotSpot" | "externalSystem";
+export type EventStormingEntityType =
+  | "event"
+  | "command"
+  | "actor"
+  | "policy"
+  | "hotSpot"
+  | "externalSystem";
 
 export const EventStormingEntityColors: Record<EventStormingEntityType, string> = {
   actor: "#50C878",

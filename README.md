@@ -9,5 +9,5 @@ DDD Collaborative tools
 ## Getting Started
 
 1. Clone the repository
-2. Install dependencies: `vp install`
-3. Start the development environment: `vp dev`
+2. Check everything is ready `vp install`
+3. Start the development environment: `vp run dev`

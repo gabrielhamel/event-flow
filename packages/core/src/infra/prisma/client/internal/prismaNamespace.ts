@@ -98,9 +98,9 @@ export type InputJsonArray = runtime.InputJsonArray;
 export type InputJsonValue = runtime.InputJsonValue;
 
 export const NullTypes = {
-  DbNull: runtime.NullTypes.DbNull as (new(secret: never) => typeof runtime.DbNull),
-  JsonNull: runtime.NullTypes.JsonNull as (new(secret: never) => typeof runtime.JsonNull),
-  AnyNull: runtime.NullTypes.AnyNull as (new(secret: never) => typeof runtime.AnyNull),
+  DbNull: runtime.NullTypes.DbNull as new (secret: never) => typeof runtime.DbNull,
+  JsonNull: runtime.NullTypes.JsonNull as new (secret: never) => typeof runtime.JsonNull,
+  AnyNull: runtime.NullTypes.AnyNull as new (secret: never) => typeof runtime.AnyNull,
 };
 /**
  * Helper for filtering JSON entries that have `null` on the database (empty on the db)
@@ -155,23 +155,21 @@ export type Subset<T, U> = {
  * @desc From `T` pick properties that exist in `U`. Simple version of Intersection.
  * Additionally, it validates, if both select and include are present. If the case, it errors.
  */
-export type SelectSubset<T, U> =
-  & {
-    [key in keyof T]: key extends keyof U ? T[key] : never;
-  }
-  & (T extends SelectAndInclude ? "Please either choose `select` or `include`."
-    : T extends SelectAndOmit ? "Please either choose `select` or `omit`."
+export type SelectSubset<T, U> = {
+  [key in keyof T]: key extends keyof U ? T[key] : never;
+} & (T extends SelectAndInclude
+  ? "Please either choose `select` or `include`."
+  : T extends SelectAndOmit
+    ? "Please either choose `select` or `omit`."
     : {});
 
 /**
  * Subset + Intersection
  * @desc From `T` pick properties that exist in `U` and intersect `K`
  */
-export type SubsetIntersection<T, U, K> =
-  & {
-    [key in keyof T]: key extends keyof U ? T[key] : never;
-  }
-  & K;
+export type SubsetIntersection<T, U, K> = {
+  [key in keyof T]: key extends keyof U ? T[key] : never;
+} & K;
 
 type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
 
@@ -179,19 +177,27 @@ type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
  * XOR is needed to have a real mutually exclusive union type
  * https://stackoverflow.com/questions/42123407/does-typescript-support-mutually-exclusive-types
  */
-export type XOR<T, U> = T extends object ? U extends object ? (Without<T, U> & U) | (Without<U, T> & T)
-  : U
+export type XOR<T, U> = T extends object
+  ? U extends object
+    ? (Without<T, U> & U) | (Without<U, T> & T)
+    : U
   : T;
 
 /**
  * Is T a Record?
  */
-type IsObject<T extends any> = T extends Array<any> ? False
-  : T extends Date ? False
-  : T extends Uint8Array ? False
-  : T extends BigInt ? False
-  : T extends object ? True
-  : False;
+type IsObject<T extends any> =
+  T extends Array<any>
+    ? False
+    : T extends Date
+      ? False
+      : T extends Uint8Array
+        ? False
+        : T extends BigInt
+          ? False
+          : T extends object
+            ? True
+            : False;
 
 /**
  * If it's T[], return T
@@ -202,9 +208,8 @@ export type UnEnumerate<T extends unknown> = T extends Array<infer U> ? U : T;
  * From ts-toolbelt
  */
 
-type __Either<O extends object, K extends Key> =
-  & Omit<O, K>
-  & {
+type __Either<O extends object, K extends Key> = Omit<O, K> &
+  {
     // Merge all but K
     [P in K]: Prisma__Pick<O, P & keyof O>; // With K possibilities
   }[K];
@@ -213,40 +218,31 @@ type EitherStrict<O extends object, K extends Key> = Strict<__Either<O, K>>;
 
 type EitherLoose<O extends object, K extends Key> = ComputeRaw<__Either<O, K>>;
 
-type _Either<
-  O extends object,
-  K extends Key,
-  strict extends Boolean,
-> = {
+type _Either<O extends object, K extends Key, strict extends Boolean> = {
   1: EitherStrict<O, K>;
   0: EitherLoose<O, K>;
 }[strict];
 
-export type Either<
-  O extends object,
-  K extends Key,
-  strict extends Boolean = 1,
-> = O extends unknown ? _Either<O, K, strict> : never;
+export type Either<O extends object, K extends Key, strict extends Boolean = 1> = O extends unknown
+  ? _Either<O, K, strict>
+  : never;
 
 export type Union = any;
 
-export type PatchUndefined<O extends object, O1 extends object> =
-  & {
-    [K in keyof O]: O[K] extends undefined ? At<O1, K> : O[K];
-  }
-  & {};
+export type PatchUndefined<O extends object, O1 extends object> = {
+  [K in keyof O]: O[K] extends undefined ? At<O1, K> : O[K];
+} & {};
 
 /** Helper Types for "Merge" **/
-export type IntersectOf<U extends Union> = (
-  U extends unknown ? (k: U) => void : never
-) extends (k: infer I) => void ? I
+export type IntersectOf<U extends Union> = (U extends unknown ? (k: U) => void : never) extends (
+  k: infer I,
+) => void
+  ? I
   : never;
 
-export type Overwrite<O extends object, O1 extends object> =
-  & {
-    [K in keyof O]: K extends keyof O1 ? O1[K] : O[K];
-  }
-  & {};
+export type Overwrite<O extends object, O1 extends object> = {
+  [K in keyof O]: K extends keyof O1 ? O1[K] : O[K];
+} & {};
 
 type _Merge<U extends object> = IntersectOf<
   Overwrite<
@@ -265,18 +261,15 @@ export type At<O extends object, K extends Key, strict extends Boolean = 1> = {
   0: AtLoose<O, K>;
 }[strict];
 
-export type ComputeRaw<A extends any> = A extends Function ? A
-  :
-    & {
+export type ComputeRaw<A extends any> = A extends Function
+  ? A
+  : {
       [K in keyof A]: A[K];
-    }
-    & {};
+    } & {};
 
-export type OptionalFlat<O> =
-  & {
-    [K in keyof O]?: O[K];
-  }
-  & {};
+export type OptionalFlat<O> = {
+  [K in keyof O]?: O[K];
+} & {};
 
 type _Record<K extends keyof any, T> = {
   [P in K]: T;
@@ -287,13 +280,16 @@ type NoExpand<T> = T extends unknown ? T : never;
 
 // this type assumes the passed object is entirely optional
 export type AtLeast<O extends object, K extends string> = NoExpand<
-  O extends unknown ?
-      | (K extends keyof O ? { [P in K]: O[P] } & O : O)
-      | { [P in keyof O as P extends K ? P : never]-?: O[P] } & O
+  O extends unknown
+    ?
+        | (K extends keyof O ? { [P in K]: O[P] } & O : O)
+        | ({ [P in keyof O as P extends K ? P : never]-?: O[P] } & O)
     : never
 >;
 
-type _Strict<U, _U = U> = U extends unknown ? U & OptionalFlat<_Record<Exclude<Keys<_U>, keyof U>, never>> : never;
+type _Strict<U, _U = U> = U extends unknown
+  ? U & OptionalFlat<_Record<Exclude<Keys<_U>, keyof U>, never>>
+  : never;
 
 export type Strict<U extends object> = ComputeRaw<_Strict<U>>;
 /** End Helper Types for "Merge" **/
@@ -311,13 +307,13 @@ export type Not<B extends Boolean> = {
   1: 0;
 }[B];
 
-export type Extends<A1 extends any, A2 extends any> = [A1] extends [never] ? 0 // anything `never` is false
-  : A1 extends A2 ? 1
-  : 0;
+export type Extends<A1 extends any, A2 extends any> = [A1] extends [never]
+  ? 0 // anything `never` is false
+  : A1 extends A2
+    ? 1
+    : 0;
 
-export type Has<U extends Union, U1 extends Union> = Not<
-  Extends<Exclude<U1, U>, U1>
->;
+export type Has<U extends Union, U1 extends Union> = Not<Extends<Exclude<U1, U>, U1>>;
 
 export type Or<B1 extends Boolean, B2 extends Boolean> = {
   0: {
@@ -332,29 +328,26 @@ export type Or<B1 extends Boolean, B2 extends Boolean> = {
 
 export type Keys<U extends Union> = U extends unknown ? keyof U : never;
 
-export type GetScalarType<T, O> = O extends object ? {
-    [P in keyof T]: P extends keyof O ? O[P]
-      : never;
-  }
+export type GetScalarType<T, O> = O extends object
+  ? {
+      [P in keyof T]: P extends keyof O ? O[P] : never;
+    }
   : never;
 
-type FieldPaths<
-  T,
-  U = Omit<T, "_avg" | "_sum" | "_count" | "_min" | "_max">,
-> = IsObject<T> extends True ? U : T;
+type FieldPaths<T, U = Omit<T, "_avg" | "_sum" | "_count" | "_min" | "_max">> =
+  IsObject<T> extends True ? U : T;
 
 export type GetHavingFields<T> = {
-  [K in keyof T]: Or<
-    Or<Extends<"OR", K>, Extends<"AND", K>>,
-    Extends<"NOT", K>
-  > extends True
-    // infer is only needed to not hit TS limit
-    // based on the brilliant idea of Pierre-Antoine Mills
-    // https://github.com/microsoft/TypeScript/issues/30188#issuecomment-478938437
-    ? T[K] extends infer TK ? GetHavingFields<UnEnumerate<TK> extends object ? Merge<UnEnumerate<TK>> : never>
-    : never
-    : {} extends FieldPaths<T[K]> ? never
-    : K;
+  [K in keyof T]: Or<Or<Extends<"OR", K>, Extends<"AND", K>>, Extends<"NOT", K>> extends True
+    ? // infer is only needed to not hit TS limit
+      // based on the brilliant idea of Pierre-Antoine Mills
+      // https://github.com/microsoft/TypeScript/issues/30188#issuecomment-478938437
+      T[K] extends infer TK
+      ? GetHavingFields<UnEnumerate<TK> extends object ? Merge<UnEnumerate<TK>> : never>
+      : never
+    : {} extends FieldPaths<T[K]>
+      ? never
+      : K;
 }[keyof T];
 
 /**
@@ -367,7 +360,10 @@ export type MaybeTupleToUnion<T> = T extends any[] ? TupleToUnion<T> : T;
 /**
  * Like `Pick`, but additionally can also accept an array of keys
  */
-export type PickEnumerable<T, K extends Enumerable<keyof T> | keyof T> = Prisma__Pick<T, MaybeTupleToUnion<K>>;
+export type PickEnumerable<T, K extends Enumerable<keyof T> | keyof T> = Prisma__Pick<
+  T,
+  MaybeTupleToUnion<K>
+>;
 
 /**
  * Exclude all keys with underscores
@@ -387,10 +383,10 @@ export const ModelName = {
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
 
-export interface TypeMapCb<GlobalOmitOptions = {}>
-  extends
-    runtime.Types.Utils.Fn<{ extArgs: runtime.Types.Extensions.InternalArgs }, runtime.Types.Utils.Record<string, any>>
-{
+export interface TypeMapCb<GlobalOmitOptions = {}> extends runtime.Types.Utils.Fn<
+  { extArgs: runtime.Types.Extensions.InternalArgs },
+  runtime.Types.Utils.Record<string, any>
+> {
   returns: TypeMap<this["params"]["extArgs"], GlobalOmitOptions>;
 }
 
@@ -698,7 +694,9 @@ export type TypeMap<
         };
         count: {
           args: Prisma.VerificationCountArgs<ExtArgs>;
-          result: runtime.Types.Utils.Optional<Prisma.VerificationCountAggregateOutputType> | number;
+          result:
+            | runtime.Types.Utils.Optional<Prisma.VerificationCountAggregateOutputType>
+            | number;
         };
       };
     };
@@ -731,16 +729,15 @@ export type TypeMap<
  * Enums
  */
 
-export const TransactionIsolationLevel = runtime.makeStrictEnum(
-  {
-    ReadUncommitted: "ReadUncommitted",
-    ReadCommitted: "ReadCommitted",
-    RepeatableRead: "RepeatableRead",
-    Serializable: "Serializable",
-  } as const,
-);
+export const TransactionIsolationLevel = runtime.makeStrictEnum({
+  ReadUncommitted: "ReadUncommitted",
+  ReadCommitted: "ReadCommitted",
+  RepeatableRead: "RepeatableRead",
+  Serializable: "Serializable",
+} as const);
 
-export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel];
+export type TransactionIsolationLevel =
+  (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel];
 
 export const UserScalarFieldEnum = {
   id: "id",
@@ -765,7 +762,8 @@ export const SessionScalarFieldEnum = {
   userId: "userId",
 } as const;
 
-export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum];
+export type SessionScalarFieldEnum =
+  (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum];
 
 export const AccountScalarFieldEnum = {
   id: "id",
@@ -783,7 +781,8 @@ export const AccountScalarFieldEnum = {
   updatedAt: "updatedAt",
 } as const;
 
-export type AccountScalarFieldEnum = (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum];
+export type AccountScalarFieldEnum =
+  (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum];
 
 export const VerificationScalarFieldEnum = {
   id: "id",
@@ -864,99 +863,101 @@ export type BatchPayload = {
   count: number;
 };
 
-export const defineExtension = runtime.Extensions.defineExtension as unknown as runtime.Types.Extensions.ExtendsHook<
+export const defineExtension = runtime.Extensions
+  .defineExtension as unknown as runtime.Types.Extensions.ExtendsHook<
   "define",
   TypeMapCb,
   runtime.Types.Extensions.DefaultArgs
 >;
 export type DefaultPrismaClient = PrismaClient;
 export type ErrorFormat = "pretty" | "colorless" | "minimal";
-export type PrismaClientOptions =
-  & ({
-    /**
-     * Instance of a Driver Adapter, e.g., like one provided by `@prisma/adapter-pg`.
-     */
-    adapter: runtime.SqlDriverAdapterFactory;
-    accelerateUrl?: never;
-  } | {
-    /**
-     * Prisma Accelerate URL allowing the client to connect through Accelerate instead of a direct database.
-     */
-    accelerateUrl: string;
-    adapter?: never;
-  })
-  & {
-    /**
-     * @default "colorless"
-     */
-    errorFormat?: ErrorFormat;
-    /**
-     * @example
-     * ```
-     * // Shorthand for `emit: 'stdout'`
-     * log: ['query', 'info', 'warn', 'error']
-     *
-     * // Emit as events only
-     * log: [
-     *   { emit: 'event', level: 'query' },
-     *   { emit: 'event', level: 'info' },
-     *   { emit: 'event', level: 'warn' }
-     *   { emit: 'event', level: 'error' }
-     * ]
-     *
-     * / Emit as events and log to stdout
-     * og: [
-     *  { emit: 'stdout', level: 'query' },
-     *  { emit: 'stdout', level: 'info' },
-     *  { emit: 'stdout', level: 'warn' }
-     *  { emit: 'stdout', level: 'error' }
-     *
-     * ```
-     * Read more in our [docs](https://pris.ly/d/logging).
-     */
-    log?: (LogLevel | LogDefinition)[];
-    /**
-     * The default values for transactionOptions
-     * maxWait ?= 2000
-     * timeout ?= 5000
-     */
-    transactionOptions?: {
-      maxWait?: number;
-      timeout?: number;
-      isolationLevel?: TransactionIsolationLevel;
-    };
-    /**
-     * Global configuration for omitting model fields by default.
-     *
-     * @example
-     * ```
-     * const prisma = new PrismaClient({
-     *   omit: {
-     *     user: {
-     *       password: true
-     *     }
-     *   }
-     * })
-     * ```
-     */
-    omit?: GlobalOmitConfig;
-    /**
-     * SQL commenter plugins that add metadata to SQL queries as comments.
-     * Comments follow the sqlcommenter format: https://google.github.io/sqlcommenter/
-     *
-     * @example
-     * ```
-     * const prisma = new PrismaClient({
-     *   adapter,
-     *   comments: [
-     *     traceContext(),
-     *     queryInsights(),
-     *   ],
-     * })
-     * ```
-     */
-    comments?: runtime.SqlCommenterPlugin[];
+export type PrismaClientOptions = (
+  | {
+      /**
+       * Instance of a Driver Adapter, e.g., like one provided by `@prisma/adapter-pg`.
+       */
+      adapter: runtime.SqlDriverAdapterFactory;
+      accelerateUrl?: never;
+    }
+  | {
+      /**
+       * Prisma Accelerate URL allowing the client to connect through Accelerate instead of a direct database.
+       */
+      accelerateUrl: string;
+      adapter?: never;
+    }
+) & {
+  /**
+   * @default "colorless"
+   */
+  errorFormat?: ErrorFormat;
+  /**
+   * @example
+   * ```
+   * // Shorthand for `emit: 'stdout'`
+   * log: ['query', 'info', 'warn', 'error']
+   *
+   * // Emit as events only
+   * log: [
+   *   { emit: 'event', level: 'query' },
+   *   { emit: 'event', level: 'info' },
+   *   { emit: 'event', level: 'warn' }
+   *   { emit: 'event', level: 'error' }
+   * ]
+   *
+   * / Emit as events and log to stdout
+   * og: [
+   *  { emit: 'stdout', level: 'query' },
+   *  { emit: 'stdout', level: 'info' },
+   *  { emit: 'stdout', level: 'warn' }
+   *  { emit: 'stdout', level: 'error' }
+   *
+   * ```
+   * Read more in our [docs](https://pris.ly/d/logging).
+   */
+  log?: (LogLevel | LogDefinition)[];
+  /**
+   * The default values for transactionOptions
+   * maxWait ?= 2000
+   * timeout ?= 5000
+   */
+  transactionOptions?: {
+    maxWait?: number;
+    timeout?: number;
+    isolationLevel?: TransactionIsolationLevel;
   };
+  /**
+   * Global configuration for omitting model fields by default.
+   *
+   * @example
+   * ```
+   * const prisma = new PrismaClient({
+   *   omit: {
+   *     user: {
+   *       password: true
+   *     }
+   *   }
+   * })
+   * ```
+   */
+  omit?: GlobalOmitConfig;
+  /**
+   * SQL commenter plugins that add metadata to SQL queries as comments.
+   * Comments follow the sqlcommenter format: https://google.github.io/sqlcommenter/
+   *
+   * @example
+   * ```
+   * const prisma = new PrismaClient({
+   *   adapter,
+   *   comments: [
+   *     traceContext(),
+   *     queryInsights(),
+   *   ],
+   * })
+   * ```
+   */
+  comments?: runtime.SqlCommenterPlugin[];
+};
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit;
   session?: Prisma.SessionOmit;
@@ -973,12 +974,10 @@ export type LogDefinition = {
 
 export type CheckIsLogLevel<T> = T extends LogLevel ? T : never;
 
-export type GetLogType<T> = CheckIsLogLevel<
-  T extends LogDefinition ? T["level"] : T
->;
+export type GetLogType<T> = CheckIsLogLevel<T extends LogDefinition ? T["level"] : T>;
 
-export type GetEvents<T extends any[]> = T extends Array<LogLevel | LogDefinition> ? GetLogType<T[number]>
-  : never;
+export type GetEvents<T extends any[]> =
+  T extends Array<LogLevel | LogDefinition> ? GetLogType<T[number]> : never;
 
 export type QueryEvent = {
   timestamp: Date;

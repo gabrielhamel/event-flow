@@ -14,10 +14,14 @@ export const WhiteboardComponent = ({ children }: { children: ReactNode }) => {
       return undefined;
     }
 
-    const whiteboardHandle = new FabricWhiteboard(canvasRef.current, {
-      height: window.innerHeight,
-      width: window.innerWidth,
-    }, mode);
+    const whiteboardHandle = new FabricWhiteboard(
+      canvasRef.current,
+      {
+        height: window.innerHeight,
+        width: window.innerWidth,
+      },
+      mode,
+    );
     setWhiteboard(whiteboardHandle);
 
     const resizeObserver = () => whiteboardHandle.resize(window.innerWidth, window.innerHeight);

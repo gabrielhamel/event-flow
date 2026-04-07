@@ -4,8 +4,6 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "lint:check": "eslint --max-warnings 0",
-    "lint:fix": "eslint --fix --max-warnings 0",
     "type:check": "tsc --noEmit -p tsconfig.app.json && tsc --noEmit -p tsconfig.node.json",
     "dev": "vp dev",
     "build": "tsc -b && vp build",

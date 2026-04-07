@@ -10,13 +10,11 @@ export class FabricCursor extends CollaborativeEntity<Cursor> {
   private readonly objectAddedUnsubscribe: () => void;
   private readonly zoomUnsubscribe: () => void;
 
-  constructor(
-    props: {
-      canvas: Canvas;
-      svg: Awaited<ReturnType<typeof loadSVGFromURL>>;
-      data: Cursor;
-    },
-  ) {
+  constructor(props: {
+    canvas: Canvas;
+    svg: Awaited<ReturnType<typeof loadSVGFromURL>>;
+    data: Cursor;
+  }) {
     super({
       data: props.data,
       id: generateId("cursor"),

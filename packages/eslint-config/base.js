@@ -57,13 +57,7 @@ export const baseConfig = [
     },
   },
   {
-    files: [
-      "**/__tests__/**",
-      "*.test.ts",
-      "*.test.tsx",
-      "*.spec.ts",
-      "*.spec.tsx",
-    ],
+    files: ["**/__tests__/**", "*.test.ts", "*.test.tsx", "*.spec.ts", "*.spec.tsx"],
     rules: {
       "@typescript-eslint/no-unsafe-assignment": ["off"],
       "@typescript-eslint/no-non-null-assertion": ["off"],

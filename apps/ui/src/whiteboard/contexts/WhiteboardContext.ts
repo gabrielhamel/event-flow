@@ -5,8 +5,6 @@ interface WhiteboardContextData {
   whiteboard: FabricWhiteboard | null;
 }
 
-export const WhiteboardContext = createContext<WhiteboardContextData>(
-  {
-    whiteboard: null,
-  },
-);
+export const WhiteboardContext = createContext<WhiteboardContextData>({
+  whiteboard: null,
+});

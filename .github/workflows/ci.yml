@@ -40,12 +40,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Cache dprint plugins
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/dprint
-          key: dprint-${{ hashFiles('dprint.json') }}
-
       - name: CI
         env:
           TURBO_SCM_BASE: ${{ github.event.before || 'HEAD~1' }}

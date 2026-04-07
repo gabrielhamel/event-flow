@@ -4,7 +4,9 @@ import type { WhiteboardSession } from "@repo/core/whiteboard/collaborative/Whit
 import type { StickyNote } from "@repo/core/whiteboard/objects/StickyNote";
 
 export interface StickyNoteFactory {
-  create: (
-    params: { id: Id; data: StickyNote; session: WhiteboardSession },
-  ) => CollaborativeEntity<StickyNote>;
+  create: (params: {
+    id: Id;
+    data: StickyNote;
+    session: WhiteboardSession;
+  }) => CollaborativeEntity<StickyNote>;
 }

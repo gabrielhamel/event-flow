@@ -12,9 +12,7 @@ export class FabricStickyNoteFactory implements StickyNoteFactory {
     this.canvas = canvas;
   }
 
-  create(
-    { data, id, session }: { id?: Id; data: StickyNote; session: WhiteboardSession },
-  ) {
+  create({ data, id, session }: { id?: Id; data: StickyNote; session: WhiteboardSession }) {
     return new FabricStickyNote({
       canvas: this.canvas,
       data,

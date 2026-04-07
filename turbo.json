@@ -13,56 +13,34 @@
   ],
   "tasks": {
     "//#format:check": {
-      "inputs": [
-        "$TURBO_DEFAULT$",
-        "!**/*.{css,svg,png,jpg,jpeg,gif,ico,woff,woff2,ttf,eot}"
-      ]
+      "inputs": ["$TURBO_DEFAULT$", "!**/*.{css,svg,png,jpg,jpeg,gif,ico,woff,woff2,ttf,eot}"]
     },
     "//#format:fix": {
       "cache": false
     },
     "lint:check": {
-      "dependsOn": [
-        "^lint:check"
-      ]
+      "dependsOn": ["^lint:check"]
     },
     "lint:fix": {
-      "dependsOn": [
-        "^lint:fix"
-      ]
+      "dependsOn": ["^lint:fix"]
     },
     "type:check": {
-      "dependsOn": [
-        "^type:check"
-      ]
+      "dependsOn": ["^type:check"]
     },
     "test": {
-      "dependsOn": [
-        "^test"
-      ]
+      "dependsOn": ["^test"]
     },
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "inputs": [
-        "$TURBO_DEFAULT$"
-      ],
-      "outputs": [
-        "dist/**"
-      ]
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$"],
+      "outputs": ["dist/**"]
     },
     "dev": {
       "cache": false,
       "persistent": true
     },
     "ci": {
-      "dependsOn": [
-        "//#format:check",
-        "type:check",
-        "lint:check",
-        "test"
-      ]
+      "dependsOn": ["//#format:check", "type:check", "lint:check", "test"]
     }
   }
 }
