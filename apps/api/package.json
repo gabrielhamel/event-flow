@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx --env-file-if-exists=.env --tsconfig tsconfig.app.json --watch src/index.ts",
-    "build": "tsup",
+    "build": "vp pack",
     "test": "vp test run",
     "test:watch": "vp test"
   },

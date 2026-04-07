@@ -4,10 +4,12 @@ DDD Collaborative tools
 
 ## Prerequisites
 
-- [Vite+](https://viteplus.dev) (Manage node version, toolchains, dependencies, hooks, etc...)
+- [direnv](https://direnv.net) (the .envrc sets up some useful environment variables)
+- [Vite+](https://viteplus.dev) (Manage node versions, toolchains, dependencies, hooks, etc...)
 
 ## Getting Started
 
 1. Clone the repository
-2. Check everything is ready `vp install`
-3. Start the development environment: `vp run dev`
+2. Activate the direnv environment `direnv allow`
+3. Install dependencies `vp install`
+4. Start the development environment: `vp run -r dev`

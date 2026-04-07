@@ -9,8 +9,7 @@ export default defineConfig({
     target: "es2023",
     tsconfig: "tsconfig.app.json",
     deps: {
-      neverBundle: ["@prisma/adapter-pg", "@prisma/client", /^@prisma\/client\/.*/u],
-      alwaysBundle: [/@repo\/.*/u],
+      alwaysBundle: [/.*/u],
     },
   },
   test: {
