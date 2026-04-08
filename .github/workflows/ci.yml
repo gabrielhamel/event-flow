@@ -137,7 +137,7 @@ jobs:
           PORTAINER_URL: ${{ vars.PORTAINER_URL }}
           PORTAINER_USER: ${{ vars.PORTAINER_USER }}
           PORTAINER_PASSWORD: ${{ secrets.PORTAINER_PASSWORD }}
-          STACK_ID: ${{ vars.PORTAINER_STACK_ID }}
-          ENDPOINT_ID: ${{ vars.PORTAINER_ENDPOINT_ID }}
+          STACK_ID: ${{ vars.STACK_ID }}
+          ENDPOINT_ID: ${{ vars.ENDPOINT_ID }}
           DEPLOYMENT_ENV_CONTENT: ${{ secrets.DEPLOYMENT_ENV_CONTENT }}
         run: vpr --filter @repo/deployment trigger
