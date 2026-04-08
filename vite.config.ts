@@ -5,6 +5,7 @@ export default defineConfig({
     "*": "vp check --fix",
   },
   fmt: {
+    ignorePatterns: ["apps/ui/src/routes.ts"],
     sortImports: {
       newlinesBetween: false,
       groups: [
