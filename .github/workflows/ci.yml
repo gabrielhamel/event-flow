@@ -24,7 +24,7 @@ jobs:
           cache: true
 
       - name: CI
-        run: vp check && vp run -r test
+        run: vp check && vpr -r test
 
   build-ui:
     if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
@@ -127,6 +127,11 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v6
 
+      - uses: voidzero-dev/setup-vp@v1
+        with:
+          node-version-file: ".node-version"
+          cache: true
+
       - name: Trigger deployment
         env:
           PORTAINER_URL: ${{ secrets.PORTAINER_URL }}
@@ -134,33 +139,5 @@ jobs:
           PORTAINER_PASSWORD: ${{ secrets.PORTAINER_PASSWORD }}
           STACK_ID: ${{ secrets.PORTAINER_STACK_ID }}
           ENDPOINT_ID: ${{ secrets.PORTAINER_ENDPOINT_ID }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
-          BETTER_AUTH_URL: ${{ secrets.BETTER_AUTH_URL }}
-          GITHUB_CLIENT_ID: ${{ secrets.SSO_GITHUB_CLIENT_ID }}
-          GITHUB_CLIENT_SECRET: ${{ secrets.SSO_GITHUB_CLIENT_SECRET }}
-        run: |
-          echo "1️⃣ Exchange API key for a JWT"
-
-          JWT=$(curl -s -X POST "$PORTAINER_URL/api/auth" \
-            -H "Content-Type: application/json" \
-            -d "{\"Username\":\"$PORTAINER_USER\",\"Password\":\"$PORTAINER_PASSWORD\"}" \
-            | jq -r '.jwt')
-
-          if [ -z "$JWT" ] || [ "$JWT" = "null" ]; then
-            echo "Failed to get JWT from Portainer"
-            exit 1
-          fi
-
-          echo "✅ JWT obtained successfully"
-
-          echo "2️⃣ Trigger stack update"
-
-          STACK_FILE_CONTENT=$(cat docker-compose.yml)
-
-          curl -s -X PUT \
-            -H "Authorization: Bearer $JWT" \
-            -H "Content-Type: application/json" \
-            "$PORTAINER_URL/api/stacks/$STACK_ID?endpointId=$ENDPOINT_ID" \
-            -d "$(jq -n --arg content "$STACK_FILE_CONTENT" --arg database_url "$DATABASE_URL" --arg better_auth_secret "$BETTER_AUTH_SECRET" --arg better_auth_url "$BETTER_AUTH_URL" --arg github_client_id "$GITHUB_CLIENT_ID" --arg github_client_secret "$GITHUB_CLIENT_SECRET" '{"Env": [{ "name": "DATABASE_URL", "value": $database_url }, { "name": "BETTER_AUTH_SECRET", "value": $better_auth_secret }, { "name": "BETTER_AUTH_URL", "value": $better_auth_url }, { "name": "GITHUB_CLIENT_ID", "value": $github_client_id }, { "name": "GITHUB_CLIENT_SECRET", "value": $github_client_secret }], "Prune": true, "RepullImageAndRedeploy": true, "StackFileContent": $content}')" \
-            | jq
+          DEPLOYMENT_ENV_CONTENT: ${{ secrets.DEPLOYMENT_ENV_CONTENT }}
+        run: vpr --filter @repo/deployment trigger

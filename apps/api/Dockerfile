@@ -9,7 +9,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN vp install --frozen-lockfile --filter @repo/api --filter @repo/core && vp run --filter="@repo/api" build
+RUN vp install --frozen-lockfile --filter @repo/api --filter @repo/core && vpr --filter="@repo/api" build
 
 EXPOSE 8080
 

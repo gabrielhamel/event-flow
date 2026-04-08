@@ -9,7 +9,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN vp install --frozen-lockfile --filter @repo/ui && vp run --filter="@repo/ui" build
+RUN vp install --frozen-lockfile --filter @repo/ui && vpr --filter="@repo/ui" build
 
 FROM nginx:1.29.5-alpine3.23
 
