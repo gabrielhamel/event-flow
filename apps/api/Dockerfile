@@ -16,4 +16,4 @@ EXPOSE 8080
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
   CMD wget --quiet --tries=1 --spider http://localhost:8080/api/healthcheck || exit 1
 
-CMD ["sh", "-c", "cd packages/core && vpx prisma migrate deploy && cd ../../apps/api && node dist/index.mjs"]
+CMD ["sh", "-c", "cd apps/api && node dist/index.mjs"]
