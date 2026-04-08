@@ -11,8 +11,6 @@
   },
   "dependencies": {
     "@hocuspocus/server": "catalog:",
-    "@prisma/adapter-pg": "catalog:",
-    "@prisma/client": "catalog:",
     "@repo/core": "workspace:*",
     "better-auth": "catalog:",
     "cors": "^2.8.6",
