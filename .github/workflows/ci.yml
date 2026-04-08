@@ -11,11 +11,6 @@ jobs:
     name: CI
     timeout-minutes: 15
     runs-on: ubuntu-latest
-    outputs:
-      ui: ${{ steps.affected.outputs.ui }}
-      api: ${{ steps.affected.outputs.api }}
-      docker-compose-changed: ${{ steps.docker-compose.outputs.changed }}
-
     steps:
       - uses: actions/checkout@v6
       - uses: voidzero-dev/setup-vp@v1
