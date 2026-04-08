@@ -10,6 +10,12 @@ export default defineConfig({
     }),
     react(),
   ],
+  fmt: {
+    ignorePatterns: ["./src/routeTree.gen.ts"],
+  },
+  lint: {
+    ignorePatterns: ["./src/routeTree.gen.ts"],
+  },
   test: {
     include: ["./src/**/*.test.{ts,tsx}"],
     passWithNoTests: true,
