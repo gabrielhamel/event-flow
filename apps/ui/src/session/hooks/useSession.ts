@@ -10,13 +10,13 @@ export const useSession = () => {
   const { data: session, isPending } = authClient.useSession();
   const [isSignInLoading, setIsSignInLoading] = useState(false);
 
-  const signIn = () => {
+  const signIn = (provider: "github") => {
     setIsSignInLoading(true);
 
     authClient.signIn
       .social({
         callbackURL: configs.uiBaseUrl,
-        provider: "github",
+        provider,
       })
       .catch((error: unknown) => {
         console.error("Error signing in:", error);
