@@ -13,6 +13,7 @@ import type * as Prisma from "../internal/prismaNamespace.js";
 
 /**
  * Model User
+ *
  */
 export type UserModel = runtime.Types.Result.DefaultSelection<Prisma.$UserPayload>;
 
@@ -119,19 +120,19 @@ export type UserAggregateArgs<
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    *
    * Count returned Users
-   */
+   **/
   _count?: true | UserCountAggregateInputType;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    *
    * Select which fields to find the minimum value
-   */
+   **/
   _min?: UserMinAggregateInputType;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    *
    * Select which fields to find the maximum value
-   */
+   **/
   _max?: UserMaxAggregateInputType;
 };
 
@@ -170,7 +171,7 @@ export type UserGroupByOutputType = {
   _max: UserMaxAggregateOutputType | null;
 };
 
-type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
+export type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<UserGroupByOutputType, T["by"]> & {
       [P in keyof T & keyof UserGroupByOutputType]: P extends "_count"
@@ -859,6 +860,7 @@ export interface UserDelegate<
    *
    * // Only select the `id`
    * const userWithIdOnly = await prisma.user.findMany({ select: { id: true } })
+   *
    */
   findMany<T extends UserFindManyArgs>(
     args?: Prisma.SelectSubset<T, UserFindManyArgs<ExtArgs>>,
@@ -876,6 +878,7 @@ export interface UserDelegate<
    *     // ... data to create a User
    *   }
    * })
+   *
    */
   create<T extends UserCreateArgs>(
     args: Prisma.SelectSubset<T, UserCreateArgs<ExtArgs>>,
@@ -896,6 +899,7 @@ export interface UserDelegate<
    *     // ... provide data here
    *   ]
    * })
+   *
    */
   createMany<T extends UserCreateManyArgs>(
     args?: Prisma.SelectSubset<T, UserCreateManyArgs<ExtArgs>>,
@@ -921,6 +925,7 @@ export interface UserDelegate<
    * })
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
+   *
    */
   createManyAndReturn<T extends UserCreateManyAndReturnArgs>(
     args?: Prisma.SelectSubset<T, UserCreateManyAndReturnArgs<ExtArgs>>,
@@ -943,6 +948,7 @@ export interface UserDelegate<
    *     // ... filter to delete one User
    *   }
    * })
+   *
    */
   delete<T extends UserDeleteArgs>(
     args: Prisma.SelectSubset<T, UserDeleteArgs<ExtArgs>>,
@@ -966,6 +972,7 @@ export interface UserDelegate<
    *     // ... provide data here
    *   }
    * })
+   *
    */
   update<T extends UserUpdateArgs>(
     args: Prisma.SelectSubset<T, UserUpdateArgs<ExtArgs>>,
@@ -986,6 +993,7 @@ export interface UserDelegate<
    *     // ... provide filter here
    *   }
    * })
+   *
    */
   deleteMany<T extends UserDeleteManyArgs>(
     args?: Prisma.SelectSubset<T, UserDeleteManyArgs<ExtArgs>>,
@@ -1006,6 +1014,7 @@ export interface UserDelegate<
    *     // ... provide data here
    *   }
    * })
+   *
    */
   updateMany<T extends UserUpdateManyArgs>(
     args: Prisma.SelectSubset<T, UserUpdateManyArgs<ExtArgs>>,
@@ -1037,6 +1046,7 @@ export interface UserDelegate<
    * })
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
+   *
    */
   updateManyAndReturn<T extends UserUpdateManyAndReturnArgs>(
     args: Prisma.SelectSubset<T, UserUpdateManyAndReturnArgs<ExtArgs>>,
@@ -1087,7 +1097,7 @@ export interface UserDelegate<
    *     // ... the filter for the Users we want to count
    *   }
    * })
-   */
+   **/
   count<T extends UserCountArgs>(
     args?: Prisma.Subset<T, UserCountArgs>,
   ): Prisma.PrismaPromise<
@@ -1121,7 +1131,7 @@ export interface UserDelegate<
    *   },
    *   take: 10,
    * })
-   */
+   **/
   aggregate<T extends UserAggregateArgs>(
     args: Prisma.Subset<T, UserAggregateArgs>,
   ): Prisma.PrismaPromise<GetUserAggregateType<T>>;
@@ -1142,7 +1152,8 @@ export interface UserDelegate<
    *     _all: true
    *   },
    * })
-   */
+   *
+   **/
   groupBy<
     T extends UserGroupByArgs,
     HasSelectOrTake extends Prisma.Or<
@@ -1484,6 +1495,11 @@ export type UserFindManyArgs<
    * Skip the first `n` Users.
    */
   skip?: number;
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   *
+   * Filter by unique combinations of Users.
+   */
   distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[];
 };
 

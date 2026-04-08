@@ -13,6 +13,7 @@ import type * as Prisma from "../internal/prismaNamespace.js";
 
 /**
  * Model Account
+ *
  */
 export type AccountModel = runtime.Types.Result.DefaultSelection<Prisma.$AccountPayload>;
 
@@ -155,19 +156,19 @@ export type AccountAggregateArgs<
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    *
    * Count returned Accounts
-   */
+   **/
   _count?: true | AccountCountAggregateInputType;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    *
    * Select which fields to find the minimum value
-   */
+   **/
   _min?: AccountMinAggregateInputType;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    *
    * Select which fields to find the maximum value
-   */
+   **/
   _max?: AccountMaxAggregateInputType;
 };
 
@@ -212,7 +213,7 @@ export type AccountGroupByOutputType = {
   _max: AccountMaxAggregateOutputType | null;
 };
 
-type GetAccountGroupByPayload<T extends AccountGroupByArgs> = Prisma.PrismaPromise<
+export type GetAccountGroupByPayload<T extends AccountGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<AccountGroupByOutputType, T["by"]> & {
       [P in keyof T & keyof AccountGroupByOutputType]: P extends "_count"
@@ -1021,6 +1022,7 @@ export interface AccountDelegate<
    *
    * // Only select the `id`
    * const accountWithIdOnly = await prisma.account.findMany({ select: { id: true } })
+   *
    */
   findMany<T extends AccountFindManyArgs>(
     args?: Prisma.SelectSubset<T, AccountFindManyArgs<ExtArgs>>,
@@ -1043,6 +1045,7 @@ export interface AccountDelegate<
    *     // ... data to create a Account
    *   }
    * })
+   *
    */
   create<T extends AccountCreateArgs>(
     args: Prisma.SelectSubset<T, AccountCreateArgs<ExtArgs>>,
@@ -1063,6 +1066,7 @@ export interface AccountDelegate<
    *     // ... provide data here
    *   ]
    * })
+   *
    */
   createMany<T extends AccountCreateManyArgs>(
     args?: Prisma.SelectSubset<T, AccountCreateManyArgs<ExtArgs>>,
@@ -1088,6 +1092,7 @@ export interface AccountDelegate<
    * })
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
+   *
    */
   createManyAndReturn<T extends AccountCreateManyAndReturnArgs>(
     args?: Prisma.SelectSubset<T, AccountCreateManyAndReturnArgs<ExtArgs>>,
@@ -1110,6 +1115,7 @@ export interface AccountDelegate<
    *     // ... filter to delete one Account
    *   }
    * })
+   *
    */
   delete<T extends AccountDeleteArgs>(
     args: Prisma.SelectSubset<T, AccountDeleteArgs<ExtArgs>>,
@@ -1133,6 +1139,7 @@ export interface AccountDelegate<
    *     // ... provide data here
    *   }
    * })
+   *
    */
   update<T extends AccountUpdateArgs>(
     args: Prisma.SelectSubset<T, AccountUpdateArgs<ExtArgs>>,
@@ -1153,6 +1160,7 @@ export interface AccountDelegate<
    *     // ... provide filter here
    *   }
    * })
+   *
    */
   deleteMany<T extends AccountDeleteManyArgs>(
     args?: Prisma.SelectSubset<T, AccountDeleteManyArgs<ExtArgs>>,
@@ -1173,6 +1181,7 @@ export interface AccountDelegate<
    *     // ... provide data here
    *   }
    * })
+   *
    */
   updateMany<T extends AccountUpdateManyArgs>(
     args: Prisma.SelectSubset<T, AccountUpdateManyArgs<ExtArgs>>,
@@ -1204,6 +1213,7 @@ export interface AccountDelegate<
    * })
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
+   *
    */
   updateManyAndReturn<T extends AccountUpdateManyAndReturnArgs>(
     args: Prisma.SelectSubset<T, AccountUpdateManyAndReturnArgs<ExtArgs>>,
@@ -1254,7 +1264,7 @@ export interface AccountDelegate<
    *     // ... the filter for the Accounts we want to count
    *   }
    * })
-   */
+   **/
   count<T extends AccountCountArgs>(
     args?: Prisma.Subset<T, AccountCountArgs>,
   ): Prisma.PrismaPromise<
@@ -1288,7 +1298,7 @@ export interface AccountDelegate<
    *   },
    *   take: 10,
    * })
-   */
+   **/
   aggregate<T extends AccountAggregateArgs>(
     args: Prisma.Subset<T, AccountAggregateArgs>,
   ): Prisma.PrismaPromise<GetAccountAggregateType<T>>;
@@ -1309,7 +1319,8 @@ export interface AccountDelegate<
    *     _all: true
    *   },
    * })
-   */
+   *
+   **/
   groupBy<
     T extends AccountGroupByArgs,
     HasSelectOrTake extends Prisma.Or<
@@ -1649,6 +1660,11 @@ export type AccountFindManyArgs<
    * Skip the first `n` Accounts.
    */
   skip?: number;
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   *
+   * Filter by unique combinations of Accounts.
+   */
   distinct?: Prisma.AccountScalarFieldEnum | Prisma.AccountScalarFieldEnum[];
 };
 

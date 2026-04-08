@@ -111,7 +111,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-  trigger-deployment:
+  deploy:
     if: always() && ((github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'))
     name: Trigger deployment
     timeout-minutes: 15
@@ -126,6 +126,11 @@ jobs:
         with:
           node-version-file: ".node-version"
           cache: true
+
+      - name: Run database migrations
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: vpr -r db:migrate
 
       - name: Trigger deployment
         env:

@@ -13,6 +13,7 @@ import type * as Prisma from "../internal/prismaNamespace.js";
 
 /**
  * Model Verification
+ *
  */
 export type VerificationModel = runtime.Types.Result.DefaultSelection<Prisma.$VerificationPayload>;
 
@@ -115,19 +116,19 @@ export type VerificationAggregateArgs<
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    *
    * Count returned Verifications
-   */
+   **/
   _count?: true | VerificationCountAggregateInputType;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    *
    * Select which fields to find the minimum value
-   */
+   **/
   _min?: VerificationMinAggregateInputType;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    *
    * Select which fields to find the maximum value
-   */
+   **/
   _max?: VerificationMaxAggregateInputType;
 };
 
@@ -167,7 +168,7 @@ export type VerificationGroupByOutputType = {
   _max: VerificationMaxAggregateOutputType | null;
 };
 
-type GetVerificationGroupByPayload<T extends VerificationGroupByArgs> = Prisma.PrismaPromise<
+export type GetVerificationGroupByPayload<T extends VerificationGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<VerificationGroupByOutputType, T["by"]> & {
       [P in keyof T & keyof VerificationGroupByOutputType]: P extends "_count"
@@ -547,6 +548,7 @@ export interface VerificationDelegate<
    *
    * // Only select the `id`
    * const verificationWithIdOnly = await prisma.verification.findMany({ select: { id: true } })
+   *
    */
   findMany<T extends VerificationFindManyArgs>(
     args?: Prisma.SelectSubset<T, VerificationFindManyArgs<ExtArgs>>,
@@ -569,6 +571,7 @@ export interface VerificationDelegate<
    *     // ... data to create a Verification
    *   }
    * })
+   *
    */
   create<T extends VerificationCreateArgs>(
     args: Prisma.SelectSubset<T, VerificationCreateArgs<ExtArgs>>,
@@ -594,6 +597,7 @@ export interface VerificationDelegate<
    *     // ... provide data here
    *   ]
    * })
+   *
    */
   createMany<T extends VerificationCreateManyArgs>(
     args?: Prisma.SelectSubset<T, VerificationCreateManyArgs<ExtArgs>>,
@@ -619,6 +623,7 @@ export interface VerificationDelegate<
    * })
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
+   *
    */
   createManyAndReturn<T extends VerificationCreateManyAndReturnArgs>(
     args?: Prisma.SelectSubset<T, VerificationCreateManyAndReturnArgs<ExtArgs>>,
@@ -641,6 +646,7 @@ export interface VerificationDelegate<
    *     // ... filter to delete one Verification
    *   }
    * })
+   *
    */
   delete<T extends VerificationDeleteArgs>(
     args: Prisma.SelectSubset<T, VerificationDeleteArgs<ExtArgs>>,
@@ -669,6 +675,7 @@ export interface VerificationDelegate<
    *     // ... provide data here
    *   }
    * })
+   *
    */
   update<T extends VerificationUpdateArgs>(
     args: Prisma.SelectSubset<T, VerificationUpdateArgs<ExtArgs>>,
@@ -694,6 +701,7 @@ export interface VerificationDelegate<
    *     // ... provide filter here
    *   }
    * })
+   *
    */
   deleteMany<T extends VerificationDeleteManyArgs>(
     args?: Prisma.SelectSubset<T, VerificationDeleteManyArgs<ExtArgs>>,
@@ -714,6 +722,7 @@ export interface VerificationDelegate<
    *     // ... provide data here
    *   }
    * })
+   *
    */
   updateMany<T extends VerificationUpdateManyArgs>(
     args: Prisma.SelectSubset<T, VerificationUpdateManyArgs<ExtArgs>>,
@@ -745,6 +754,7 @@ export interface VerificationDelegate<
    * })
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
+   *
    */
   updateManyAndReturn<T extends VerificationUpdateManyAndReturnArgs>(
     args: Prisma.SelectSubset<T, VerificationUpdateManyAndReturnArgs<ExtArgs>>,
@@ -800,7 +810,7 @@ export interface VerificationDelegate<
    *     // ... the filter for the Verifications we want to count
    *   }
    * })
-   */
+   **/
   count<T extends VerificationCountArgs>(
     args?: Prisma.Subset<T, VerificationCountArgs>,
   ): Prisma.PrismaPromise<
@@ -834,7 +844,7 @@ export interface VerificationDelegate<
    *   },
    *   take: 10,
    * })
-   */
+   **/
   aggregate<T extends VerificationAggregateArgs>(
     args: Prisma.Subset<T, VerificationAggregateArgs>,
   ): Prisma.PrismaPromise<GetVerificationAggregateType<T>>;
@@ -855,7 +865,8 @@ export interface VerificationDelegate<
    *     _all: true
    *   },
    * })
-   */
+   *
+   **/
   groupBy<
     T extends VerificationGroupByArgs,
     HasSelectOrTake extends Prisma.Or<
@@ -1160,6 +1171,11 @@ export type VerificationFindManyArgs<
    * Skip the first `n` Verifications.
    */
   skip?: number;
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   *
+   * Filter by unique combinations of Verifications.
+   */
   distinct?: Prisma.VerificationScalarFieldEnum | Prisma.VerificationScalarFieldEnum[];
 };
 

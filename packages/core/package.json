@@ -12,6 +12,8 @@
     }
   },
   "scripts": {
+    "db:generate": "vp exec prisma generate",
+    "db:migrate": "vp exec prisma migrate deploy",
     "test": "vp test run",
     "test:watch": "vp test"
   },

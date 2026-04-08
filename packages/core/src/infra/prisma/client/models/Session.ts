@@ -13,6 +13,7 @@ import type * as Prisma from "../internal/prismaNamespace.js";
 
 /**
  * Model Session
+ *
  */
 export type SessionModel = runtime.Types.Result.DefaultSelection<Prisma.$SessionPayload>;
 
@@ -125,19 +126,19 @@ export type SessionAggregateArgs<
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    *
    * Count returned Sessions
-   */
+   **/
   _count?: true | SessionCountAggregateInputType;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    *
    * Select which fields to find the minimum value
-   */
+   **/
   _min?: SessionMinAggregateInputType;
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    *
    * Select which fields to find the maximum value
-   */
+   **/
   _max?: SessionMaxAggregateInputType;
 };
 
@@ -177,7 +178,7 @@ export type SessionGroupByOutputType = {
   _max: SessionMaxAggregateOutputType | null;
 };
 
-type GetSessionGroupByPayload<T extends SessionGroupByArgs> = Prisma.PrismaPromise<
+export type GetSessionGroupByPayload<T extends SessionGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<SessionGroupByOutputType, T["by"]> & {
       [P in keyof T & keyof SessionGroupByOutputType]: P extends "_count"
@@ -827,6 +828,7 @@ export interface SessionDelegate<
    *
    * // Only select the `id`
    * const sessionWithIdOnly = await prisma.session.findMany({ select: { id: true } })
+   *
    */
   findMany<T extends SessionFindManyArgs>(
     args?: Prisma.SelectSubset<T, SessionFindManyArgs<ExtArgs>>,
@@ -849,6 +851,7 @@ export interface SessionDelegate<
    *     // ... data to create a Session
    *   }
    * })
+   *
    */
   create<T extends SessionCreateArgs>(
     args: Prisma.SelectSubset<T, SessionCreateArgs<ExtArgs>>,
@@ -869,6 +872,7 @@ export interface SessionDelegate<
    *     // ... provide data here
    *   ]
    * })
+   *
    */
   createMany<T extends SessionCreateManyArgs>(
     args?: Prisma.SelectSubset<T, SessionCreateManyArgs<ExtArgs>>,
@@ -894,6 +898,7 @@ export interface SessionDelegate<
    * })
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
+   *
    */
   createManyAndReturn<T extends SessionCreateManyAndReturnArgs>(
     args?: Prisma.SelectSubset<T, SessionCreateManyAndReturnArgs<ExtArgs>>,
@@ -916,6 +921,7 @@ export interface SessionDelegate<
    *     // ... filter to delete one Session
    *   }
    * })
+   *
    */
   delete<T extends SessionDeleteArgs>(
     args: Prisma.SelectSubset<T, SessionDeleteArgs<ExtArgs>>,
@@ -939,6 +945,7 @@ export interface SessionDelegate<
    *     // ... provide data here
    *   }
    * })
+   *
    */
   update<T extends SessionUpdateArgs>(
     args: Prisma.SelectSubset<T, SessionUpdateArgs<ExtArgs>>,
@@ -959,6 +966,7 @@ export interface SessionDelegate<
    *     // ... provide filter here
    *   }
    * })
+   *
    */
   deleteMany<T extends SessionDeleteManyArgs>(
     args?: Prisma.SelectSubset<T, SessionDeleteManyArgs<ExtArgs>>,
@@ -979,6 +987,7 @@ export interface SessionDelegate<
    *     // ... provide data here
    *   }
    * })
+   *
    */
   updateMany<T extends SessionUpdateManyArgs>(
     args: Prisma.SelectSubset<T, SessionUpdateManyArgs<ExtArgs>>,
@@ -1010,6 +1019,7 @@ export interface SessionDelegate<
    * })
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
+   *
    */
   updateManyAndReturn<T extends SessionUpdateManyAndReturnArgs>(
     args: Prisma.SelectSubset<T, SessionUpdateManyAndReturnArgs<ExtArgs>>,
@@ -1060,7 +1070,7 @@ export interface SessionDelegate<
    *     // ... the filter for the Sessions we want to count
    *   }
    * })
-   */
+   **/
   count<T extends SessionCountArgs>(
     args?: Prisma.Subset<T, SessionCountArgs>,
   ): Prisma.PrismaPromise<
@@ -1094,7 +1104,7 @@ export interface SessionDelegate<
    *   },
    *   take: 10,
    * })
-   */
+   **/
   aggregate<T extends SessionAggregateArgs>(
     args: Prisma.Subset<T, SessionAggregateArgs>,
   ): Prisma.PrismaPromise<GetSessionAggregateType<T>>;
@@ -1115,7 +1125,8 @@ export interface SessionDelegate<
    *     _all: true
    *   },
    * })
-   */
+   *
+   **/
   groupBy<
     T extends SessionGroupByArgs,
     HasSelectOrTake extends Prisma.Or<
@@ -1450,6 +1461,11 @@ export type SessionFindManyArgs<
    * Skip the first `n` Sessions.
    */
   skip?: number;
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   *
+   * Filter by unique combinations of Sessions.
+   */
   distinct?: Prisma.SessionScalarFieldEnum | Prisma.SessionScalarFieldEnum[];
 };
 
