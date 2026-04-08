@@ -134,10 +134,10 @@ jobs:
 
       - name: Trigger deployment
         env:
-          PORTAINER_URL: ${{ secrets.PORTAINER_URL }}
-          PORTAINER_USER: ${{ secrets.PORTAINER_USER }}
+          PORTAINER_URL: ${{ env.PORTAINER_URL }}
+          PORTAINER_USER: ${{ env.PORTAINER_USER }}
           PORTAINER_PASSWORD: ${{ secrets.PORTAINER_PASSWORD }}
-          STACK_ID: ${{ secrets.PORTAINER_STACK_ID }}
-          ENDPOINT_ID: ${{ secrets.PORTAINER_ENDPOINT_ID }}
+          STACK_ID: ${{ env.PORTAINER_STACK_ID }}
+          ENDPOINT_ID: ${{ env.PORTAINER_ENDPOINT_ID }}
           DEPLOYMENT_ENV_CONTENT: ${{ secrets.DEPLOYMENT_ENV_CONTENT }}
         run: vpr --filter @repo/deployment trigger
