@@ -5,9 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vp dev",
-    "build": "tsc -b && vp build",
-    "test": "vp test run",
-    "test:watch": "vp test"
+    "build": "tsc -b && vp build"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

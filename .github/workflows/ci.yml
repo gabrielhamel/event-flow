@@ -19,7 +19,7 @@ jobs:
           cache: true
 
       - name: CI
-        run: vp check && vpr -r test
+        run: vp check
 
   build-ui:
     if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'

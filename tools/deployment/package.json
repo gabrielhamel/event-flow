@@ -4,9 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "trigger": "vp exec tsx src/index.ts",
-    "test": "vp test run",
-    "test:watch": "vp test"
+    "trigger": "vp exec tsx src/index.ts"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",

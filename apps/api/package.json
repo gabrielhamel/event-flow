@@ -4,10 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vp exec tsx --env-file=.env.dev --env-file-if-exists=.env --tsconfig tsconfig.app.json --watch src/index.ts",
-    "build": "vp pack",
-    "test": "vp test run",
-    "test:watch": "vp test"
+    "dev": "vp exec tsx --env-file=.env.dev --env-file-if-exists=.env --watch src/index.ts",
+    "build": "vp pack"
   },
   "dependencies": {
     "@hocuspocus/server": "catalog:",

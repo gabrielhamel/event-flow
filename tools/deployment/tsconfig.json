@@ -1,11 +1,4 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.tool.json"
-    },
-    {
-      "path": "./tsconfig.node.json"
-    }
-  ]
+  "extends": "@repo/typescript-config/base.json",
+  "include": ["src"]
 }

@@ -11,8 +11,4 @@ export default defineConfig({
     }),
     react(),
   ],
-  test: {
-    include: ["./src/**/*.test.{ts,tsx}"],
-    passWithNoTests: true,
-  },
 });
