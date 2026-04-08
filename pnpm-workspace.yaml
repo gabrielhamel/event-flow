@@ -3,25 +3,25 @@ packages:
   - "packages/*"
   - "tools/*"
 
-injectWorkspacePackages: true
-syncInjectedDepsAfterScripts:
-  - build
+catalog:
+  "@hocuspocus/provider": ^3.4.4
+  "@hocuspocus/server": ^3.4.4
+  "@prisma/adapter-pg": ^7.7.0
+  "@prisma/client": ^7.7.0
+  "@tanstack/react-router": ^1.168.10
+  "@tanstack/router-plugin": ^1.167.12
+  "@types/node": ^25.5.2
+  better-auth: ^1.5.6
+  "prisma": ^7.7.0
+  tsx: ^4.21.0
+  typescript: ^6.0.2
+  vite: npm:@voidzero-dev/vite-plus-core@latest
+  vite-plus: latest
+  vitest: npm:@voidzero-dev/vite-plus-test@latest
 
 catalogMode: prefer
 
-catalog:
-  "@types/node": ^25.5.2
-  better-auth: ^1.5.6
-  tsx: ^4.21.0
-  typescript: ^6.0.2
-  "@prisma/client": ^7.7.0
-  "@prisma/adapter-pg": ^7.7.0
-  "prisma": ^7.7.0
-  "@hocuspocus/provider": ^3.4.4
-  "@hocuspocus/server": ^3.4.4
-  vite: npm:@voidzero-dev/vite-plus-core@latest
-  vitest: npm:@voidzero-dev/vite-plus-test@latest
-  vite-plus: latest
+injectWorkspacePackages: true
 
 overrides:
   vite: "catalog:"
@@ -34,3 +34,5 @@ peerDependencyRules:
   allowedVersions:
     vite: "*"
     vitest: "*"
+syncInjectedDepsAfterScripts:
+  - build

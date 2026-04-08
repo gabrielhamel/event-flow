@@ -1,5 +1,5 @@
 import { Logout } from "@mui/icons-material";
-import { Avatar, ListItemIcon, Menu, MenuItem } from "@mui/material";
+import { Avatar, ListItemIcon, Menu, MenuItem, Typography } from "@mui/material";
 import { type MouseEvent, useState } from "react";
 
 export const CurrentUserAvatar = ({
@@ -51,9 +51,9 @@ export const CurrentUserAvatar = ({
       >
         <MenuItem onClick={handleSignOut}>
           <ListItemIcon>
-            <Logout fontSize="small" />
+            <Logout fontSize="small" color="error" />
           </ListItemIcon>
-          Sign out
+          <Typography color="error">Sign out</Typography>
         </MenuItem>
       </Menu>
     </>
