@@ -15,7 +15,7 @@ import type * as Prisma from "./prismaNamespace.js";
 
 const config: runtime.GetPrismaClientConfig = {
   previewFeatures: [],
-  clientVersion: "7.6.0",
+  clientVersion: "7.7.0",
   engineVersion: "75cbdc1eb7150937890ad5465d861175c6624711",
   activeProvider: "postgresql",
   inlineSchema:
