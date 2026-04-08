@@ -76,7 +76,7 @@ importers:
     devDependencies:
       '@repo/typescript-config':
         specifier: workspace:*
-        version: link:../../packages/typescript-config
+        version: link:../../tools/typescript-config
       '@types/cors':
         specifier: ^2.8.19
         version: 2.8.19
@@ -125,7 +125,7 @@ importers:
     devDependencies:
       '@repo/typescript-config':
         specifier: workspace:*
-        version: link:../../packages/typescript-config
+        version: link:../../tools/typescript-config
       '@types/node':
         specifier: 'catalog:'
         version: 25.5.2
@@ -174,7 +174,7 @@ importers:
     devDependencies:
       '@repo/typescript-config':
         specifier: workspace:*
-        version: link:../typescript-config
+        version: link:../../tools/typescript-config
       '@types/pg':
         specifier: ^8.20.0
         version: 8.20.0
@@ -182,20 +182,11 @@ importers:
         specifier: ^7.6.0
         version: 7.6.0(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@6.0.2)
 
-  packages/typescript-config:
-    devDependencies:
-      vite:
-        specifier: npm:@voidzero-dev/vite-plus-core@latest
-        version: '@voidzero-dev/vite-plus-core@0.1.16(@types/node@25.5.2)(jiti@2.6.1)(tsx@4.21.0)(typescript@6.0.2)(yaml@2.8.2)'
-      vite-plus:
-        specifier: 'catalog:'
-        version: 0.1.16(@opentelemetry/api@1.9.0)(@types/node@25.5.2)(@voidzero-dev/vite-plus-core@0.1.16(@types/node@25.5.2)(jiti@2.6.1)(tsx@4.21.0)(typescript@6.0.2)(yaml@2.8.2))(jiti@2.6.1)(jsdom@26.1.0(canvas@3.2.1))(tsx@4.21.0)(typescript@6.0.2)(yaml@2.8.2)
-
   tools/deployment:
     devDependencies:
       '@repo/typescript-config':
         specifier: workspace:*
-        version: link:../../packages/typescript-config
+        version: link:../typescript-config
       '@types/node':
         specifier: 'catalog:'
         version: 25.5.2
@@ -205,6 +196,15 @@ importers:
       vite-plus:
         specifier: 'catalog:'
         version: 0.1.16(@opentelemetry/api@1.9.0)(@types/node@25.5.2)(jiti@2.6.1)(jsdom@26.1.0(canvas@3.2.1))(tsx@4.21.0)(typescript@6.0.2)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.5.2)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
+
+  tools/typescript-config:
+    devDependencies:
+      vite:
+        specifier: npm:@voidzero-dev/vite-plus-core@latest
+        version: '@voidzero-dev/vite-plus-core@0.1.16(@types/node@25.5.2)(jiti@2.6.1)(tsx@4.21.0)(typescript@6.0.2)(yaml@2.8.2)'
+      vite-plus:
+        specifier: 'catalog:'
+        version: 0.1.16(@opentelemetry/api@1.9.0)(@types/node@25.5.2)(@voidzero-dev/vite-plus-core@0.1.16(@types/node@25.5.2)(jiti@2.6.1)(tsx@4.21.0)(typescript@6.0.2)(yaml@2.8.2))(jiti@2.6.1)(jsdom@26.1.0(canvas@3.2.1))(tsx@4.21.0)(typescript@6.0.2)(yaml@2.8.2)
 
 packages:
 
