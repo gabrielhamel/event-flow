@@ -1,6 +1,8 @@
 import { v7 as uuid } from "uuid";
+import z from "zod";
 
-export type Id = string & { _brand: "Id" };
+export const IdSchema = z.string().brand("Id");
+export type Id = z.infer<typeof IdSchema>;
 
 export const generateId = (entityName?: string) => {
   const id = uuid();

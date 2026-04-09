@@ -6,3 +6,5 @@ export const makePrismaClient = () => {
 
   return new PrismaClient({ adapter });
 };
+
+export type PrismaClientInstance = ReturnType<typeof makePrismaClient>;
