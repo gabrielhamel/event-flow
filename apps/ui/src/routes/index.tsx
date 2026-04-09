@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import { createFileRoute, useRouter } from "@tanstack/react-router";
+import { apiClient } from "../apiClient";
 import { EventStormingControlBar } from "../event-storming/components/EventStormingControlBar";
 import { AvatarSkeleton } from "../session/components/AvatarSkeleton";
 import { CurrentUserAvatar } from "../session/components/CurrentUserAvatar";
@@ -16,6 +17,15 @@ function IndexPage() {
   const router = useRouter();
 
   const handleSignIn = () => router.navigate({ to: "/auth" });
+
+  apiClient.user
+    .current()
+    .then((user) => {
+      console.log("Current user:", user);
+    })
+    .catch((error) => {
+      console.error("Error fetching current user:", error);
+    });
 
   return (
     <WhiteboardComponent>

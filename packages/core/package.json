@@ -18,12 +18,14 @@
   },
   "dependencies": {
     "@hocuspocus/provider": "catalog:",
+    "@orpc/contract": "catalog:",
     "@prisma/adapter-pg": "catalog:",
     "@prisma/client": "catalog:",
     "better-auth": "catalog:",
     "pg": "^8.20.0",
     "uuid": "^13.0.0",
-    "yjs": "^13.6.30"
+    "yjs": "^13.6.30",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",

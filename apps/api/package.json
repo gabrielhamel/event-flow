@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@hocuspocus/server": "catalog:",
+    "@orpc/server": "catalog:",
     "@repo/core": "workspace:*",
     "better-auth": "catalog:",
     "cors": "^2.8.6",
