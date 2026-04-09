@@ -1,4 +1,6 @@
 import { oc } from "@orpc/contract";
 import { z } from "zod";
 
-export const getCurrentUserContract = oc.output(z.object({ email: z.email() }));
+export const getCurrentUserContract = oc.output(
+  z.object({ email: z.email(), id: z.string(), avatarUrl: z.string().nullable() }),
+);

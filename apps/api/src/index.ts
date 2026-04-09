@@ -1,6 +1,7 @@
 import { Hocuspocus } from "@hocuspocus/server";
 import { implement } from "@orpc/server";
 import { RPCHandler } from "@orpc/server/node";
+import { type RequestHeadersPluginContext, RequestHeadersPlugin } from "@orpc/server/plugins";
 import { routerContract } from "@repo/core/infra/api/router";
 import { auth } from "@repo/core/infra/auth";
 import { toNodeHandler } from "better-auth/node";
@@ -32,17 +33,35 @@ app.ws("/api/collaboration", (websocket, request) => {
   collaborationServer.handleConnection(websocket, request, context);
 });
 
-const orpcServer = implement(routerContract);
+interface ORPCContext extends RequestHeadersPluginContext {}
+
+const orpcServer = implement(routerContract).$context<ORPCContext>();
 const orpcRouter = orpcServer.router({
   user: {
-    current: orpcServer.user.current.handler(() => {
+    current: orpcServer.user.current.handler(async ({ context }) => {
+      if (!context.reqHeaders) {
+        throw new Error("no headers");
+      }
+
+      const session = await auth.api.getSession({
+        headers: context.reqHeaders,
+      });
+
+      if (!session) {
+        throw new Error("no session");
+      }
+
       return {
-        email: "gabriel@example.com",
+        id: session.user.id,
+        email: session.user.email,
+        avatarUrl: session.user.image ?? null,
       };
     }),
   },
 });
-const orpcHandler = new RPCHandler(orpcRouter);
+const orpcHandler = new RPCHandler(orpcRouter, {
+  plugins: [new RequestHeadersPlugin()],
+});
 
 app.use("/api{/*path}", async (req, res, next) => {
   const { matched } = await orpcHandler.handle(req, res, {

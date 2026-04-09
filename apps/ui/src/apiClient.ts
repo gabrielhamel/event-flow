@@ -6,6 +6,11 @@ import { configs } from "./configs";
 
 const link = new RPCLink({
   url: configs.apiBaseUrl,
+  fetch: (input, init) =>
+    fetch(input, {
+      ...init,
+      credentials: "include",
+    }),
 });
 
 export const apiClient: ContractRouterClient<typeof routerContract> = createORPCClient(link);
