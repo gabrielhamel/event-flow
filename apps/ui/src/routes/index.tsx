@@ -15,9 +15,7 @@ function IndexPage() {
   const { isSessionLoading, isSignInLoading, session, signOut } = useSession();
   const router = useRouter();
 
-  const handleSignIn = () => {
-    router.navigate({ to: "/auth" });
-  };
+  const handleSignIn = () => router.navigate({ to: "/auth" });
 
   return (
     <WhiteboardComponent>
