@@ -13,7 +13,8 @@
   },
   "scripts": {
     "db:generate": "vp exec prisma generate",
-    "db:migrate": "vp exec prisma migrate deploy"
+    "db:migrate": "vp exec prisma migrate deploy",
+    "db:auth:generate": "vp exec auth generate --adapter prisma --dialect postgresql --config src/infra/auth.ts --output src/infra/prisma/schema.prisma"
   },
   "dependencies": {
     "@hocuspocus/provider": "catalog:",
@@ -27,6 +28,7 @@
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
     "@types/pg": "^8.20.0",
+    "auth": "catalog:",
     "prisma": "catalog:"
   }
 }
