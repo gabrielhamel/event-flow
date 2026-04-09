@@ -1,4 +1,4 @@
-import { GitHub } from "@mui/icons-material";
+import { GitHub, Google } from "@mui/icons-material";
 import { Button, Stack } from "@mui/material";
 import { createFileRoute } from "@tanstack/react-router";
 import { CenteredLayout } from "../components/CenteredLayout";
@@ -16,6 +16,9 @@ function AuthPage() {
       <Stack borderRadius={2} p={2} spacing={2}>
         <Button variant="contained" startIcon={<GitHub />} onClick={() => signIn("github")}>
           Github
+        </Button>
+        <Button variant="contained" startIcon={<Google />} onClick={() => signIn("google")}>
+          Google
         </Button>
       </Stack>
     </CenteredLayout>

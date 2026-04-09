@@ -10,7 +10,7 @@ export const useSession = () => {
   const { data: session, isPending } = authClient.useSession();
   const [isSignInLoading, setIsSignInLoading] = useState(false);
 
-  const signIn = (provider: "github") => {
+  const signIn = (provider: "github" | "google") => {
     setIsSignInLoading(true);
 
     authClient.signIn
