@@ -1,21 +1,17 @@
-import { Hocuspocus } from "@hocuspocus/server";
-import { implement } from "@orpc/server";
-import { RPCHandler } from "@orpc/server/node";
-import { type RequestHeadersPluginContext, RequestHeadersPlugin } from "@orpc/server/plugins";
-import { routerContract } from "@repo/core/infra/api/router";
 import { auth } from "@repo/core/infra/auth";
 import { toNodeHandler } from "better-auth/node";
 import cors from "cors";
-import express from "express";
+import express, { type Express } from "express";
 import expressWebsockets from "express-ws";
+import { routerHandler } from "./router";
+import { websocketHandler } from "./websocket";
 
-const collaborationServer = new Hocuspocus({
-  onAwarenessUpdate() {
-    return Promise.resolve();
-  },
-});
+const addWebsocketModule = (app: Express) => {
+  return expressWebsockets(app).app;
+};
 
-const { app } = expressWebsockets(express());
+const rawApp = express();
+const app = addWebsocketModule(rawApp);
 
 app.use(cors({ credentials: true, origin: true }));
 
@@ -26,45 +22,11 @@ app.get("/api/healthcheck", (_, response) => {
 });
 
 app.ws("/api/collaboration", (websocket, request) => {
-  const context = {
-    randomKey: "randomValue2",
-  };
-
-  collaborationServer.handleConnection(websocket, request, context);
-});
-
-interface ORPCContext extends RequestHeadersPluginContext {}
-
-const orpcServer = implement(routerContract).$context<ORPCContext>();
-const orpcRouter = orpcServer.router({
-  user: {
-    current: orpcServer.user.current.handler(async ({ context }) => {
-      if (!context.reqHeaders) {
-        throw new Error("no headers");
-      }
-
-      const session = await auth.api.getSession({
-        headers: context.reqHeaders,
-      });
-
-      if (!session) {
-        throw new Error("no session");
-      }
-
-      return {
-        id: session.user.id,
-        email: session.user.email,
-        avatarUrl: session.user.image ?? null,
-      };
-    }),
-  },
-});
-const orpcHandler = new RPCHandler(orpcRouter, {
-  plugins: [new RequestHeadersPlugin()],
+  websocketHandler.handleConnection(websocket, request);
 });
 
 app.use("/api{/*path}", async (req, res, next) => {
-  const { matched } = await orpcHandler.handle(req, res, {
+  const { matched } = await routerHandler.handle(req, res, {
     prefix: "/api",
   });
 
@@ -75,4 +37,4 @@ app.use("/api{/*path}", async (req, res, next) => {
   next();
 });
 
-app.listen(8080, () => console.log("Listening on 8080"));
+app.listen(8080, () => console.log("API listening on 8080"));
