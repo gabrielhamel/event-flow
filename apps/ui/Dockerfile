@@ -17,3 +17,4 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:80/ || exit 1
 
 COPY --from=build /app/apps/ui/dist /usr/share/nginx/html
+COPY --from=build /app/tools/deployment/nginx/nginx.conf /etc/nginx/conf.d/default.conf
