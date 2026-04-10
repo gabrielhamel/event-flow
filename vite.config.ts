@@ -19,7 +19,11 @@ export default defineConfig({
       ],
     },
   },
-  lint: { options: { typeAware: true, typeCheck: true } },
+  lint: {
+    options: { typeAware: true, typeCheck: true },
+    plugins: ["import"],
+    rules: { "import/no-cycle": "error" },
+  },
   run: {
     cache: true,
   },
