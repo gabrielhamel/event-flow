@@ -22,6 +22,7 @@ export class PrismaUserRepository implements UserRepository {
         id: userRow.id as Id,
         email: userRow.email,
         avatarUrl: userRow.image,
+        name: userRow.name,
       }),
     );
   }

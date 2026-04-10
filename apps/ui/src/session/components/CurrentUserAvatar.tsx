@@ -8,7 +8,7 @@ export const CurrentUserAvatar = ({
   username,
 }: {
   username: string;
-  avatarUrl?: string;
+  avatarUrl: string | null;
   onSignOut: () => void;
 }) => {
   const [anchorAvatarMenu, setAnchorAvatarMenu] = useState<null | HTMLElement>(null);
@@ -39,7 +39,7 @@ export const CurrentUserAvatar = ({
         sx={{
           boxShadow: 1,
         }}
-        src={avatarUrl}
+        src={avatarUrl ?? undefined}
         onClick={handleAvatarClick}
       >
         {avatarData}
@@ -49,6 +49,9 @@ export const CurrentUserAvatar = ({
         onClose={handleAvatarMenuClose}
         anchorEl={anchorAvatarMenu}
       >
+        <MenuItem>
+          <Typography>{username}</Typography>
+        </MenuItem>
         <MenuItem onClick={handleSignOut}>
           <ListItemIcon>
             <Logout fontSize="small" color="error" />

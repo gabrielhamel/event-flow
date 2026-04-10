@@ -26,7 +26,7 @@
     "pg": "^8.20.0",
     "uuid": "^13.0.0",
     "yjs": "^13.6.30",
-    "zod": "^4.3.6"
+    "zod": "catalog:"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",

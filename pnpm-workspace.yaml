@@ -16,12 +16,14 @@ catalog:
   "@orpc/contract": ^1.13.14
   "@orpc/server": ^1.13.14
   "@orpc/client": ^1.13.14
+  "@orpc/tanstack-query": ^1.13.14
   "prisma": ^7.7.0
   tsx: ^4.21.0
   typescript: ^6.0.2
   vite: npm:@voidzero-dev/vite-plus-core@latest
   vite-plus: latest
   vitest: npm:@voidzero-dev/vite-plus-test@latest
+  zod: ^4.3.6
 
 injectWorkspacePackages: true
 
