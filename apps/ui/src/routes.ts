@@ -9,15 +9,11 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as WhiteboardRouteImport } from './routes/whiteboard'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EventStormingIndexRouteImport } from './routes/event-storming/index'
+import { Route as EventStormingEventStormingIdRouteImport } from './routes/event-storming/$eventStormingId'
 
-const WhiteboardRoute = WhiteboardRouteImport.update({
-  id: '/whiteboard',
-  path: '/whiteboard',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
@@ -28,46 +24,63 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EventStormingIndexRoute = EventStormingIndexRouteImport.update({
+  id: '/event-storming/',
+  path: '/event-storming/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventStormingEventStormingIdRoute =
+  EventStormingEventStormingIdRouteImport.update({
+    id: '/event-storming/$eventStormingId',
+    path: '/event-storming/$eventStormingId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
-  '/whiteboard': typeof WhiteboardRoute
+  '/event-storming/$eventStormingId': typeof EventStormingEventStormingIdRoute
+  '/event-storming/': typeof EventStormingIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
-  '/whiteboard': typeof WhiteboardRoute
+  '/event-storming/$eventStormingId': typeof EventStormingEventStormingIdRoute
+  '/event-storming': typeof EventStormingIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
-  '/whiteboard': typeof WhiteboardRoute
+  '/event-storming/$eventStormingId': typeof EventStormingEventStormingIdRoute
+  '/event-storming/': typeof EventStormingIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/whiteboard'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/event-storming/$eventStormingId'
+    | '/event-storming/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/whiteboard'
-  id: '__root__' | '/' | '/auth' | '/whiteboard'
+  to: '/' | '/auth' | '/event-storming/$eventStormingId' | '/event-storming'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth'
+    | '/event-storming/$eventStormingId'
+    | '/event-storming/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
-  WhiteboardRoute: typeof WhiteboardRoute
+  EventStormingEventStormingIdRoute: typeof EventStormingEventStormingIdRoute
+  EventStormingIndexRoute: typeof EventStormingIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/whiteboard': {
-      id: '/whiteboard'
-      path: '/whiteboard'
-      fullPath: '/whiteboard'
-      preLoaderRoute: typeof WhiteboardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/auth': {
       id: '/auth'
       path: '/auth'
@@ -82,13 +95,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/event-storming/': {
+      id: '/event-storming/'
+      path: '/event-storming'
+      fullPath: '/event-storming/'
+      preLoaderRoute: typeof EventStormingIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/event-storming/$eventStormingId': {
+      id: '/event-storming/$eventStormingId'
+      path: '/event-storming/$eventStormingId'
+      fullPath: '/event-storming/$eventStormingId'
+      preLoaderRoute: typeof EventStormingEventStormingIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
-  WhiteboardRoute: WhiteboardRoute,
+  EventStormingEventStormingIdRoute: EventStormingEventStormingIdRoute,
+  EventStormingIndexRoute: EventStormingIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

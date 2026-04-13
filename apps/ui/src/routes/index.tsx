@@ -11,7 +11,7 @@ function IndexPage() {
     <CenteredLayout>
       <Stack spacing={2}>
         <Typography>Welcome to the DDD Lab!</Typography>
-        <Link to="/whiteboard">
+        <Link to="/event-storming">
           <Button variant="outlined">New event storming</Button>
         </Link>
       </Stack>

@@ -2,30 +2,35 @@ import { Box } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { apiViewClient } from "../apiClient";
-import { EventStormingControlBar } from "../event-storming/components/EventStormingControlBar";
-import { AvatarSkeleton } from "../session/components/AvatarSkeleton";
-import { CurrentUserAvatar } from "../session/components/CurrentUserAvatar";
-import { useSession } from "../session/hooks/useSession";
-import { WhiteboardComponent } from "../whiteboard/components/WhiteboardComponent";
+import z from "zod";
+import { apiViewClient } from "../../apiClient";
+import { EventStormingControlBar } from "../../event-storming/components/EventStormingControlBar";
+import { AvatarSkeleton } from "../../session/components/AvatarSkeleton";
+import { CurrentUserAvatar } from "../../session/components/CurrentUserAvatar";
+import { useSession } from "../../session/hooks/useSession";
+import { WhiteboardComponent } from "../../whiteboard/components/WhiteboardComponent";
 
-export const Route = createFileRoute("/whiteboard")({
-  component: WhiteboardPage,
+export const Route = createFileRoute("/event-storming/$eventStormingId")({
+  component: EventStormingPage,
+  params: z.object({
+    eventStormingId: z.string(),
+  }),
 });
 
-function WhiteboardPage() {
+function EventStormingPage() {
   const { isSessionLoading, session, signOut } = useSession();
   const router = useRouter();
+  const { eventStormingId } = Route.useParams();
   const { data: currentUser } = useQuery(apiViewClient.user.current.queryOptions());
 
   useEffect(() => {
     if (!isSessionLoading && !session) {
       router.navigate({
         to: "/auth",
-        search: { redirectPath: "/whiteboard" },
+        search: { redirectPath: `/event-storming/${eventStormingId}` },
       });
     }
-  });
+  }, [isSessionLoading, session, eventStormingId, router]);
 
   return (
     <WhiteboardComponent>
