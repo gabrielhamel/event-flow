@@ -1,10 +1,17 @@
+import type { Id } from "@repo/core/Id";
 import { Box } from "@mui/material";
 import { type ReactNode, useEffect, useRef, useState } from "react";
 import { useThemeMode } from "../../useThemeMode";
 import { WhiteboardContext } from "../contexts/WhiteboardContext";
 import { FabricWhiteboard } from "../FabricWhiteboard";
 
-export const WhiteboardComponent = ({ children }: { children: ReactNode }) => {
+export const WhiteboardComponent = ({
+  children,
+  documentId,
+}: {
+  children: ReactNode;
+  documentId: Id;
+}) => {
   const [whiteboard, setWhiteboard] = useState<FabricWhiteboard | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { mode } = useThemeMode();
@@ -21,6 +28,7 @@ export const WhiteboardComponent = ({ children }: { children: ReactNode }) => {
         width: window.innerWidth,
       },
       mode,
+      documentId,
     );
     setWhiteboard(whiteboardHandle);
 
@@ -36,7 +44,7 @@ export const WhiteboardComponent = ({ children }: { children: ReactNode }) => {
         console.error("Error destroying whiteboard:", reason);
       });
     };
-  }, [mode]);
+  }, [mode, documentId]);
 
   return (
     <WhiteboardContext

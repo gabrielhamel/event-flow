@@ -1,3 +1,4 @@
+import type { Id } from "@repo/core/Id";
 import { getInfraConfig } from "@repo/core/infra/config";
 import { WhiteboardSession } from "@repo/core/whiteboard/collaborative/WhiteboardSession";
 import { Canvas, type TPointerEventInfo } from "fabric";
@@ -18,6 +19,7 @@ export class FabricWhiteboard {
     anchor: HTMLCanvasElement,
     size: { width: number; height: number },
     theme: "light" | "dark",
+    documentId: Id,
   ) {
     this.canvas = new Canvas(anchor, {
       backgroundColor: theme === "light" ? "#F8F9FA" : "#1E1E1E",
@@ -39,6 +41,7 @@ export class FabricWhiteboard {
       `${apiWebsocketBaseUrl}/collaboration`,
       this.stickyNoteFactory,
       cursorFactory,
+      documentId,
     );
 
     this.canvas.on("mouse:move", this.handleMouseMove.bind(this));

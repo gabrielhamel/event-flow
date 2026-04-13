@@ -16,13 +16,18 @@ export class WhiteboardSession {
   private readonly cursorEntityCollection: Map<number, CollaborativeEntity<Cursor>>;
   private readonly cursorColor: string;
 
-  constructor(url: string, stickyNoteFactory: StickyNoteFactory, cursorFactory: CursorFactory) {
+  constructor(
+    url: string,
+    stickyNoteFactory: StickyNoteFactory,
+    cursorFactory: CursorFactory,
+    documentId: Id,
+  ) {
     this.stickyNoteFactory = stickyNoteFactory;
     this.cursorFactory = cursorFactory;
 
     this.provider = new HocuspocusProvider({
       document: new Y.Doc(),
-      name: "example-document",
+      name: documentId,
       url,
     });
 

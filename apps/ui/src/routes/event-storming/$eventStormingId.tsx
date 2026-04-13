@@ -1,4 +1,5 @@
 import { Box } from "@mui/material";
+import { IdSchema } from "@repo/core/Id";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { useEffect } from "react";
@@ -13,7 +14,7 @@ import { WhiteboardComponent } from "../../whiteboard/components/WhiteboardCompo
 export const Route = createFileRoute("/event-storming/$eventStormingId")({
   component: EventStormingPage,
   params: z.object({
-    eventStormingId: z.string(),
+    eventStormingId: IdSchema,
   }),
 });
 
@@ -33,7 +34,7 @@ function EventStormingPage() {
   }, [isSessionLoading, session, eventStormingId, router]);
 
   return (
-    <WhiteboardComponent>
+    <WhiteboardComponent documentId={eventStormingId}>
       <Box
         sx={{
           display: "flex",
