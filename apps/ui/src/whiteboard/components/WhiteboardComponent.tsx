@@ -44,7 +44,7 @@ export const WhiteboardComponent = ({ children }: { children: ReactNode }) => {
         whiteboard,
       }}
     >
-      <Box overflow="hidden">
+      <Box sx={{ overflow: "hidden" }}>
         <canvas ref={canvasRef} />
       </Box>
       {children}

@@ -23,7 +23,7 @@ function AuthPage() {
 
   return (
     <CenteredLayout>
-      <Stack borderRadius={2} p={2} spacing={2}>
+      <Stack spacing={2} sx={{ borderRadius: 2, p: 2 }}>
         {isSignInLoading ? (
           <Box
             sx={{

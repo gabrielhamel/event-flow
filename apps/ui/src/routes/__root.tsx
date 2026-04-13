@@ -29,7 +29,7 @@ function RootComponent() {
     <QueryClientProvider client={new QueryClient()}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Box height={"100vh"} width={"100vw"}>
+        <Box sx={{ height: "100vh", width: "100vw" }}>
           <Outlet />
         </Box>
       </ThemeProvider>
