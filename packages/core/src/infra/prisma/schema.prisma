@@ -69,3 +69,10 @@ model Verification {
   @@index([identifier])
   @@map("verification")
 }
+
+model Document {
+  id        String   @id
+  data      Bytes
+
+  @@map("document")
+}

@@ -16,8 +16,8 @@
 
 import * as runtime from "@prisma/client/runtime/index-browser";
 
-export type * from "../models.js";
-export type * from "./prismaNamespace.js";
+export type * from "../models";
+export type * from "./prismaNamespace";
 
 export const Decimal = runtime.Decimal;
 
@@ -52,6 +52,7 @@ export const ModelName = {
   Session: "Session",
   Account: "Account",
   Verification: "Verification",
+  Document: "Document",
 } as const;
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
@@ -126,6 +127,14 @@ export const VerificationScalarFieldEnum = {
 
 export type VerificationScalarFieldEnum =
   (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum];
+
+export const DocumentScalarFieldEnum = {
+  id: "id",
+  data: "data",
+} as const;
+
+export type DocumentScalarFieldEnum =
+  (typeof DocumentScalarFieldEnum)[keyof typeof DocumentScalarFieldEnum];
 
 export const SortOrder = {
   asc: "asc",

@@ -15,10 +15,10 @@
  */
 
 import * as runtime from "@prisma/client/runtime/client";
-import type * as Prisma from "../models.js";
-import { type PrismaClient } from "./class.js";
+import type * as Prisma from "../models";
+import { type PrismaClient } from "./class";
 
-export type * from "../models.js";
+export type * from "../models";
 
 export type DMMF = typeof runtime.DMMF;
 
@@ -379,6 +379,7 @@ export const ModelName = {
   Session: "Session",
   Account: "Account",
   Verification: "Verification",
+  Document: "Document",
 } as const;
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
@@ -398,7 +399,7 @@ export type TypeMap<
     omit: GlobalOmitOptions;
   };
   meta: {
-    modelProps: "user" | "session" | "account" | "verification";
+    modelProps: "user" | "session" | "account" | "verification" | "document";
     txIsolationLevel: TransactionIsolationLevel;
   };
   model: {
@@ -700,6 +701,80 @@ export type TypeMap<
         };
       };
     };
+    Document: {
+      payload: Prisma.$DocumentPayload<ExtArgs>;
+      fields: Prisma.DocumentFieldRefs;
+      operations: {
+        findUnique: {
+          args: Prisma.DocumentFindUniqueArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentPayload> | null;
+        };
+        findUniqueOrThrow: {
+          args: Prisma.DocumentFindUniqueOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentPayload>;
+        };
+        findFirst: {
+          args: Prisma.DocumentFindFirstArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentPayload> | null;
+        };
+        findFirstOrThrow: {
+          args: Prisma.DocumentFindFirstOrThrowArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentPayload>;
+        };
+        findMany: {
+          args: Prisma.DocumentFindManyArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentPayload>[];
+        };
+        create: {
+          args: Prisma.DocumentCreateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentPayload>;
+        };
+        createMany: {
+          args: Prisma.DocumentCreateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        createManyAndReturn: {
+          args: Prisma.DocumentCreateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentPayload>[];
+        };
+        delete: {
+          args: Prisma.DocumentDeleteArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentPayload>;
+        };
+        update: {
+          args: Prisma.DocumentUpdateArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentPayload>;
+        };
+        deleteMany: {
+          args: Prisma.DocumentDeleteManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateMany: {
+          args: Prisma.DocumentUpdateManyArgs<ExtArgs>;
+          result: BatchPayload;
+        };
+        updateManyAndReturn: {
+          args: Prisma.DocumentUpdateManyAndReturnArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentPayload>[];
+        };
+        upsert: {
+          args: Prisma.DocumentUpsertArgs<ExtArgs>;
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentPayload>;
+        };
+        aggregate: {
+          args: Prisma.DocumentAggregateArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDocument>;
+        };
+        groupBy: {
+          args: Prisma.DocumentGroupByArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.DocumentGroupByOutputType>[];
+        };
+        count: {
+          args: Prisma.DocumentCountArgs<ExtArgs>;
+          result: runtime.Types.Utils.Optional<Prisma.DocumentCountAggregateOutputType> | number;
+        };
+      };
+    };
   };
 } & {
   other: {
@@ -796,6 +871,14 @@ export const VerificationScalarFieldEnum = {
 export type VerificationScalarFieldEnum =
   (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum];
 
+export const DocumentScalarFieldEnum = {
+  id: "id",
+  data: "data",
+} as const;
+
+export type DocumentScalarFieldEnum =
+  (typeof DocumentScalarFieldEnum)[keyof typeof DocumentScalarFieldEnum];
+
 export const SortOrder = {
   asc: "asc",
   desc: "desc",
@@ -845,6 +928,16 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "DateTime[]">;
+
+/**
+ * Reference to a field of type 'Bytes'
+ */
+export type BytesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "Bytes">;
+
+/**
+ * Reference to a field of type 'Bytes[]'
+ */
+export type ListBytesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, "Bytes[]">;
 
 /**
  * Reference to a field of type 'Int'
@@ -963,6 +1056,7 @@ export type GlobalOmitConfig = {
   session?: Prisma.SessionOmit;
   account?: Prisma.AccountOmit;
   verification?: Prisma.VerificationOmit;
+  document?: Prisma.DocumentOmit;
 };
 
 /* Types for Logging */
