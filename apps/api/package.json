@@ -8,6 +8,7 @@
     "build": "vp pack"
   },
   "dependencies": {
+    "@hocuspocus/extension-database": "catalog:",
     "@hocuspocus/server": "catalog:",
     "@orpc/server": "catalog:",
     "@repo/core": "workspace:*",
