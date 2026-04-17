@@ -69,3 +69,8 @@ export type Verification = Prisma.VerificationModel;
  *
  */
 export type Document = Prisma.DocumentModel;
+/**
+ * Model EventStorming
+ *
+ */
+export type EventStorming = Prisma.EventStormingModel;

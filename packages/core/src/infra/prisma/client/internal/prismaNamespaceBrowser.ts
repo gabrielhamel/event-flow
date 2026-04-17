@@ -53,6 +53,7 @@ export const ModelName = {
   Account: "Account",
   Verification: "Verification",
   Document: "Document",
+  EventStorming: "EventStorming",
 } as const;
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
@@ -135,6 +136,18 @@ export const DocumentScalarFieldEnum = {
 
 export type DocumentScalarFieldEnum =
   (typeof DocumentScalarFieldEnum)[keyof typeof DocumentScalarFieldEnum];
+
+export const EventStormingScalarFieldEnum = {
+  id: "id",
+  name: "name",
+  data: "data",
+  ownerId: "ownerId",
+  createdAt: "createdAt",
+  updatedAt: "updatedAt",
+} as const;
+
+export type EventStormingScalarFieldEnum =
+  (typeof EventStormingScalarFieldEnum)[keyof typeof EventStormingScalarFieldEnum];
 
 export const SortOrder = {
   asc: "asc",

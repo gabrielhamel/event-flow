@@ -1,9 +1,10 @@
 import type { RequestHeadersPluginContext } from "@orpc/server/plugins";
+import type { Id } from "@repo/core/Id";
 import { ORPCError } from "@orpc/server";
 import { auth } from "@repo/core/infra/auth";
 import { server } from "./server";
 
-interface RouterContext extends RequestHeadersPluginContext {}
+export interface RouterContext extends RequestHeadersPluginContext {}
 
 export const authMiddleware = server
   .$context<RouterContext>()
@@ -22,7 +23,7 @@ export const authMiddleware = server
 
     return next({
       context: {
-        currentUserId: session.user.id,
+        currentUserId: session.user.id as Id,
       },
     });
   });

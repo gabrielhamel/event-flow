@@ -8,7 +8,7 @@ export class GetUserUseCase {
     this.userRepository = userRepository;
   }
 
-  execute(id: string) {
-    return this.userRepository.getById(id as Id).map((user) => user.toDTO());
+  execute(id: Id) {
+    return this.userRepository.getById(id).map((user) => user.toDTO());
   }
 }

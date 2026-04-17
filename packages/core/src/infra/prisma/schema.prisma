@@ -8,15 +8,16 @@ datasource db {
 }
 
 model User {
-  id            String    @id
-  name          String
-  email         String
-  emailVerified Boolean   @default(false)
-  image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  sessions      Session[]
-  accounts      Account[]
+  id             String          @id
+  name           String
+  email          String
+  emailVerified  Boolean         @default(false)
+  image          String?
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  sessions       Session[]
+  accounts       Account[]
+  eventStormings EventStorming[]
 
   @@unique([email])
   @@map("user")
@@ -71,8 +72,22 @@ model Verification {
 }
 
 model Document {
-  id        String   @id
-  data      Bytes
+  id   String @id
+  data Bytes
 
   @@map("document")
+}
+
+model EventStorming {
+  id   String @id
+  name String
+  data Bytes?
+
+  ownerId   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  owner User @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+  @@map("event_storming")
 }

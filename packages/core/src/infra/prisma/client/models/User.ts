@@ -196,6 +196,7 @@ export type UserWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string;
   sessions?: Prisma.SessionListRelationFilter;
   accounts?: Prisma.AccountListRelationFilter;
+  eventStormings?: Prisma.EventStormingListRelationFilter;
 };
 
 export type UserOrderByWithRelationInput = {
@@ -208,6 +209,7 @@ export type UserOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder;
   sessions?: Prisma.SessionOrderByRelationAggregateInput;
   accounts?: Prisma.AccountOrderByRelationAggregateInput;
+  eventStormings?: Prisma.EventStormingOrderByRelationAggregateInput;
 };
 
 export type UserWhereUniqueInput = Prisma.AtLeast<
@@ -224,6 +226,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<
     updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string;
     sessions?: Prisma.SessionListRelationFilter;
     accounts?: Prisma.AccountListRelationFilter;
+    eventStormings?: Prisma.EventStormingListRelationFilter;
   },
   "id" | "email"
 >;
@@ -264,6 +267,7 @@ export type UserCreateInput = {
   updatedAt?: Date | string;
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput;
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput;
+  eventStormings?: Prisma.EventStormingCreateNestedManyWithoutOwnerInput;
 };
 
 export type UserUncheckedCreateInput = {
@@ -276,6 +280,7 @@ export type UserUncheckedCreateInput = {
   updatedAt?: Date | string;
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput;
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput;
+  eventStormings?: Prisma.EventStormingUncheckedCreateNestedManyWithoutOwnerInput;
 };
 
 export type UserUpdateInput = {
@@ -288,6 +293,7 @@ export type UserUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput;
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput;
+  eventStormings?: Prisma.EventStormingUpdateManyWithoutOwnerNestedInput;
 };
 
 export type UserUncheckedUpdateInput = {
@@ -300,6 +306,7 @@ export type UserUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput;
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput;
+  eventStormings?: Prisma.EventStormingUncheckedUpdateManyWithoutOwnerNestedInput;
 };
 
 export type UserCreateManyInput = {
@@ -435,6 +442,32 @@ export type UserUpdateOneRequiredWithoutAccountsNestedInput = {
   >;
 };
 
+export type UserCreateNestedOneWithoutEventStormingsInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutEventStormingsInput,
+    Prisma.UserUncheckedCreateWithoutEventStormingsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEventStormingsInput;
+  connect?: Prisma.UserWhereUniqueInput;
+};
+
+export type UserUpdateOneRequiredWithoutEventStormingsNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutEventStormingsInput,
+    Prisma.UserUncheckedCreateWithoutEventStormingsInput
+  >;
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutEventStormingsInput;
+  upsert?: Prisma.UserUpsertWithoutEventStormingsInput;
+  connect?: Prisma.UserWhereUniqueInput;
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutEventStormingsInput,
+      Prisma.UserUpdateWithoutEventStormingsInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutEventStormingsInput
+  >;
+};
+
 export type UserCreateWithoutSessionsInput = {
   id: string;
   name: string;
@@ -444,6 +477,7 @@ export type UserCreateWithoutSessionsInput = {
   createdAt?: Date | string;
   updatedAt?: Date | string;
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput;
+  eventStormings?: Prisma.EventStormingCreateNestedManyWithoutOwnerInput;
 };
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -455,6 +489,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   createdAt?: Date | string;
   updatedAt?: Date | string;
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput;
+  eventStormings?: Prisma.EventStormingUncheckedCreateNestedManyWithoutOwnerInput;
 };
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -494,6 +529,7 @@ export type UserUpdateWithoutSessionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput;
+  eventStormings?: Prisma.EventStormingUpdateManyWithoutOwnerNestedInput;
 };
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -505,6 +541,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput;
+  eventStormings?: Prisma.EventStormingUncheckedUpdateManyWithoutOwnerNestedInput;
 };
 
 export type UserCreateWithoutAccountsInput = {
@@ -516,6 +553,7 @@ export type UserCreateWithoutAccountsInput = {
   createdAt?: Date | string;
   updatedAt?: Date | string;
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput;
+  eventStormings?: Prisma.EventStormingCreateNestedManyWithoutOwnerInput;
 };
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -527,6 +565,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   createdAt?: Date | string;
   updatedAt?: Date | string;
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput;
+  eventStormings?: Prisma.EventStormingUncheckedCreateNestedManyWithoutOwnerInput;
 };
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -566,6 +605,7 @@ export type UserUpdateWithoutAccountsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput;
+  eventStormings?: Prisma.EventStormingUpdateManyWithoutOwnerNestedInput;
 };
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -577,6 +617,83 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput;
+  eventStormings?: Prisma.EventStormingUncheckedUpdateManyWithoutOwnerNestedInput;
+};
+
+export type UserCreateWithoutEventStormingsInput = {
+  id: string;
+  name: string;
+  email: string;
+  emailVerified?: boolean;
+  image?: string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput;
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput;
+};
+
+export type UserUncheckedCreateWithoutEventStormingsInput = {
+  id: string;
+  name: string;
+  email: string;
+  emailVerified?: boolean;
+  image?: string | null;
+  createdAt?: Date | string;
+  updatedAt?: Date | string;
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput;
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput;
+};
+
+export type UserCreateOrConnectWithoutEventStormingsInput = {
+  where: Prisma.UserWhereUniqueInput;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutEventStormingsInput,
+    Prisma.UserUncheckedCreateWithoutEventStormingsInput
+  >;
+};
+
+export type UserUpsertWithoutEventStormingsInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutEventStormingsInput,
+    Prisma.UserUncheckedUpdateWithoutEventStormingsInput
+  >;
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutEventStormingsInput,
+    Prisma.UserUncheckedCreateWithoutEventStormingsInput
+  >;
+  where?: Prisma.UserWhereInput;
+};
+
+export type UserUpdateToOneWithWhereWithoutEventStormingsInput = {
+  where?: Prisma.UserWhereInput;
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutEventStormingsInput,
+    Prisma.UserUncheckedUpdateWithoutEventStormingsInput
+  >;
+};
+
+export type UserUpdateWithoutEventStormingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput;
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput;
+};
+
+export type UserUncheckedUpdateWithoutEventStormingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string;
+  name?: Prisma.StringFieldUpdateOperationsInput | string;
+  email?: Prisma.StringFieldUpdateOperationsInput | string;
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean;
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput;
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput;
 };
 
 /**
@@ -586,6 +703,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
 export type UserCountOutputType = {
   sessions: number;
   accounts: number;
+  eventStormings: number;
 };
 
 export type UserCountOutputTypeSelect<
@@ -593,6 +711,7 @@ export type UserCountOutputTypeSelect<
 > = {
   sessions?: boolean | UserCountOutputTypeCountSessionsArgs;
   accounts?: boolean | UserCountOutputTypeCountAccountsArgs;
+  eventStormings?: boolean | UserCountOutputTypeCountEventStormingsArgs;
 };
 
 /**
@@ -625,6 +744,15 @@ export type UserCountOutputTypeCountAccountsArgs<
   where?: Prisma.AccountWhereInput;
 };
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountEventStormingsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.EventStormingWhereInput;
+};
+
 export type UserSelect<
   ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = runtime.Types.Extensions.GetSelect<
@@ -638,6 +766,7 @@ export type UserSelect<
     updatedAt?: boolean;
     sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>;
     accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>;
+    eventStormings?: boolean | Prisma.User$eventStormingsArgs<ExtArgs>;
     _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>;
   },
   ExtArgs["result"]["user"]
@@ -694,6 +823,7 @@ export type UserInclude<
 > = {
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>;
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>;
+  eventStormings?: boolean | Prisma.User$eventStormingsArgs<ExtArgs>;
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>;
 };
 export type UserIncludeCreateManyAndReturn<
@@ -710,6 +840,7 @@ export type $UserPayload<
   objects: {
     sessions: Prisma.$SessionPayload<ExtArgs>[];
     accounts: Prisma.$AccountPayload<ExtArgs>[];
+    eventStormings: Prisma.$EventStormingPayload<ExtArgs>[];
   };
   scalars: runtime.Types.Extensions.GetPayloadResult<
     {
@@ -1252,6 +1383,17 @@ export interface Prisma__UserClient<
       >
     | Null
   >;
+  eventStormings<T extends Prisma.User$eventStormingsArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$eventStormingsArgs<ExtArgs>>,
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$EventStormingPayload<ExtArgs>,
+        T,
+        "findMany",
+        GlobalOmitOptions
+      >
+    | Null
+  >;
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1759,6 +1901,34 @@ export type User$accountsArgs<
   take?: number;
   skip?: number;
   distinct?: Prisma.AccountScalarFieldEnum | Prisma.AccountScalarFieldEnum[];
+};
+
+/**
+ * User.eventStormings
+ */
+export type User$eventStormingsArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the EventStorming
+   */
+  select?: Prisma.EventStormingSelect<ExtArgs> | null;
+  /**
+   * Omit specific fields from the EventStorming
+   */
+  omit?: Prisma.EventStormingOmit<ExtArgs> | null;
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EventStormingInclude<ExtArgs> | null;
+  where?: Prisma.EventStormingWhereInput;
+  orderBy?:
+    | Prisma.EventStormingOrderByWithRelationInput
+    | Prisma.EventStormingOrderByWithRelationInput[];
+  cursor?: Prisma.EventStormingWhereUniqueInput;
+  take?: number;
+  skip?: number;
+  distinct?: Prisma.EventStormingScalarFieldEnum | Prisma.EventStormingScalarFieldEnum[];
 };
 
 /**
