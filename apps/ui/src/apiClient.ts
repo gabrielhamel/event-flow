@@ -2,7 +2,7 @@ import type { ContractRouterClient } from "@orpc/contract";
 import { createORPCClient } from "@orpc/client";
 import { RPCLink } from "@orpc/client/fetch";
 import { createTanstackQueryUtils } from "@orpc/tanstack-query";
-import { routerContract } from "@repo/core/infra/api/router";
+import { routerContract } from "@repo/core/infra/routerContract";
 import { configs } from "./configs";
 
 const link = new RPCLink({
