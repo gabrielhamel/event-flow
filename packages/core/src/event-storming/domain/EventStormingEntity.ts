@@ -38,6 +38,15 @@ export class EventStormingEntity {
     };
   }
 
+  updateData(data: Uint8Array<ArrayBuffer>) {
+    return new EventStormingEntity({
+      id: this.id,
+      name: this.name,
+      data,
+      owner: this.owner,
+    });
+  }
+
   static create(id: Id, name: string, owner: UserEntity) {
     return new EventStormingEntity({
       id,

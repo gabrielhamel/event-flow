@@ -1,6 +1,7 @@
 import { PrismaEventStormingRepository } from "@repo/core/event-storming/infra/PrismaEventStormingRepository";
 import { CreateEventStormingUseCase } from "@repo/core/event-storming/useCase/CreateEventStorming";
 import { GetEventStormingUseCase } from "@repo/core/event-storming/useCase/GetEventStorming";
+import { UpdateEventStormingDataUseCase } from "@repo/core/event-storming/useCase/UpdateEventStormingData";
 import { makePrismaClient } from "@repo/core/infra/prisma";
 import { PrismaUserRepository } from "@repo/core/user/infra/PrismaUserRepository";
 import { GetUserUseCase } from "@repo/core/user/useCase/GetUserUseCase";
@@ -19,6 +20,7 @@ const container = {
     eventStorming: {
       get: new GetEventStormingUseCase(eventStormingRepository),
       create: new CreateEventStormingUseCase(userRepository, eventStormingRepository),
+      updateData: new UpdateEventStormingDataUseCase(eventStormingRepository),
     },
   },
 };
