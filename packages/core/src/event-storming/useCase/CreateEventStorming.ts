@@ -22,7 +22,11 @@ export class CreateEventStormingUseCase {
 
   execute(command: CreateEventStormingCommand) {
     return this.userRepository.getById(command.ownerId).andThen((owner) => {
-      const eventStorming = EventStormingEntity.create(command.id, "", owner);
+      const eventStorming = EventStormingEntity.create(
+        command.id,
+        "Untitled event storming",
+        owner,
+      );
 
       return this.eventStormingRepository.save(eventStorming);
     });
