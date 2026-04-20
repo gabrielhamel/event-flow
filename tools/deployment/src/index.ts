@@ -37,7 +37,10 @@ console.log("1️⃣  Authenticating with Portainer...");
 const authResponse = await fetch(`${portainerUrl}/api/auth`, {
   method: "POST",
   headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ Username: portainerUser, Password: portainerPassword }),
+  body: JSON.stringify({
+    Username: portainerUser,
+    Password: portainerPassword,
+  }),
 });
 
 if (!authResponse.ok) {
@@ -54,7 +57,7 @@ console.log("✅ JWT obtained successfully");
 
 console.log("2️⃣  Triggering stack update...");
 
-const stackFileContent = readFileSync(resolve(process.cwd(), "portainer", "stack.yml"), "utf-8");
+const stackFileContent = readFileSync(resolve(process.cwd(), "stack.yml"), "utf-8");
 
 const updateResponse = await fetch(
   `${portainerUrl}/api/stacks/${stackId}?endpointId=${endpointId}`,
@@ -65,7 +68,10 @@ const updateResponse = await fetch(
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      Env: Object.entries(deploymentEnv).map(([name, value]) => ({ name, value })),
+      Env: Object.entries(deploymentEnv).map(([name, value]) => ({
+        name,
+        value,
+      })),
       Prune: true,
       RepullImageAndRedeploy: true,
       StackFileContent: stackFileContent,
