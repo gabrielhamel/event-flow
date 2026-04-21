@@ -7,7 +7,7 @@
     "prepare": "vp config"
   },
   "devDependencies": {
-    "@tanstack/eslint-plugin-query": "^5.99.1",
+    "@tanstack/eslint-plugin-query": "^5.99.2",
     "@tanstack/eslint-plugin-router": "^1.161.6",
     "vite-plus": "catalog:"
   },
