@@ -10,4 +10,5 @@ DDD Collaborative tools
 
 1. Clone the repository
 2. Install dependencies `vp install`
-3. Start the development environment: `vpr -r dev`
+3. Inside `apps/api`. Copy `.env.template` to `.env` and fill the environment variables
+4. Start the development environment: `vpr -r dev`
