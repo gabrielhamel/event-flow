@@ -4,9 +4,13 @@ packages:
   - "tools/*"
 
 catalog:
+  "@hocuspocus/extension-database": ^3.4.4
   "@hocuspocus/provider": ^3.4.4
   "@hocuspocus/server": ^3.4.4
-  "@hocuspocus/extension-database": ^3.4.4
+  "@orpc/client": ^1.13.14
+  "@orpc/contract": ^1.13.14
+  "@orpc/server": ^1.13.14
+  "@orpc/tanstack-query": ^1.13.14
   "@prisma/adapter-pg": ^7.7.0
   "@prisma/client": ^7.7.0
   "@tanstack/react-router": ^1.168.23
@@ -14,10 +18,6 @@ catalog:
   "@types/node": ^25.6.0
   auth: ^1.6.5
   better-auth: ^1.6.5
-  "@orpc/contract": ^1.13.14
-  "@orpc/server": ^1.13.14
-  "@orpc/client": ^1.13.14
-  "@orpc/tanstack-query": ^1.13.14
   "prisma": ^7.7.0
   tsx: ^4.21.0
   typescript: ^6.0.3
@@ -25,6 +25,8 @@ catalog:
   vite-plus: ^0.1.19
   vitest: npm:@voidzero-dev/vite-plus-test@^0.1.19
   zod: ^4.3.6
+
+catalogMode: "strict"
 
 injectWorkspacePackages: true
 
@@ -39,5 +41,6 @@ peerDependencyRules:
   allowedVersions:
     vite: "*"
     vitest: "*"
+
 syncInjectedDepsAfterScripts:
   - build
