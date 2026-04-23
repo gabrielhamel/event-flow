@@ -13,15 +13,15 @@
     "@orpc/server": "catalog:",
     "@repo/core": "workspace:*",
     "better-auth": "catalog:",
-    "cors": "^2.8.6",
-    "express": "^5.2.1",
-    "express-ws": "^5.0.2"
+    "cors": "catalog:",
+    "express": "catalog:",
+    "express-ws": "catalog:"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.6",
-    "@types/express-ws": "^3.0.6",
+    "@types/cors": "catalog:",
+    "@types/express": "catalog:",
+    "@types/express-ws": "catalog:",
     "tsx": "catalog:"
   }
 }

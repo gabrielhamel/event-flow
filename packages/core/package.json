@@ -22,16 +22,16 @@
     "@prisma/adapter-pg": "catalog:",
     "@prisma/client": "catalog:",
     "better-auth": "catalog:",
-    "neverthrow": "^8.2.0",
-    "pg": "^8.20.0",
-    "uuid": "^13.0.0",
-    "yjs": "^13.6.30",
+    "neverthrow": "catalog:",
+    "pg": "catalog:",
+    "uuid": "catalog:",
+    "yjs": "catalog:",
     "zod": "catalog:"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
     "@types/node": "catalog:",
-    "@types/pg": "^8.20.0",
+    "@types/pg": "catalog:",
     "auth": "catalog:",
     "prisma": "catalog:"
   }
