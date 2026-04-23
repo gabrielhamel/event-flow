@@ -52,7 +52,6 @@ export const ModelName = {
   Session: "Session",
   Account: "Account",
   Verification: "Verification",
-  Document: "Document",
   EventStorming: "EventStorming",
 } as const;
 
@@ -128,14 +127,6 @@ export const VerificationScalarFieldEnum = {
 
 export type VerificationScalarFieldEnum =
   (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum];
-
-export const DocumentScalarFieldEnum = {
-  id: "id",
-  data: "data",
-} as const;
-
-export type DocumentScalarFieldEnum =
-  (typeof DocumentScalarFieldEnum)[keyof typeof DocumentScalarFieldEnum];
 
 export const EventStormingScalarFieldEnum = {
   id: "id",

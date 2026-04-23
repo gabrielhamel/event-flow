@@ -12,9 +12,9 @@
     }
   },
   "scripts": {
-    "db:generate": "vp exec prisma generate",
+    "db:generate": "vp exec prisma generate && vp check --fix",
     "db:migrate": "vp exec prisma migrate deploy",
-    "db:auth:generate": "vp exec auth generate --adapter prisma --dialect postgresql --config src/infra/auth.ts --output src/infra/prisma/schema.prisma"
+    "db:auth:generate": "vp exec auth generate --adapter prisma --dialect postgresql --config src/infra/auth.ts --output src/infra/prisma/schema.prisma && vp check --fix"
   },
   "dependencies": {
     "@hocuspocus/provider": "catalog:",
@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
+    "@types/node": "catalog:",
     "@types/pg": "^8.20.0",
     "auth": "catalog:",
     "prisma": "catalog:"

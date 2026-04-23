@@ -379,7 +379,6 @@ export const ModelName = {
   Session: "Session",
   Account: "Account",
   Verification: "Verification",
-  Document: "Document",
   EventStorming: "EventStorming",
 } as const;
 
@@ -400,7 +399,7 @@ export type TypeMap<
     omit: GlobalOmitOptions;
   };
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "document" | "eventStorming";
+    modelProps: "user" | "session" | "account" | "verification" | "eventStorming";
     txIsolationLevel: TransactionIsolationLevel;
   };
   model: {
@@ -702,80 +701,6 @@ export type TypeMap<
         };
       };
     };
-    Document: {
-      payload: Prisma.$DocumentPayload<ExtArgs>;
-      fields: Prisma.DocumentFieldRefs;
-      operations: {
-        findUnique: {
-          args: Prisma.DocumentFindUniqueArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentPayload> | null;
-        };
-        findUniqueOrThrow: {
-          args: Prisma.DocumentFindUniqueOrThrowArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentPayload>;
-        };
-        findFirst: {
-          args: Prisma.DocumentFindFirstArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentPayload> | null;
-        };
-        findFirstOrThrow: {
-          args: Prisma.DocumentFindFirstOrThrowArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentPayload>;
-        };
-        findMany: {
-          args: Prisma.DocumentFindManyArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentPayload>[];
-        };
-        create: {
-          args: Prisma.DocumentCreateArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentPayload>;
-        };
-        createMany: {
-          args: Prisma.DocumentCreateManyArgs<ExtArgs>;
-          result: BatchPayload;
-        };
-        createManyAndReturn: {
-          args: Prisma.DocumentCreateManyAndReturnArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentPayload>[];
-        };
-        delete: {
-          args: Prisma.DocumentDeleteArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentPayload>;
-        };
-        update: {
-          args: Prisma.DocumentUpdateArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentPayload>;
-        };
-        deleteMany: {
-          args: Prisma.DocumentDeleteManyArgs<ExtArgs>;
-          result: BatchPayload;
-        };
-        updateMany: {
-          args: Prisma.DocumentUpdateManyArgs<ExtArgs>;
-          result: BatchPayload;
-        };
-        updateManyAndReturn: {
-          args: Prisma.DocumentUpdateManyAndReturnArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentPayload>[];
-        };
-        upsert: {
-          args: Prisma.DocumentUpsertArgs<ExtArgs>;
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentPayload>;
-        };
-        aggregate: {
-          args: Prisma.DocumentAggregateArgs<ExtArgs>;
-          result: runtime.Types.Utils.Optional<Prisma.AggregateDocument>;
-        };
-        groupBy: {
-          args: Prisma.DocumentGroupByArgs<ExtArgs>;
-          result: runtime.Types.Utils.Optional<Prisma.DocumentGroupByOutputType>[];
-        };
-        count: {
-          args: Prisma.DocumentCountArgs<ExtArgs>;
-          result: runtime.Types.Utils.Optional<Prisma.DocumentCountAggregateOutputType> | number;
-        };
-      };
-    };
     EventStorming: {
       payload: Prisma.$EventStormingPayload<ExtArgs>;
       fields: Prisma.EventStormingFieldRefs;
@@ -947,14 +872,6 @@ export const VerificationScalarFieldEnum = {
 
 export type VerificationScalarFieldEnum =
   (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum];
-
-export const DocumentScalarFieldEnum = {
-  id: "id",
-  data: "data",
-} as const;
-
-export type DocumentScalarFieldEnum =
-  (typeof DocumentScalarFieldEnum)[keyof typeof DocumentScalarFieldEnum];
 
 export const EventStormingScalarFieldEnum = {
   id: "id",
@@ -1145,7 +1062,6 @@ export type GlobalOmitConfig = {
   session?: Prisma.SessionOmit;
   account?: Prisma.AccountOmit;
   verification?: Prisma.VerificationOmit;
-  document?: Prisma.DocumentOmit;
   eventStorming?: Prisma.EventStormingOmit;
 };
 

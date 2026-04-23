@@ -65,11 +65,6 @@ export type Account = Prisma.AccountModel;
  */
 export type Verification = Prisma.VerificationModel;
 /**
- * Model Document
- *
- */
-export type Document = Prisma.DocumentModel;
-/**
  * Model EventStorming
  *
  */

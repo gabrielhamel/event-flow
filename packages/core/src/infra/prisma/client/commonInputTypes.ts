@@ -146,23 +146,6 @@ export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>;
 };
 
-export type BytesFilter<$PrismaModel = never> = {
-  equals?: runtime.Bytes | Prisma.BytesFieldRefInput<$PrismaModel>;
-  in?: runtime.Bytes[] | Prisma.ListBytesFieldRefInput<$PrismaModel>;
-  notIn?: runtime.Bytes[] | Prisma.ListBytesFieldRefInput<$PrismaModel>;
-  not?: Prisma.NestedBytesFilter<$PrismaModel> | runtime.Bytes;
-};
-
-export type BytesWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: runtime.Bytes | Prisma.BytesFieldRefInput<$PrismaModel>;
-  in?: runtime.Bytes[] | Prisma.ListBytesFieldRefInput<$PrismaModel>;
-  notIn?: runtime.Bytes[] | Prisma.ListBytesFieldRefInput<$PrismaModel>;
-  not?: Prisma.NestedBytesWithAggregatesFilter<$PrismaModel> | runtime.Bytes;
-  _count?: Prisma.NestedIntFilter<$PrismaModel>;
-  _min?: Prisma.NestedBytesFilter<$PrismaModel>;
-  _max?: Prisma.NestedBytesFilter<$PrismaModel>;
-};
-
 export type BytesNullableFilter<$PrismaModel = never> = {
   equals?: runtime.Bytes | Prisma.BytesFieldRefInput<$PrismaModel> | null;
   in?: runtime.Bytes[] | Prisma.ListBytesFieldRefInput<$PrismaModel> | null;
@@ -325,23 +308,6 @@ export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>;
   _min?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>;
   _max?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>;
-};
-
-export type NestedBytesFilter<$PrismaModel = never> = {
-  equals?: runtime.Bytes | Prisma.BytesFieldRefInput<$PrismaModel>;
-  in?: runtime.Bytes[] | Prisma.ListBytesFieldRefInput<$PrismaModel>;
-  notIn?: runtime.Bytes[] | Prisma.ListBytesFieldRefInput<$PrismaModel>;
-  not?: Prisma.NestedBytesFilter<$PrismaModel> | runtime.Bytes;
-};
-
-export type NestedBytesWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: runtime.Bytes | Prisma.BytesFieldRefInput<$PrismaModel>;
-  in?: runtime.Bytes[] | Prisma.ListBytesFieldRefInput<$PrismaModel>;
-  notIn?: runtime.Bytes[] | Prisma.ListBytesFieldRefInput<$PrismaModel>;
-  not?: Prisma.NestedBytesWithAggregatesFilter<$PrismaModel> | runtime.Bytes;
-  _count?: Prisma.NestedIntFilter<$PrismaModel>;
-  _min?: Prisma.NestedBytesFilter<$PrismaModel>;
-  _max?: Prisma.NestedBytesFilter<$PrismaModel>;
 };
 
 export type NestedBytesNullableFilter<$PrismaModel = never> = {
