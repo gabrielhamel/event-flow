@@ -24,8 +24,8 @@ services:
     ports:
       - "127.0.0.1:15082:3000"
     environment:
-      - GF_SECURITY_ADMIN_USER="${GF_SECURITY_ADMIN_USER}"
-      - GF_SECURITY_ADMIN_PASSWORD="${GF_SECURITY_ADMIN_PASSWORD}"
+      - GF_SECURITY_ADMIN_USER=${GF_SECURITY_ADMIN_USER}
+      - GF_SECURITY_ADMIN_PASSWORD=${GF_SECURITY_ADMIN_PASSWORD}
     volumes:
       - grafana-data:/var/lib/grafana
       - grafana-conf:/etc/grafana
