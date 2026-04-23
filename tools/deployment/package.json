@@ -8,7 +8,6 @@
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
-    "@types/node": "catalog:",
     "tsx": "catalog:",
     "vite-plus": "catalog:"
   }

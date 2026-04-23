@@ -30,7 +30,6 @@
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
-    "@types/node": "catalog:",
     "@types/pg": "catalog:",
     "auth": "catalog:",
     "prisma": "catalog:"

@@ -154,6 +154,9 @@ importers:
       '@tanstack/eslint-plugin-router':
         specifier: 'catalog:'
         version: 1.161.6(eslint@10.2.0(jiti@2.6.1))(typescript@6.0.3)
+      '@types/node':
+        specifier: 'catalog:'
+        version: 25.6.0
       vite-plus:
         specifier: 'catalog:'
         version: 0.1.19(@opentelemetry/api@1.9.0)(@types/node@25.6.0)(esbuild@0.27.3)(jiti@2.6.1)(jsdom@26.1.0(canvas@3.2.1))(tsx@4.21.0)(typescript@6.0.3)(vite@8.0.3(@emnapi/core@1.9.1)(@emnapi/runtime@1.9.1)(@types/node@25.6.0)(esbuild@0.27.3)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
@@ -258,9 +261,6 @@ importers:
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../../tools/typescript-config
-      '@types/node':
-        specifier: 'catalog:'
-        version: 25.6.0
       '@types/react':
         specifier: 'catalog:'
         version: 19.2.14
@@ -316,9 +316,6 @@ importers:
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../../tools/typescript-config
-      '@types/node':
-        specifier: 'catalog:'
-        version: 25.6.0
       '@types/pg':
         specifier: 'catalog:'
         version: 8.20.0
@@ -334,9 +331,6 @@ importers:
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
-      '@types/node':
-        specifier: 'catalog:'
-        version: 25.6.0
       tsx:
         specifier: 'catalog:'
         version: 4.21.0
