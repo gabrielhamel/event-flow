@@ -55,6 +55,8 @@ catalogMode: "strict"
 
 injectWorkspacePackages: true
 
+minimumReleaseAge: 2880
+
 overrides:
   vite: "catalog:"
   vitest: "catalog:"
