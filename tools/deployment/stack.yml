@@ -18,25 +18,3 @@ services:
     ports:
       - "127.0.0.1:15081:80"
     restart: "always"
-
-  grafana:
-    image: grafana/grafana
-    ports:
-      - "127.0.0.1:15082:3000"
-    environment:
-      - GF_SECURITY_ADMIN_USER=${GF_SECURITY_ADMIN_USER}
-      - GF_SECURITY_ADMIN_PASSWORD=${GF_SECURITY_ADMIN_PASSWORD}
-    volumes:
-      - grafana-data:/var/lib/grafana
-      - grafana-conf:/etc/grafana
-    restart: "always"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 5s
-
-volumes:
-  grafana-data:
-  grafana-conf:
