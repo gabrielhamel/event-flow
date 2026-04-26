@@ -44,7 +44,7 @@ catalog:
   react-dom: 19.2.5
   tsx: 4.21.0
   typescript: 6.0.3
-  uuid: 13.0.0
+  uuid: 14.0.0
   vite: npm:@voidzero-dev/vite-plus-core@0.1.19
   vite-plus: 0.1.19
   vitest: npm:@voidzero-dev/vite-plus-test@0.1.19
