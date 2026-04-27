@@ -70,7 +70,7 @@ const updateResponse = await fetch(
     },
     body: JSON.stringify({
       Env: [
-        Object.entries(deploymentEnv).map(([name, value]) => ({
+        ...Object.entries(deploymentEnv).map(([name, value]) => ({
           name,
           value,
         })),
