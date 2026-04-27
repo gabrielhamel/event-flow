@@ -22,7 +22,16 @@ app.get("/api/healthcheck", (_, response) => {
 });
 
 app.ws("/api/collaboration", (websocket, request) => {
-  websocketHandler.handleConnection(websocket, request);
+  const webRequest = new Request(`http://${request.headers.host}${request.url}`, {
+    headers: new Headers(request.headers as Record<string, string>),
+  });
+  const clientConnection = websocketHandler.handleConnection(websocket, webRequest);
+  websocket.on("message", (data) =>
+    clientConnection.handleMessage(new Uint8Array(Buffer.from(data as Buffer))),
+  );
+  websocket.on("close", (code, reason) =>
+    clientConnection.handleClose({ code, reason: reason?.toString() ?? "" }),
+  );
 });
 
 app.use("/api{/*path}", async (req, res, next) => {
