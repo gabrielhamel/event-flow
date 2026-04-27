@@ -11,6 +11,76 @@ updates:
     schedule:
       interval: "weekly"
     groups:
+      emotion-major:
+        update-types:
+          - "major"
+        patterns:
+          - "@emotion/*"
+
+      hocuspocus-major:
+        update-types:
+          - "major"
+        patterns:
+          - "@hocuspocus/*"
+
+      mui-major:
+        update-types:
+          - "major"
+        patterns:
+          - "@mui/*"
+
+      orpc-major:
+        update-types:
+          - "major"
+        patterns:
+          - "@orpc/*"
+
+      prisma-major:
+        update-types:
+          - "major"
+        patterns:
+          - "@prisma/*"
+          - "prisma"
+
+      tanstack-query-major:
+        update-types:
+          - "major"
+        patterns:
+          - "@tanstack/eslint-plugin-query"
+          - "@tanstack/react-query"
+
+      tanstack-router-major:
+        update-types:
+          - "major"
+        patterns:
+          - "@tanstack/eslint-plugin-router"
+          - "@tanstack/react-router"
+          - "@tanstack/router-plugin"
+
+      react-major:
+        update-types:
+          - "major"
+        patterns:
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
+
+      better-auth-major:
+        update-types:
+          - "major"
+        patterns:
+          - "auth"
+          - "better-auth"
+
+      vite-plus-major:
+        update-types:
+          - "major"
+        patterns:
+          - "vite"
+          - "vite-plus"
+          - "vitest"
+
       non-breaking:
         update-types:
           - "minor"
