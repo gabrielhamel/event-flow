@@ -8,7 +8,9 @@ import { FabricCursorFactory } from "./objects/factories/FabricCursorFactory";
 import { FabricStickyNoteFactory } from "./objects/factories/FabricStickyNoteFactory";
 
 const isInDevelopment = import.meta.env.MODE === "development";
-const { apiWebsocketBaseUrl } = getInfraConfig(isInDevelopment);
+const hostname = window.location.hostname;
+
+const { apiWebsocketBaseUrl } = getInfraConfig(isInDevelopment, hostname);
 
 export class FabricWhiteboard {
   private readonly canvas: Canvas;

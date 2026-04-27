@@ -1,6 +1,6 @@
-export const getInfraConfig = (isInDevelopment: boolean) => {
-  const apiHostname = isInDevelopment ? "localhost:8080" : "ddd-lab.gabrielhamel.fr";
-  const uiHostname = isInDevelopment ? "localhost:5173" : "ddd-lab.gabrielhamel.fr";
+export const getInfraConfig = (isInDevelopment: boolean, hostname: string | null) => {
+  const apiHostname = isInDevelopment ? "localhost:8080" : hostname;
+  const uiHostname = isInDevelopment ? "localhost:5173" : hostname;
   const sslActivated = !isInDevelopment;
 
   const apiWebsocketBaseUrl = `${sslActivated ? "wss" : "ws"}://${apiHostname}/api`;

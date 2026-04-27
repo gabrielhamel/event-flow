@@ -4,7 +4,9 @@ import { getInfraConfig } from "./config";
 import { makePrismaClient } from "./prisma";
 
 const isInDevelopment = process.env.NODE_ENV === "development";
-const { uiBaseUrl } = getInfraConfig(isInDevelopment);
+const hostname = isInDevelopment ? null : (process.env.HOSTNAME ?? null);
+
+const { uiBaseUrl } = getInfraConfig(isInDevelopment, hostname);
 
 const db = makePrismaClient();
 
