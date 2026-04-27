@@ -44,7 +44,7 @@ function IndexPage() {
   return (
     <CenteredLayout>
       <Stack spacing={2}>
-        <Typography>Welcome to the DDD Lab!</Typography>
+        <Typography>Welcome to the EventFlow!</Typography>
         {session ? (
           <Button
             variant="outlined"

@@ -1,5 +1,5 @@
 {
-  "name": "ddd-lab",
+  "name": "@repo/root",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -12,7 +12,7 @@
     "@types/node": "catalog:",
     "vite-plus": "catalog:"
   },
-  "packageManager": "pnpm@10.33.1",
+  "packageManager": "pnpm@10.33.2",
   "pnpm": {
     "onlyBuiltDependencies": [
       "@prisma/engines",
