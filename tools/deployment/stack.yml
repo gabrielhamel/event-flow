@@ -1,6 +1,6 @@
 services:
   api:
-    image: ghcr.io/gabrielhamel/ddd-lab/api:main
+    image: ghcr.io/gabrielhamel/event-flow/api:main
     ports:
       - "127.0.0.1:15080:8080"
     environment:
@@ -14,7 +14,7 @@ services:
     restart: "always"
 
   ui:
-    image: ghcr.io/gabrielhamel/ddd-lab/ui:main
+    image: ghcr.io/gabrielhamel/event-flow/ui:main
     ports:
       - "127.0.0.1:15081:80"
     restart: "always"

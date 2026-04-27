@@ -52,7 +52,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/gabrielhamel/ddd-lab/ui
+          images: ghcr.io/${{ github.repository }}/ui
 
       - name: Build & push image
         id: push
@@ -97,7 +97,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/gabrielhamel/ddd-lab/api
+          images: ghcr.io/${{ github.repository }}/api
 
       - name: Build & push image
         id: push
