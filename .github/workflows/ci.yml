@@ -140,4 +140,5 @@ jobs:
           STACK_ID: ${{ vars.STACK_ID }}
           ENDPOINT_ID: ${{ vars.ENDPOINT_ID }}
           DEPLOYMENT_ENV_CONTENT: ${{ secrets.DEPLOYMENT_ENV_CONTENT }}
+          IMAGE_REGISTRY: ghcr.io/${{ github.repository }}
         run: vpr --filter @repo/deployment trigger

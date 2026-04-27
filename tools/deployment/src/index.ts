@@ -25,6 +25,7 @@ function parseEnvContent(content: string): Record<string, string> {
 }
 
 const deploymentEnv = parseEnvContent(requireEnv("DEPLOYMENT_ENV_CONTENT"));
+const imageRegistry = requireEnv("IMAGE_REGISTRY");
 
 const portainerUrl = requireEnv("PORTAINER_URL");
 const portainerUser = requireEnv("PORTAINER_USER");
@@ -68,10 +69,16 @@ const updateResponse = await fetch(
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      Env: Object.entries(deploymentEnv).map(([name, value]) => ({
-        name,
-        value,
-      })),
+      Env: [
+        Object.entries(deploymentEnv).map(([name, value]) => ({
+          name,
+          value,
+        })),
+        {
+          name: "IMAGE_REGISTRY",
+          value: imageRegistry,
+        },
+      ],
       Prune: true,
       RepullImageAndRedeploy: true,
       StackFileContent: stackFileContent,
