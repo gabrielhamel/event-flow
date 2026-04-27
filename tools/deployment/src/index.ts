@@ -59,6 +59,10 @@ console.log("✅ JWT obtained successfully");
 console.log("2️⃣  Triggering stack update...");
 
 const stackFileContent = readFileSync(resolve(process.cwd(), "stack.yml"), "utf-8");
+const stackFileContentWithVariables = stackFileContent.replace(
+  /\$\{IMAGE_REGISTRY\}/g,
+  imageRegistry,
+);
 
 const updateResponse = await fetch(
   `${portainerUrl}/api/stacks/${stackId}?endpointId=${endpointId}`,
@@ -69,19 +73,13 @@ const updateResponse = await fetch(
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      Env: [
-        ...Object.entries(deploymentEnv).map(([name, value]) => ({
-          name,
-          value,
-        })),
-        {
-          name: "IMAGE_REGISTRY",
-          value: imageRegistry,
-        },
-      ],
+      Env: Object.entries(deploymentEnv).map(([name, value]) => ({
+        name,
+        value,
+      })),
       Prune: true,
       RepullImageAndRedeploy: true,
-      StackFileContent: stackFileContent,
+      StackFileContent: stackFileContentWithVariables,
     }),
   },
 );
