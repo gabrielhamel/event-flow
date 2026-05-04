@@ -31,8 +31,8 @@ catalog:
   "@types/react": 19.2.14
   "@types/react-dom": 19.2.3
   "@vitejs/plugin-react": 6.0.1
-  auth: 1.6.5
-  better-auth: 1.6.5
+  auth: 1.6.9
+  better-auth: 1.6.9
   cors: 2.8.6
   express: 5.2.1
   express-ws: 5.0.2
