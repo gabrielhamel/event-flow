@@ -1,0 +1,14 @@
+{
+  "name": "@repo/deployment",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "trigger": "vp exec tsx src/index.ts"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "tsx": "catalog:",
+    "vite-plus": "catalog:"
+  }
+}

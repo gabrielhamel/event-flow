@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "noEmit": true,
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "allowImportingTsExtensions": true,
+    "esModuleInterop": true
+  },
+  "files": [],
+  "references": [
+    { "path": "packages/core" },
+    { "path": "apps/api" },
+    { "path": "apps/ui" },
+    { "path": "tools/deployment" }
+  ]
+}

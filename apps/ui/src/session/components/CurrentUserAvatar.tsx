@@ -1,0 +1,64 @@
+import { Logout } from "@mui/icons-material";
+import { Avatar, ListItemIcon, Menu, MenuItem, Typography } from "@mui/material";
+import { type MouseEvent, useState } from "react";
+
+export const CurrentUserAvatar = ({
+  avatarUrl,
+  onSignOut,
+  username,
+}: {
+  username: string;
+  avatarUrl: string | null;
+  onSignOut: () => void;
+}) => {
+  const [anchorAvatarMenu, setAnchorAvatarMenu] = useState<null | HTMLElement>(null);
+
+  const avatarData = username
+    .split(" ")
+    .map((word) => word[0])
+    .join("");
+
+  const handleSignOut = () => {
+    setAnchorAvatarMenu(null);
+
+    onSignOut();
+  };
+
+  const handleAvatarClick = (event: MouseEvent<HTMLDivElement>) => {
+    setAnchorAvatarMenu(event.currentTarget);
+  };
+
+  const handleAvatarMenuClose = () => {
+    setAnchorAvatarMenu(null);
+  };
+
+  return (
+    <>
+      <Avatar
+        component="div"
+        sx={{
+          boxShadow: 1,
+        }}
+        src={avatarUrl ?? undefined}
+        onClick={handleAvatarClick}
+      >
+        {avatarData}
+      </Avatar>
+      <Menu
+        open={Boolean(anchorAvatarMenu)}
+        onClose={handleAvatarMenuClose}
+        anchorEl={anchorAvatarMenu}
+      >
+        <MenuItem>
+          <Typography>{username}</Typography>
+        </MenuItem>
+        <MenuItem onClick={handleSignOut}>
+          <ListItemIcon>
+            <Logout fontSize="small" color="error" />
+          </ListItemIcon>
+          <Typography color="error">Sign out</Typography>
+        </MenuItem>
+      </Menu>
+    </>
+  );
+};

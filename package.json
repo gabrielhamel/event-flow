@@ -1,0 +1,16 @@
+{
+  "name": "@repo/root",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "prepare": "vp config"
+  },
+  "devDependencies": {
+    "@tanstack/eslint-plugin-query": "catalog:",
+    "@tanstack/eslint-plugin-router": "catalog:",
+    "@types/node": "catalog:",
+    "vite-plus": "catalog:"
+  },
+  "packageManager": "pnpm@11.0.9"
+}

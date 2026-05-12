@@ -1,0 +1,144 @@
+name: CI
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  ci:
+    name: CI
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: voidzero-dev/setup-vp@v1
+        with:
+          node-version-file: ".node-version"
+          cache: true
+
+      - name: CI
+        run: vp check
+
+  build-ui:
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
+    name: Build ui
+    timeout-minutes: 15
+    environment: Production
+    runs-on: ubuntu-latest
+    needs: ci
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v6
+
+      - name: Log in to the container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}/ui
+
+      - name: Build & push image
+        id: push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: tools/deployment/apps/ui/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  build-api:
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
+    name: Build api
+    timeout-minutes: 15
+    environment: Production
+    runs-on: ubuntu-latest
+    needs: ci
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v6
+
+      - name: Log in to the container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}/api
+
+      - name: Build & push image
+        id: push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: tools/deployment/apps/api/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    if: always() && ((github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'))
+    name: Trigger deployment
+    timeout-minutes: 15
+    environment: Production
+    runs-on: ubuntu-latest
+    needs: [ci, build-api, build-ui]
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v6
+
+      - uses: voidzero-dev/setup-vp@v1
+        with:
+          node-version-file: ".node-version"
+          cache: true
+
+      - name: Run database migrations
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: vpr -r db:migrate
+
+      - name: Trigger deployment
+        env:
+          PORTAINER_URL: ${{ vars.PORTAINER_URL }}
+          PORTAINER_USER: ${{ vars.PORTAINER_USER }}
+          PORTAINER_PASSWORD: ${{ secrets.PORTAINER_PASSWORD }}
+          STACK_ID: ${{ vars.STACK_ID }}
+          ENDPOINT_ID: ${{ vars.ENDPOINT_ID }}
+          DEPLOYMENT_ENV_CONTENT: ${{ secrets.DEPLOYMENT_ENV_CONTENT }}
+          IMAGE_REGISTRY: ghcr.io/${{ github.repository }}
+        run: vpr --filter @repo/deployment trigger

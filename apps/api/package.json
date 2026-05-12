@@ -1,0 +1,27 @@
+{
+  "name": "@repo/api",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vp exec tsx --env-file=.env.dev --env-file-if-exists=.env --watch src/index.ts",
+    "build": "vp pack"
+  },
+  "dependencies": {
+    "@hocuspocus/extension-database": "catalog:",
+    "@hocuspocus/server": "catalog:",
+    "@orpc/server": "catalog:",
+    "@repo/core": "workspace:*",
+    "better-auth": "catalog:",
+    "cors": "catalog:",
+    "express": "catalog:",
+    "express-ws": "catalog:"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/cors": "catalog:",
+    "@types/express": "catalog:",
+    "@types/express-ws": "catalog:",
+    "tsx": "catalog:"
+  }
+}

@@ -1,0 +1,79 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+  - "tools/*"
+
+catalog:
+  "@emotion/react": 11.14.0
+  "@emotion/styled": 11.14.1
+  "@fontsource/roboto": 5.2.10
+  "@hocuspocus/extension-database": 4.0.0
+  "@hocuspocus/provider": 4.0.0
+  "@hocuspocus/server": 4.0.0
+  "@mui/icons-material": 9.0.0
+  "@mui/material": 9.0.0
+  "@orpc/client": 1.14.0
+  "@orpc/contract": 1.14.0
+  "@orpc/server": 1.14.0
+  "@orpc/tanstack-query": 1.14.0
+  "@prisma/adapter-pg": 7.8.0
+  "@prisma/client": 7.8.0
+  "@tanstack/eslint-plugin-query": 5.99.2
+  "@tanstack/eslint-plugin-router": 1.161.6
+  "@tanstack/react-query": 5.99.1
+  "@tanstack/react-router": 1.169.1
+  "@tanstack/router-plugin": 1.167.22
+  "@types/cors": 2.8.19
+  "@types/express": 5.0.6
+  "@types/express-ws": 3.0.6
+  "@types/node": 25.6.0
+  "@types/pg": 8.20.0
+  "@types/react": 19.2.14
+  "@types/react-dom": 19.2.3
+  "@vitejs/plugin-react": 6.0.1
+  auth: 1.6.9
+  better-auth: 1.6.9
+  cors: 2.8.6
+  express: 5.2.1
+  express-ws: 5.0.2
+  fabric: 7.3.1
+  neverthrow: 8.2.0
+  pg: 8.20.0
+  "prisma": 7.8.0
+  react: 19.2.5
+  react-dom: 19.2.5
+  tsx: 4.21.0
+  typescript: 6.0.3
+  uuid: 14.0.0
+  vite: npm:@voidzero-dev/vite-plus-core@0.1.19
+  vite-plus: 0.1.20
+  vitest: npm:@voidzero-dev/vite-plus-test@0.1.19
+  yjs: 13.6.30
+  zod: 4.3.6
+
+catalogMode: "strict"
+
+injectWorkspacePackages: true
+
+minimumReleaseAge: 2880
+
+overrides:
+  vite: "catalog:"
+  vitest: "catalog:"
+
+peerDependencyRules:
+  allowAny:
+    - vite
+    - vitest
+  allowedVersions:
+    vite: "*"
+    vitest: "*"
+
+syncInjectedDepsAfterScripts:
+  - build
+allowBuilds:
+  "@prisma/engines": true
+  "@swc/core": true
+  canvas: true
+  esbuild: true
+  prisma: true

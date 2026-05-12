@@ -1,0 +1,37 @@
+{
+  "name": "@repo/core",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./*": {
+      "default": "./src/*.ts"
+    },
+    "./infra/prisma": {
+      "default": "./src/infra/prisma/index.ts"
+    }
+  },
+  "scripts": {
+    "db:generate": "vp exec prisma generate && vp check --fix",
+    "db:migrate": "vp exec prisma migrate deploy",
+    "db:auth:generate": "vp exec auth generate --adapter prisma --dialect postgresql --config src/infra/auth.ts --output src/infra/prisma/schema.prisma && vp check --fix"
+  },
+  "dependencies": {
+    "@hocuspocus/provider": "catalog:",
+    "@orpc/contract": "catalog:",
+    "@prisma/adapter-pg": "catalog:",
+    "@prisma/client": "catalog:",
+    "better-auth": "catalog:",
+    "neverthrow": "catalog:",
+    "pg": "catalog:",
+    "uuid": "catalog:",
+    "yjs": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/pg": "catalog:",
+    "auth": "catalog:",
+    "prisma": "catalog:"
+  }
+}
