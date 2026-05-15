@@ -3,7 +3,7 @@ import type { CursorFactory } from "@repo/core/whiteboard/objects/factories/Curs
 import { type Canvas, loadSVGFromURL } from "fabric";
 import { FabricCursor } from "../FabricCursor";
 
-const cursorSVG = await loadSVGFromURL("cursor.svg");
+const cursorSVG = await loadSVGFromURL("/cursor.svg");
 
 export class FabricCursorFactory implements CursorFactory {
   private readonly canvas: Canvas;
