@@ -41,8 +41,8 @@ catalogs:
       specifier: 1.14.0
       version: 1.14.0
     '@orpc/tanstack-query':
-      specifier: 1.14.0
-      version: 1.14.0
+      specifier: 1.14.3
+      version: 1.14.3
     '@prisma/adapter-pg':
       specifier: 7.8.0
       version: 7.8.0
@@ -229,7 +229,7 @@ importers:
         version: 1.14.0
       '@orpc/tanstack-query':
         specifier: 'catalog:'
-        version: 1.14.0(@orpc/client@1.14.0)(@tanstack/query-core@5.99.1)
+        version: 1.14.3(@orpc/client@1.14.0)(@tanstack/query-core@5.99.1)
       '@repo/core':
         specifier: workspace:*
         version: link:../../packages/core
@@ -1116,6 +1116,14 @@ packages:
       '@opentelemetry/api':
         optional: true
 
+  '@orpc/shared@1.14.3':
+    resolution: {integrity: sha512-S7qmhZT4vchKEF6F6YduG5ub5lWnvQRVNq1/f5/kJkSnYMG5q6rWLcK7c3wYfDkeap05ZIiWTwksH+fv+yJOrw==}
+    peerDependencies:
+      '@opentelemetry/api': '>=1.9.0'
+    peerDependenciesMeta:
+      '@opentelemetry/api':
+        optional: true
+
   '@orpc/standard-server-aws-lambda@1.14.0':
     resolution: {integrity: sha512-VotvWuCs2BvlQxvH6/4WrN/cQQVxDEZX4uop6okMQjejoP2qp5Nvb5VsVpUmpT94EGRaWsbDhb1nwF3gr20wvw==}
 
@@ -1139,10 +1147,10 @@ packages:
   '@orpc/standard-server@1.14.0':
     resolution: {integrity: sha512-zN3Q+ajsoLoxLYmONc1RkDyhIg1wENolrTly8HfodcR3gYrfFRcGhUzShqa/KdG47mK49Nps8rdeeMj6NT8EYw==}
 
-  '@orpc/tanstack-query@1.14.0':
-    resolution: {integrity: sha512-Bjx29HULT5PNSaGFkt+rExTqQonZfaqrAMUOLWBBNlI8TtPMvnKtDxlzmvO5J4Aq8k5p0t+cZX1E6HTeH3mqKQ==}
+  '@orpc/tanstack-query@1.14.3':
+    resolution: {integrity: sha512-SRoq4zCRF65vlveFegaaVHaqmlpOxI/tHL/sdKVrELJ3zPq22sS4GZQeABIdevH25wjxWBO0gKrVaazzTtVA6Q==}
     peerDependencies:
-      '@orpc/client': 1.14.0
+      '@orpc/client': 1.14.3
       '@tanstack/query-core': '>=5.80.2'
 
   '@oxc-project/runtime@0.126.0':
@@ -4674,6 +4682,11 @@ snapshots:
       radash: 12.1.1
       type-fest: 5.5.0
 
+  '@orpc/shared@1.14.3':
+    dependencies:
+      radash: 12.1.1
+      type-fest: 5.5.0
+
   '@orpc/standard-server-aws-lambda@1.14.0':
     dependencies:
       '@orpc/shared': 1.14.0
@@ -4719,10 +4732,10 @@ snapshots:
     transitivePeerDependencies:
       - '@opentelemetry/api'
 
-  '@orpc/tanstack-query@1.14.0(@orpc/client@1.14.0)(@tanstack/query-core@5.99.1)':
+  '@orpc/tanstack-query@1.14.3(@orpc/client@1.14.0)(@tanstack/query-core@5.99.1)':
     dependencies:
       '@orpc/client': 1.14.0
-      '@orpc/shared': 1.14.0
+      '@orpc/shared': 1.14.3
       '@tanstack/query-core': 5.99.1
     transitivePeerDependencies:
       - '@opentelemetry/api'
