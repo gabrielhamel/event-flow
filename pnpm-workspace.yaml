@@ -10,8 +10,8 @@ catalog:
   "@hocuspocus/extension-database": 4.0.0
   "@hocuspocus/provider": 4.0.0
   "@hocuspocus/server": 4.0.0
-  "@mui/icons-material": 9.0.0
-  "@mui/material": 9.0.0
+  "@mui/icons-material": 9.0.1
+  "@mui/material": 9.0.1
   "@orpc/client": 1.14.3
   "@orpc/contract": 1.14.3
   "@orpc/server": 1.14.3
