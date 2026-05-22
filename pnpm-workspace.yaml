@@ -28,7 +28,7 @@ catalog:
   "@types/express-ws": 3.0.6
   "@types/node": 25.8.0
   "@types/pg": 8.20.0
-  "@types/react": 19.2.14
+  "@types/react": 19.2.15
   "@types/react-dom": 19.2.3
   "@vitejs/plugin-react": 6.0.2
   auth: 1.6.11
@@ -40,7 +40,7 @@ catalog:
   neverthrow: 8.2.0
   pg: 8.20.0
   "prisma": 7.8.0
-  react: 19.2.5
+  react: 19.2.6
   react-dom: 19.2.5
   tsx: 4.21.0
   typescript: 6.0.3
