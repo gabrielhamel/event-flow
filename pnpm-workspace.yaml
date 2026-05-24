@@ -26,7 +26,7 @@ catalog:
   "@types/cors": 2.8.19
   "@types/express": 5.0.6
   "@types/express-ws": 3.0.6
-  "@types/node": 25.8.0
+  "@types/node": 25.9.1
   "@types/pg": 8.20.0
   "@types/react": 19.2.15
   "@types/react-dom": 19.2.3
@@ -36,13 +36,13 @@ catalog:
   cors: 2.8.6
   express: 5.2.1
   express-ws: 5.0.2
-  fabric: 7.3.1
+  fabric: 7.4.0
   neverthrow: 8.2.0
-  pg: 8.20.0
+  pg: 8.21.0
   "prisma": 7.8.0
   react: 19.2.6
   react-dom: 19.2.6
-  tsx: 4.21.0
+  tsx: 4.22.3
   typescript: 6.0.3
   uuid: 14.0.0
   vite: npm:@voidzero-dev/vite-plus-core@0.1.19
