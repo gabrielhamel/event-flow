@@ -22,7 +22,7 @@ function AuthPage() {
   }
 
   return (
-    <CenteredLayout>
+    <CenteredLayout background="linear-gradient(to bottom right, #eef2ff, #ffffff, #faf5ff)">
       <Stack spacing={2} sx={{ borderRadius: 2, p: 2 }}>
         {isSignInLoading ? (
           <Box
