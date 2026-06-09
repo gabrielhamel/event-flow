@@ -50,14 +50,14 @@ catalogs:
       specifier: 7.8.0
       version: 7.8.0
     '@tanstack/eslint-plugin-query':
-      specifier: 5.99.2
-      version: 5.99.2
+      specifier: 5.101.0
+      version: 5.101.0
     '@tanstack/eslint-plugin-router':
       specifier: 1.162.0
       version: 1.162.0
     '@tanstack/react-query':
-      specifier: 5.99.1
-      version: 5.99.1
+      specifier: 5.101.0
+      version: 5.101.0
     '@tanstack/react-router':
       specifier: 1.169.1
       version: 1.169.1
@@ -150,7 +150,7 @@ importers:
     devDependencies:
       '@tanstack/eslint-plugin-query':
         specifier: 'catalog:'
-        version: 5.99.2(eslint@10.2.0(jiti@2.6.1))(typescript@6.0.3)
+        version: 5.101.0(eslint@10.2.0(jiti@2.6.1))(typescript@6.0.3)
       '@tanstack/eslint-plugin-router':
         specifier: 'catalog:'
         version: 1.162.0(eslint@10.2.0(jiti@2.6.1))(typescript@6.0.3)
@@ -229,13 +229,13 @@ importers:
         version: 1.14.3
       '@orpc/tanstack-query':
         specifier: 'catalog:'
-        version: 1.14.3(@orpc/client@1.14.3)(@tanstack/query-core@5.99.1)
+        version: 1.14.3(@orpc/client@1.14.3)(@tanstack/query-core@5.101.0)
       '@repo/core':
         specifier: workspace:*
         version: link:../../packages/core
       '@tanstack/react-query':
         specifier: 'catalog:'
-        version: 5.99.1(react@19.2.7)
+        version: 5.101.0(react@19.2.7)
       '@tanstack/react-router':
         specifier: 'catalog:'
         version: 1.169.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -1696,8 +1696,8 @@ packages:
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
 
-  '@tanstack/eslint-plugin-query@5.99.2':
-    resolution: {integrity: sha512-xiazL4CWOHJRDDgs5ZkfW98qlEAisakFDKh1Djc3BIk84tsvt3ow52AC2EiWSMY1q13IB4UI4jSo7yXlC3NL6g==}
+  '@tanstack/eslint-plugin-query@5.101.0':
+    resolution: {integrity: sha512-wsfg821y4yw21J7nKI2oM5yyGSz3vASXqgWbmWCXZpnyY9ObLrBCcXivwZKj4YHF2fUWiqoOIRX2pbE79cf6gQ==}
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0 || ^10.0.0
       typescript: ^5.4.0 || ^6.0.0
@@ -1714,11 +1714,11 @@ packages:
     resolution: {integrity: sha512-NaOGLRrddszbQj9upGat6HG/4TKvXLvu+osAIgfxPYA+eIvYKv8GKDJOrY2D3/U9MRnKfMWD7bU4jeD4xmqyIg==}
     engines: {node: '>=20.19'}
 
-  '@tanstack/query-core@5.99.1':
-    resolution: {integrity: sha512-5E8xwxyWvr22yt7zvzP3KOZ5TUElOdVA45NP3/Ao1m9mvc9i18NLTDe9m3M00BH2DR5J20cv7xckMPlhKNs+vQ==}
+  '@tanstack/query-core@5.101.0':
+    resolution: {integrity: sha512-cQetA74EB+seWySv1TTKr828TnP0u39m6LykwDXIo84SNortpDkp30TMEjkqtYCNP9c40uT/iwl6MLiufEt0Ow==}
 
-  '@tanstack/react-query@5.99.1':
-    resolution: {integrity: sha512-akg5GdwW70lvJvCqVHZ7tizGyc+TATjUzKX9RuF1xknhEe/1leofXk7YLYbrbRsuhNbHJBAayaQUMvvOFZ5L5g==}
+  '@tanstack/react-query@5.101.0':
+    resolution: {integrity: sha512-rLlJXSpkqfizLWgkR5+eLeIk0MvTx/meEIR7LRjxic+qxiQP8zVjq7BqQkiCMNLQBlLfuOLqqr6KO5GtrDlmSg==}
     peerDependencies:
       react: ^18 || ^19
 
@@ -4770,11 +4770,11 @@ snapshots:
     transitivePeerDependencies:
       - '@opentelemetry/api'
 
-  '@orpc/tanstack-query@1.14.3(@orpc/client@1.14.3)(@tanstack/query-core@5.99.1)':
+  '@orpc/tanstack-query@1.14.3(@orpc/client@1.14.3)(@tanstack/query-core@5.101.0)':
     dependencies:
       '@orpc/client': 1.14.3
       '@orpc/shared': 1.14.3
-      '@tanstack/query-core': 5.99.1
+      '@tanstack/query-core': 5.101.0
     transitivePeerDependencies:
       - '@opentelemetry/api'
 
@@ -5140,7 +5140,7 @@ snapshots:
 
   '@standard-schema/spec@1.1.0': {}
 
-  '@tanstack/eslint-plugin-query@5.99.2(eslint@10.2.0(jiti@2.6.1))(typescript@6.0.3)':
+  '@tanstack/eslint-plugin-query@5.101.0(eslint@10.2.0(jiti@2.6.1))(typescript@6.0.3)':
     dependencies:
       '@typescript-eslint/utils': 8.58.2(eslint@10.2.0(jiti@2.6.1))(typescript@6.0.3)
       eslint: 10.2.0(jiti@2.6.1)
@@ -5159,11 +5159,11 @@ snapshots:
 
   '@tanstack/history@1.161.6': {}
 
-  '@tanstack/query-core@5.99.1': {}
+  '@tanstack/query-core@5.101.0': {}
 
-  '@tanstack/react-query@5.99.1(react@19.2.7)':
+  '@tanstack/react-query@5.101.0(react@19.2.7)':
     dependencies:
-      '@tanstack/query-core': 5.99.1
+      '@tanstack/query-core': 5.101.0
       react: 19.2.7
 
   '@tanstack/react-router@1.169.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
@@ -5376,7 +5376,7 @@ snapshots:
       debug: 4.4.3
       minimatch: 10.2.5
       semver: 7.7.4
-      tinyglobby: 0.2.16
+      tinyglobby: 0.2.17
       ts-api-utils: 2.5.0(typescript@6.0.3)
       typescript: 6.0.3
     transitivePeerDependencies:
