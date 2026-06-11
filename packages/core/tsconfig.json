@@ -4,7 +4,7 @@
     "types": ["node"],
     "composite": true,
     "outDir": "dist",
-    "rootDir": "src"
+    "rootDir": "."
   },
   "include": ["src", "*.config.ts"]
 }
