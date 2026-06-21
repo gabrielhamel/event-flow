@@ -17,14 +17,14 @@ catalogs:
       specifier: 5.2.10
       version: 5.2.10
     '@hocuspocus/extension-database':
-      specifier: 4.1.0
-      version: 4.1.0
+      specifier: 4.3.0
+      version: 4.3.0
     '@hocuspocus/provider':
-      specifier: 4.1.0
-      version: 4.1.0
+      specifier: 4.3.0
+      version: 4.3.0
     '@hocuspocus/server':
-      specifier: 4.1.0
-      version: 4.1.0
+      specifier: 4.3.0
+      version: 4.3.0
     '@mui/icons-material':
       specifier: 9.1.1
       version: 9.1.1
@@ -165,10 +165,10 @@ importers:
     dependencies:
       '@hocuspocus/extension-database':
         specifier: 'catalog:'
-        version: 4.1.0(y-protocols@1.0.7(yjs@13.6.31))(yjs@13.6.31)
+        version: 4.3.0(y-protocols@1.0.7(yjs@13.6.31))(yjs@13.6.31)
       '@hocuspocus/server':
         specifier: 'catalog:'
-        version: 4.1.0(y-protocols@1.0.7(yjs@13.6.31))(yjs@13.6.31)
+        version: 4.3.0(y-protocols@1.0.7(yjs@13.6.31))(yjs@13.6.31)
       '@orpc/server':
         specifier: 'catalog:'
         version: 1.14.6(crossws@0.4.5)(ws@8.20.0)
@@ -284,7 +284,7 @@ importers:
     dependencies:
       '@hocuspocus/provider':
         specifier: 'catalog:'
-        version: 4.1.0(y-protocols@1.0.7(yjs@13.6.31))(yjs@13.6.31)
+        version: 4.3.0(y-protocols@1.0.7(yjs@13.6.31))(yjs@13.6.31)
       '@orpc/contract':
         specifier: 'catalog:'
         version: 1.14.6
@@ -909,22 +909,22 @@ packages:
   '@fontsource/roboto@5.2.10':
     resolution: {integrity: sha512-8HlA5FtSfz//oFSr2eL7GFXAiE7eIkcGOtx7tjsLKq+as702x9+GU7K95iDeWFapHC4M2hv9RrpXKRTGGBI8Zg==}
 
-  '@hocuspocus/common@4.1.0':
-    resolution: {integrity: sha512-SOBbu0GcBMbLo7IYRDZC6gvEcoATbEFIC5KqzvLanC6dZZLkv91pYEBli+Exs/G71ELL3iUjSwnaf+gksxcjFA==}
+  '@hocuspocus/common@4.3.0':
+    resolution: {integrity: sha512-8USsMvso01aMKOSSyvb8oTAlfES/nBM+Y74XjW5Fy5ovmOaVpoRRBrktIrEVwydrp8Cr6C66ivc0orcW/3P+Kg==}
 
-  '@hocuspocus/extension-database@4.1.0':
-    resolution: {integrity: sha512-jH70FcWxIVcN++IYuSfS4JPAJgowEjFXWU/59yNlSYHEl0tWNqtR4/JBpVVAJQd1gV1kV/EXsrlnoNzV8SeCuw==}
+  '@hocuspocus/extension-database@4.3.0':
+    resolution: {integrity: sha512-iiFU2l+/lxXVREXS9VUMDJQCOzM3LWOlFs0ezNkFIrXUf7u4LyagCR5v5y8zoBxMGNE5NwzMkP4xBiDX/Tc90A==}
     peerDependencies:
       yjs: ^13.6.8
 
-  '@hocuspocus/provider@4.1.0':
-    resolution: {integrity: sha512-K80V2yX4AMdpqgjIkexJioyI2Oq8pu8hjdFqY0INXKSpH8TQv9NMaDzJmlrZMYmUeKyRO2t7VhGyFK9jZQPnNw==}
+  '@hocuspocus/provider@4.3.0':
+    resolution: {integrity: sha512-eS5dECLnJDgELI2AfZNvr5jS0B6IWFoo7eAUgwwOzy1bf7KdPagXAYCtSWqSXmLMwjABlubZJQg8FVrTefU0cA==}
     peerDependencies:
       y-protocols: ^1.0.6
       yjs: ^13.6.8
 
-  '@hocuspocus/server@4.1.0':
-    resolution: {integrity: sha512-mp0Of76kRkK/u+9pKXPLNV4NI2Cyjql/jVnudVb0z6xAd/i7mBDTK88p1I1sNoX9yvCvhY7lQlrvVx6sMcl8Xw==}
+  '@hocuspocus/server@4.3.0':
+    resolution: {integrity: sha512-GX9ohUJAr6aIa2ewS0EPeyf3w12wLCBBSGfc76ZMOuZJZPUzDH6BJWFjkVlaVW3OmwZ5+jxdXXFUf6sAi4EIrg==}
     engines: {node: '>=22'}
     peerDependencies:
       y-protocols: ^1.0.6
@@ -4447,29 +4447,29 @@ snapshots:
 
   '@fontsource/roboto@5.2.10': {}
 
-  '@hocuspocus/common@4.1.0':
+  '@hocuspocus/common@4.3.0':
     dependencies:
       lib0: 0.2.117
 
-  '@hocuspocus/extension-database@4.1.0(y-protocols@1.0.7(yjs@13.6.31))(yjs@13.6.31)':
+  '@hocuspocus/extension-database@4.3.0(y-protocols@1.0.7(yjs@13.6.31))(yjs@13.6.31)':
     dependencies:
-      '@hocuspocus/server': 4.1.0(y-protocols@1.0.7(yjs@13.6.31))(yjs@13.6.31)
+      '@hocuspocus/server': 4.3.0(y-protocols@1.0.7(yjs@13.6.31))(yjs@13.6.31)
       yjs: 13.6.31
     transitivePeerDependencies:
       - srvx
       - y-protocols
 
-  '@hocuspocus/provider@4.1.0(y-protocols@1.0.7(yjs@13.6.31))(yjs@13.6.31)':
+  '@hocuspocus/provider@4.3.0(y-protocols@1.0.7(yjs@13.6.31))(yjs@13.6.31)':
     dependencies:
-      '@hocuspocus/common': 4.1.0
+      '@hocuspocus/common': 4.3.0
       '@lifeomic/attempt': 3.1.0
       lib0: 0.2.117
       y-protocols: 1.0.7(yjs@13.6.31)
       yjs: 13.6.31
 
-  '@hocuspocus/server@4.1.0(y-protocols@1.0.7(yjs@13.6.31))(yjs@13.6.31)':
+  '@hocuspocus/server@4.3.0(y-protocols@1.0.7(yjs@13.6.31))(yjs@13.6.31)':
     dependencies:
-      '@hocuspocus/common': 4.1.0
+      '@hocuspocus/common': 4.3.0
       async-mutex: 0.5.0
       crossws: 0.4.5
       kleur: 4.1.5
