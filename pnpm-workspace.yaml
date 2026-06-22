@@ -45,9 +45,8 @@ catalog:
   tsx: 4.22.4
   typescript: 6.0.3
   uuid: 14.0.0
-  vite: npm:@voidzero-dev/vite-plus-core@0.1.19
-  vite-plus: 0.1.24
-  vitest: npm:@voidzero-dev/vite-plus-test@0.1.19
+  vite: npm:@voidzero-dev/vite-plus-core@0.2.1
+  vite-plus: 0.2.1
   yjs: 13.6.31
   zod: 4.4.3
 
@@ -59,15 +58,12 @@ minimumReleaseAge: 2880
 
 overrides:
   vite: "catalog:"
-  vitest: "catalog:"
 
 peerDependencyRules:
   allowAny:
     - vite
-    - vitest
   allowedVersions:
     vite: "*"
-    vitest: "*"
 
 syncInjectedDepsAfterScripts:
   - build
