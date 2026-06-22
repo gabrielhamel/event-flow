@@ -26,7 +26,7 @@ catalog:
   "@types/cors": 2.8.19
   "@types/express": 5.0.6
   "@types/express-ws": 3.0.6
-  "@types/node": 25.9.3
+  "@types/node": 26.0.0
   "@types/pg": 8.20.0
   "@types/react": 19.2.17
   "@types/react-dom": 19.2.3
