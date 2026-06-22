@@ -59,7 +59,6 @@ updates:
         patterns:
           - "vite"
           - "vite-plus"
-          - "vitest"
 
       everything-else:
         update-types:
