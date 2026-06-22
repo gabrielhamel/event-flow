@@ -12,10 +12,10 @@ catalog:
   "@hocuspocus/server": 4.1.0
   "@mui/icons-material": 9.1.1
   "@mui/material": 9.1.1
-  "@orpc/client": 1.14.3
-  "@orpc/contract": 1.14.3
-  "@orpc/server": 1.14.3
-  "@orpc/tanstack-query": 1.14.3
+  "@orpc/client": 1.14.6
+  "@orpc/contract": 1.14.6
+  "@orpc/server": 1.14.6
+  "@orpc/tanstack-query": 1.14.6
   "@prisma/adapter-pg": 7.8.0
   "@prisma/client": 7.8.0
   "@tanstack/eslint-plugin-query": 5.101.0
